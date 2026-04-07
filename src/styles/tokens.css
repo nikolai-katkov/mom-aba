@@ -1,0 +1,213 @@
+/**
+ * Design System Tokens - Single Source of Truth
+ *
+ * All color, typography, spacing, and animation tokens are defined here.
+ * Import this file once in main.tsx to make tokens available globally.
+ *
+ * Theme: "Playful & Bright" — light background, colorful accents, rounded shapes.
+ *
+ * Theme Architecture:
+ * Tokens are defined on both :root and [data-theme='light'] selectors.
+ * :root provides the default (light) theme. To add a dark theme,
+ * create a [data-theme='dark'] block overriding the color tokens.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+[data-theme='light'],
+:root {
+  /* ============================================
+   * Colors - Background
+   * ============================================ */
+  --color-bg: #fafbfe;
+  --color-surface: #ffffff;
+  --color-elevated: #f0f2f8;
+
+  /* ============================================
+   * Colors - Border
+   * ============================================ */
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.15);
+
+  /* ============================================
+   * Colors - Text
+   * ============================================ */
+  --color-text: #1a1d2e;
+  --color-text-dim: #5c6078;
+  --color-text-muted: #9498b0;
+
+  /* ============================================
+   * Colors - Primary (Teal)
+   * ============================================ */
+  --color-primary: #14b8a6;
+  --color-primary-bright: #2dd4bf;
+  --color-primary-dim: rgba(20, 184, 166, 0.12);
+
+  /* Primary Alpha Scale */
+  --color-primary-alpha-5: rgba(20, 184, 166, 0.05);
+  --color-primary-alpha-10: rgba(20, 184, 166, 0.1);
+  --color-primary-alpha-15: rgba(20, 184, 166, 0.15);
+  --color-primary-alpha-20: rgba(20, 184, 166, 0.2);
+  --color-primary-alpha-30: rgba(20, 184, 166, 0.3);
+  --color-primary-alpha-40: rgba(20, 184, 166, 0.4);
+  --color-primary-alpha-50: rgba(20, 184, 166, 0.5);
+
+  /* ============================================
+   * Colors - Accent (Violet)
+   * ============================================ */
+  --color-accent: #8b5cf6;
+  --color-accent-bright: #a78bfa;
+  --color-accent-dim: rgba(139, 92, 246, 0.12);
+
+  /* Accent Alpha Scale */
+  --color-accent-alpha-5: rgba(139, 92, 246, 0.05);
+  --color-accent-alpha-10: rgba(139, 92, 246, 0.1);
+  --color-accent-alpha-15: rgba(139, 92, 246, 0.15);
+  --color-accent-alpha-20: rgba(139, 92, 246, 0.2);
+  --color-accent-alpha-30: rgba(139, 92, 246, 0.3);
+  --color-accent-alpha-40: rgba(139, 92, 246, 0.4);
+  --color-accent-alpha-50: rgba(139, 92, 246, 0.5);
+
+  /* ============================================
+   * Colors - Warm (Coral)
+   * ============================================ */
+  --color-warm: #f97316;
+  --color-warm-bright: #fb923c;
+  --color-warm-dim: rgba(249, 115, 22, 0.12);
+
+  /* ============================================
+   * Colors - Semantic
+   * ============================================ */
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-danger: #ef4444;
+
+  /* Danger Alpha Scale */
+  --color-danger-alpha-5: rgba(239, 68, 68, 0.05);
+  --color-danger-alpha-10: rgba(239, 68, 68, 0.1);
+  --color-danger-alpha-15: rgba(239, 68, 68, 0.15);
+  --color-danger-alpha-20: rgba(239, 68, 68, 0.2);
+
+  /* ============================================
+   * Colors - Neutral (Slate)
+   * ============================================ */
+  --color-neutral: rgba(100, 116, 139, 0.7);
+  --color-neutral-dim: rgba(100, 116, 139, 0.4);
+  --color-neutral-muted: rgba(100, 116, 139, 0.15);
+  --color-neutral-bg: rgba(100, 116, 139, 0.06);
+
+  /* ============================================
+   * Colors - Overlay (Black Alpha)
+   * ============================================ */
+  --color-overlay-subtle: rgba(0, 0, 0, 0.02);
+  --color-overlay-light: rgba(0, 0, 0, 0.04);
+  --color-overlay-medium: rgba(0, 0, 0, 0.06);
+  --color-overlay-strong: rgba(0, 0, 0, 0.1);
+  --color-overlay-intense: rgba(0, 0, 0, 0.15);
+
+  /* ============================================
+   * Shadows
+   * ============================================ */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.04);
+
+  /* Primary Glow */
+  --shadow-primary-sm: 0 2px 8px rgba(20, 184, 166, 0.15);
+  --shadow-primary-md: 0 4px 12px rgba(20, 184, 166, 0.2);
+
+  /* ============================================
+   * Spacing Scale (4px base)
+   * ============================================ */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* ============================================
+   * Border Radius
+   * ============================================ */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ============================================
+   * Typography - Families
+   * ============================================ */
+  --font-family-primary: 'Nunito', -apple-system, system-ui, sans-serif;
+  --font-family-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  /* ============================================
+   * Typography - Sizes (rem-based for accessibility)
+   * ============================================ */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.8125rem;
+  --font-size-base: 0.9375rem;
+  --font-size-lg: 1.0625rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.5rem;
+  --font-size-5xl: 3.5rem;
+
+  /* ============================================
+   * Typography - Letter Spacing
+   * ============================================ */
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-snug: -0.01em;
+  --letter-spacing-none: 0;
+  --letter-spacing-normal: 0.01em;
+  --letter-spacing-wide: 0.04em;
+  --letter-spacing-wider: 0.08em;
+
+  /* ============================================
+   * Typography - Weights
+   * ============================================ */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* ============================================
+   * Transitions
+   * ============================================ */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ============================================
+   * Blur (backdrop-filter)
+   * ============================================ */
+  --blur-sm: 4px;
+  --blur-md: 12px;
+}
+
+/* ============================================
+ * Global Reset
+ * ============================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
