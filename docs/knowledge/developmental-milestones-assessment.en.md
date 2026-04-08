@@ -1,3 +1,7 @@
+_[Русский](./developmental-milestones-assessment.ru.md)_
+
+---
+
 # Developmental Milestones Assessment
 
 Related stories: [Epic 01 -- Assessment Foundation](../roadmap/01-assessment-foundation/_epic.md)
@@ -50,7 +54,7 @@ Each criterion specifies one of four evaluation methods:
 | KOM  | Combination (test + obs) | Mixed                |
 | NOV  | Time-limited observation | Timer-based (60 min) |
 
-> **Open question:** The VB-MAPP standard uses a half-point scoring scale (0, 0.5, 1) per criterion. The original assessment document specifies 1--4 scoring. The MVP spec uses binary Yes/No. See [PM Questions: Scoring Model](pm-questions-scoring-model.md) for the full analysis and questions to resolve with the PM.
+> **Open question:** The VB-MAPP standard uses a half-point scoring scale (0, 0.5, 1) per criterion. The original assessment document specifies 1--4 scoring. The MVP spec uses binary Yes/No. See [PM Questions: Scoring Model](pm-questions-scoring-model.en.md) for the full analysis and questions to resolve with the PM.
 
 ## Level I Sections
 
@@ -160,6 +164,8 @@ Criteria within each section increase in complexity, form a developmental gradie
 4. **Criterion assessment** -- binary Yes/No question with illustration and context. "Yes" marks complete; "No" navigates to training.
 5. **Training** -- video slot, step-by-step short guide, collapsible full guide. Controls: "Retry" / "Back".
 
+All screens include a **language switcher** (RU/EN) in the page header, allowing parents to toggle the interface language at any time. Language preference is persisted across sessions.
+
 ### Criterion States
 
 - Not started
@@ -183,6 +189,7 @@ Assessment > (if No) Training > Reassessment -- repeats until "Yes" or parent na
 - Full assessment + training loop
 - Progress tracking
 - Static image placeholders for video/illustration slots
+- Bilingual UI (Russian default, English) with language switcher on all pages
 
 ### Excluded
 

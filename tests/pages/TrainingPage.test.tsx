@@ -3,7 +3,10 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
 import { AssessmentProvider } from '../../src/hooks'
+import { LanguageProvider } from '../../src/i18n'
+import { SECTIONS_BY_LANGUAGE } from '../../src/i18n/translations'
 import { TrainingPage } from '../../src/pages/TrainingPage'
+import { byT } from '../helpers/byT'
 
 const mockNavigate = vi.fn()
 
@@ -18,16 +21,18 @@ vi.mock('react-router-dom', async () => {
 function renderPage(sectionId = 'mand', criterionId = 'mand-1') {
   return render(
     <MemoryRouter initialEntries={[`/sections/${sectionId}/criteria/${criterionId}/train`]}>
-      <AssessmentProvider>
-        <Routes>
-          <Route
-            path="/sections/:sectionId/criteria/:criterionId/train"
-            element={<TrainingPage />}
-          />
-          <Route path="/sections/:sectionId/criteria" element={<div>Criteria List</div>} />
-          <Route path="/" element={<div>Home</div>} />
-        </Routes>
-      </AssessmentProvider>
+      <LanguageProvider initialLanguage="en">
+        <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
+          <Routes>
+            <Route
+              path="/sections/:sectionId/criteria/:criterionId/train"
+              element={<TrainingPage />}
+            />
+            <Route path="/sections/:sectionId/criteria" element={<div>Criteria List</div>} />
+            <Route path="/" element={<div>Home</div>} />
+          </Routes>
+        </AssessmentProvider>
+      </LanguageProvider>
     </MemoryRouter>
   )
 }
@@ -38,32 +43,29 @@ describe('TrainingPage', () => {
     mockNavigate.mockClear()
   })
 
-  it('renders training steps', () => {
+  it('renders video placeholder', () => {
     renderPage()
-    expect(screen.getByText(/choose 2 items your child loves/iu)).toBeInTheDocument()
+    expect(byT('videoComingSoon')).toBeInTheDocument()
   })
 
-  it('toggles full guide with Read more', async () => {
+  it('toggles full guide', async () => {
     renderPage()
-    const toggle = screen.getByRole('button', { name: 'Read more' })
+    const toggle = byT('readMore')
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
 
     await userEvent.click(toggle)
-    expect(screen.getByRole('button', { name: 'Show less' })).toHaveAttribute(
-      'aria-expanded',
-      'true'
-    )
+    expect(byT('showLess')).toHaveAttribute('aria-expanded', 'true')
   })
 
   it('navigates to assessment when Retry is clicked', async () => {
     renderPage()
-    await userEvent.click(screen.getByRole('button', { name: 'Retry Assessment' }))
+    await userEvent.click(byT('retryAssessment'))
     expect(mockNavigate).toHaveBeenCalledWith('/sections/mand/criteria/mand-1/assess')
   })
 
   it('navigates to criteria list when Back is clicked', async () => {
     renderPage()
-    await userEvent.click(screen.getByRole('button', { name: 'Back to List' }))
+    await userEvent.click(byT('backToList'))
     expect(mockNavigate).toHaveBeenCalledWith('/sections/mand/criteria')
   })
 

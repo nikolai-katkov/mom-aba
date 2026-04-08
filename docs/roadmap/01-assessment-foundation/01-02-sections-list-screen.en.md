@@ -1,3 +1,7 @@
+_[Русский](./01-02-sections-list-screen.ru.md)_
+
+---
+
 # 01-02: Sections List Screen
 
 Status: Draft
@@ -34,7 +38,7 @@ App entry point showing available skill sections as cards. MAND is active with p
 
 ## Knowledge Reference
 
-- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.md)
+- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.en.md)
 
 ## Related Files
 

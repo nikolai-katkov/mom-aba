@@ -1,8 +1,7 @@
 import type { ReactNode } from 'react'
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 
-import { SECTIONS } from '../data'
-import type { AssessmentState, CriterionState, CriterionStatus } from '../types'
+import type { AssessmentState, CriterionState, CriterionStatus, Section } from '../types'
 import { loadAssessmentState, saveAssessmentState } from '../utils'
 
 interface AssessmentContextValue {
@@ -23,7 +22,12 @@ const DEFAULT_CRITERION_STATE: CriterionState = {
   score: 0,
 }
 
-export function AssessmentProvider({ children }: { children: ReactNode }) {
+interface AssessmentProviderProps {
+  children: ReactNode
+  sections: Section[]
+}
+
+export function AssessmentProvider({ children, sections }: AssessmentProviderProps) {
   const [state, setState] = useState<AssessmentState>(loadAssessmentState)
 
   useEffect(() => {
@@ -51,7 +55,7 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
 
   const getSectionProgress = useCallback(
     (sectionId: string): { completed: number; total: number; status: CriterionStatus } => {
-      const section = SECTIONS.find(s => s.id === sectionId)
+      const section = sections.find(s => s.id === sectionId)
       if (!section) {
         return { completed: 0, total: 0, status: 'NotStarted' }
       }
@@ -78,7 +82,7 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
 
       return { completed: completedCount, total, status }
     },
-    [state.criterionStates]
+    [state.criterionStates, sections]
   )
 
   const value = useMemo(

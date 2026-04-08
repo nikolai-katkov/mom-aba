@@ -1,5 +1,6 @@
 export { Button } from './Button/Button'
 export { Card } from './Card/Card'
+export { LanguageSwitcher } from './LanguageSwitcher/LanguageSwitcher'
 export { PageLayout } from './PageLayout/PageLayout'
 export { ProgressBar } from './ProgressBar/ProgressBar'
 export { ProgressiveDisclosure } from './ProgressiveDisclosure/ProgressiveDisclosure'

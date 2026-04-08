@@ -1,3 +1,7 @@
+_[Русский](./01-01-assessment-data-model.ru.md)_
+
+---
+
 # 01-01: Assessment Data Model
 
 Status: Draft
@@ -19,7 +23,7 @@ Define TypeScript interfaces and seed data for the assessment hierarchy. Two sep
 - [ ] `ScoringType` enum: `TCT`, `NAB`, `KOM`, `NOV`
 - [ ] `CriterionStatus` enum: `NotStarted`, `InProgress`, `Completed`
 - [ ] Assessment and training are separate data structures, linked by criterion ID
-- [ ] Score stored as numeric (0, 0.5, 1) internally, even if UI exposes binary Yes/No (see [PM Questions: Scoring Model](../../knowledge/pm-questions-scoring-model.md))
+- [ ] Score stored as numeric (0, 0.5, 1) internally, even if UI exposes binary Yes/No (see [PM Questions: Scoring Model](../../knowledge/pm-questions-scoring-model.en.md))
 - [ ] Structure supports adding Level II/III and additional sections without breaking changes
 - [ ] Development dimensions model: Independence, Generalization, Repertoire Size
 
@@ -33,8 +37,8 @@ Define TypeScript interfaces and seed data for the assessment hierarchy. Two sep
 
 ## Knowledge Reference
 
-- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.md)
-- [PM Questions: Scoring Model](../../knowledge/pm-questions-scoring-model.md)
+- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.en.md)
+- [PM Questions: Scoring Model](../../knowledge/pm-questions-scoring-model.en.md)
 
 ## Related Files
 

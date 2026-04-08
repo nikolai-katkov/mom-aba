@@ -1,3 +1,3 @@
-export { SECTION_INTRODUCTIONS } from './introduction'
-export { MAND_SECTION, SECTIONS, TACT_SECTION } from './sections'
-export { TRAINING_CONTENT } from './training'
+export { INTRODUCTIONS_BY_LANGUAGE } from '../i18n/translations/introduction'
+export { SECTIONS_BY_LANGUAGE } from '../i18n/translations/sections'
+export { TRAINING_BY_LANGUAGE } from '../i18n/translations/training'

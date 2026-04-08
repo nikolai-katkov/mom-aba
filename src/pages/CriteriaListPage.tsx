@@ -2,8 +2,8 @@ import { useCallback } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 import { Card, PageLayout, ProgressBar, StatusBadge } from '../components/ui'
-import { SECTIONS } from '../data'
-import { useAssessment } from '../hooks'
+import { useAssessment, useLanguage } from '../hooks'
+import { interpolate, tProps } from '../i18n'
 import type { Criterion } from '../types'
 import styles from './CriteriaListPage.module.css'
 
@@ -35,8 +35,9 @@ function CriterionCard({ criterion, sectionId }: { criterion: Criterion; section
 export function CriteriaListPage() {
   const { sectionId } = useParams<{ sectionId: string }>()
   const { getSectionProgress } = useAssessment()
+  const { t, sections } = useLanguage()
 
-  const section = SECTIONS.find(s => s.id === sectionId)
+  const section = sections.find(s => s.id === sectionId)
 
   if (!section) {
     return <Navigate to="/" replace />
@@ -48,8 +49,11 @@ export function CriteriaListPage() {
     <PageLayout title={section.title} hasBackButton backPath={`/sections/${section.id}/intro`}>
       <div className={styles.progressHeader}>
         <ProgressBar completed={progress.completed} total={progress.total} />
-        <span className={styles.progressLabel}>
-          {progress.completed}/{progress.total} completed
+        <span className={styles.progressLabel} {...tProps('completedOfTotal')}>
+          {interpolate(t('completedOfTotal'), {
+            completed: progress.completed,
+            total: progress.total,
+          })}
         </span>
       </div>
 

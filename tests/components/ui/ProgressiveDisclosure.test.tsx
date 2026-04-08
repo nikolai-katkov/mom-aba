@@ -1,57 +1,57 @@
-import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { ProgressiveDisclosure } from '../../../src/components/ui'
+import { byT } from '../../helpers/byT'
+import { renderWithProviders } from '../../helpers/renderWithProviders'
 
 describe('ProgressiveDisclosure', () => {
   it('hides content by default', () => {
-    render(
+    renderWithProviders(
       <ProgressiveDisclosure>
         <p>Hidden content</p>
       </ProgressiveDisclosure>
     )
 
-    const toggle = screen.getByRole('button', { name: 'Read more' })
+    const toggle = byT('readMore')
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
   })
 
   it('reveals content when toggle is clicked', async () => {
-    render(
+    renderWithProviders(
       <ProgressiveDisclosure>
         <p>Hidden content</p>
       </ProgressiveDisclosure>
     )
 
-    await userEvent.click(screen.getByRole('button', { name: 'Read more' }))
+    await userEvent.click(byT('readMore'))
 
-    const toggle = screen.getByRole('button', { name: 'Show less' })
+    const toggle = byT('showLess')
     expect(toggle).toHaveAttribute('aria-expanded', 'true')
   })
 
   it('hides content again when toggled twice', async () => {
-    render(
+    renderWithProviders(
       <ProgressiveDisclosure>
         <p>Hidden content</p>
       </ProgressiveDisclosure>
     )
 
     const user = userEvent.setup()
-    await user.click(screen.getByRole('button', { name: 'Read more' }))
-    await user.click(screen.getByRole('button', { name: 'Show less' }))
+    await user.click(byT('readMore'))
+    await user.click(byT('showLess'))
 
-    expect(screen.getByRole('button', { name: 'Read more' })).toHaveAttribute(
-      'aria-expanded',
-      'false'
-    )
+    expect(byT('readMore')).toHaveAttribute('aria-expanded', 'false')
   })
 
-  it('uses custom labels', () => {
-    render(
+  it('uses custom labels when provided', () => {
+    renderWithProviders(
       <ProgressiveDisclosure collapsedLabel="More details" expandedLabel="Less details">
         <p>Content</p>
       </ProgressiveDisclosure>
     )
 
-    expect(screen.getByRole('button', { name: 'More details' })).toBeInTheDocument()
+    // data-t still reflects the key, but the text content is custom
+    const toggle = byT('readMore')
+    expect(toggle).toHaveTextContent('More details')
   })
 })

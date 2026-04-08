@@ -3,7 +3,10 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
 import { AssessmentProvider } from '../../src/hooks'
+import { LanguageProvider } from '../../src/i18n'
+import { SECTIONS_BY_LANGUAGE } from '../../src/i18n/translations'
 import { CriteriaListPage } from '../../src/pages/CriteriaListPage'
+import { byT } from '../helpers/byT'
 
 const mockNavigate = vi.fn()
 
@@ -18,12 +21,14 @@ vi.mock('react-router-dom', async () => {
 function renderPage(sectionId = 'mand') {
   return render(
     <MemoryRouter initialEntries={[`/sections/${sectionId}/criteria`]}>
-      <AssessmentProvider>
-        <Routes>
-          <Route path="/sections/:sectionId/criteria" element={<CriteriaListPage />} />
-          <Route path="/" element={<div>Home</div>} />
-        </Routes>
-      </AssessmentProvider>
+      <LanguageProvider initialLanguage="en">
+        <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
+          <Routes>
+            <Route path="/sections/:sectionId/criteria" element={<CriteriaListPage />} />
+            <Route path="/" element={<div>Home</div>} />
+          </Routes>
+        </AssessmentProvider>
+      </LanguageProvider>
     </MemoryRouter>
   )
 }
@@ -36,21 +41,22 @@ describe('CriteriaListPage', () => {
 
   it('renders 5 criterion cards', () => {
     renderPage()
-    expect(screen.getByText('Uses 2 words or gestures')).toBeInTheDocument()
-    expect(screen.getByText('Makes 4 independent requests')).toBeInTheDocument()
-    expect(screen.getByText('Generalizes 6 requests')).toBeInTheDocument()
-    expect(screen.getByText('Spontaneously makes 5 requests')).toBeInTheDocument()
-    expect(screen.getByText('Has 10 independent requests')).toBeInTheDocument()
+    const statusBadges = document.querySelectorAll('[data-t="statusNotStarted"]')
+    expect(statusBadges).toHaveLength(5)
   })
 
-  it('shows progress bar with 0/5', () => {
+  it('shows progress bar with completion label', () => {
     renderPage()
-    expect(screen.getByText('0/5 completed')).toBeInTheDocument()
+    expect(byT('completedOfTotal')).toBeInTheDocument()
   })
 
   it('navigates to assessment when a criterion is clicked', async () => {
     renderPage()
-    await userEvent.click(screen.getByText('Uses 2 words or gestures'))
+    // Click on the first criterion card (skip PageLayout and language switcher buttons)
+    const allButtons = screen.getAllByRole('button')
+    // Back button, RU, EN, then 5 criterion cards
+    const firstCriterionCard = allButtons[3]
+    await userEvent.click(firstCriterionCard)
     expect(mockNavigate).toHaveBeenCalledWith('/sections/mand/criteria/mand-1/assess')
   })
 

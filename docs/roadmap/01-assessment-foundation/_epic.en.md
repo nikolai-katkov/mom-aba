@@ -1,3 +1,7 @@
+_[Русский](./_epic.ru.md)_
+
+---
+
 # Epic 01: Assessment Foundation
 
 ## Summary
@@ -8,8 +12,8 @@ Implement the core assessment flow for the MAND section: sections list, introduc
 
 ## Knowledge Reference
 
-- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.md)
-- [PM Questions: Scoring Model](../../knowledge/pm-questions-scoring-model.md)
+- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.en.md)
+- [PM Questions: Scoring Model](../../knowledge/pm-questions-scoring-model.en.md)
 
 ## Stories
 

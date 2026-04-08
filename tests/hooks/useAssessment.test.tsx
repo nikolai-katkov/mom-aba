@@ -2,10 +2,13 @@ import { act, renderHook } from '@testing-library/react'
 import type { ReactNode } from 'react'
 
 import { AssessmentProvider, useAssessment } from '../../src/hooks'
+import { SECTIONS_BY_LANGUAGE } from '../../src/i18n/translations'
+
+const sections = SECTIONS_BY_LANGUAGE.en
 
 function createWrapper() {
   return function Wrapper({ children }: { children: ReactNode }) {
-    return <AssessmentProvider>{children}</AssessmentProvider>
+    return <AssessmentProvider sections={sections}>{children}</AssessmentProvider>
   }
 }
 
@@ -15,7 +18,6 @@ describe('useAssessment', () => {
   })
 
   it('throws when used outside AssessmentProvider', () => {
-    // Suppress React error boundary console output
     const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
     expect(() => renderHook(() => useAssessment())).toThrow(
       'useAssessment must be used within an AssessmentProvider'

@@ -1,3 +1,7 @@
+_[Русский](./01-05-criterion-assessment-screen.ru.md)_
+
+---
+
 # 01-05: Criterion Assessment Screen
 
 Status: Draft
@@ -21,7 +25,7 @@ Binary assessment screen for a single criterion. Presents a clear Yes/No questio
 - [ ] Route: `/sections/:sectionId/criteria/:criterionId/assess`
 - [ ] "Yes" persists score (1) and updates criterion status to Completed
 - [ ] "No" persists score (0) and updates criterion status to InProgress
-- [ ] Score stored as numeric value (0 or 1), not boolean (see [PM Questions: Scoring Model](../../knowledge/pm-questions-scoring-model.md))
+- [ ] Score stored as numeric value (0 or 1), not boolean (see [PM Questions: Scoring Model](../../knowledge/pm-questions-scoring-model.en.md))
 - [ ] State persists across page reloads
 - [ ] Navigation: Yes -> criteria list, No -> training screen
 
@@ -41,7 +45,7 @@ Binary assessment screen for a single criterion. Presents a clear Yes/No questio
 
 ## Knowledge Reference
 
-- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.md)
+- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.en.md)
 
 ## Related Files
 

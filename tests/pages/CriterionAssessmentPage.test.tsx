@@ -3,7 +3,10 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
 import { AssessmentProvider } from '../../src/hooks'
+import { LanguageProvider } from '../../src/i18n'
+import { SECTIONS_BY_LANGUAGE } from '../../src/i18n/translations'
 import { CriterionAssessmentPage } from '../../src/pages/CriterionAssessmentPage'
+import { byT } from '../helpers/byT'
 
 const mockNavigate = vi.fn()
 
@@ -18,16 +21,18 @@ vi.mock('react-router-dom', async () => {
 function renderPage(sectionId = 'mand', criterionId = 'mand-1') {
   return render(
     <MemoryRouter initialEntries={[`/sections/${sectionId}/criteria/${criterionId}/assess`]}>
-      <AssessmentProvider>
-        <Routes>
-          <Route
-            path="/sections/:sectionId/criteria/:criterionId/assess"
-            element={<CriterionAssessmentPage />}
-          />
-          <Route path="/sections/:sectionId/criteria" element={<div>Criteria List</div>} />
-          <Route path="/" element={<div>Home</div>} />
-        </Routes>
-      </AssessmentProvider>
+      <LanguageProvider initialLanguage="en">
+        <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
+          <Routes>
+            <Route
+              path="/sections/:sectionId/criteria/:criterionId/assess"
+              element={<CriterionAssessmentPage />}
+            />
+            <Route path="/sections/:sectionId/criteria" element={<div>Criteria List</div>} />
+            <Route path="/" element={<div>Home</div>} />
+          </Routes>
+        </AssessmentProvider>
+      </LanguageProvider>
     </MemoryRouter>
   )
 }
@@ -38,29 +43,25 @@ describe('CriterionAssessmentPage', () => {
     mockNavigate.mockClear()
   })
 
-  it('renders the criterion question', () => {
+  it('renders the illustration placeholder', () => {
     renderPage()
-    expect(
-      screen.getByText('Can the child request at least 2 items using words, gestures, or cards?')
-    ).toBeInTheDocument()
+    expect(byT('illustration')).toBeInTheDocument()
   })
 
-  it('renders criterion conditions', () => {
+  it('renders what to look for section', () => {
     renderPage()
-    expect(
-      screen.getByText('Prompts allowed (echoic, imitation, non-physical)')
-    ).toBeInTheDocument()
+    expect(byT('whatToLookFor')).toBeInTheDocument()
   })
 
   it('navigates to criteria list when Yes is clicked', async () => {
     renderPage()
-    await userEvent.click(screen.getByRole('button', { name: 'Yes' }))
+    await userEvent.click(byT('yes'))
     expect(mockNavigate).toHaveBeenCalledWith('/sections/mand/criteria')
   })
 
   it('navigates to training when No is clicked', async () => {
     renderPage()
-    await userEvent.click(screen.getByRole('button', { name: 'No' }))
+    await userEvent.click(byT('no'))
     expect(mockNavigate).toHaveBeenCalledWith('/sections/mand/criteria/mand-1/train')
   })
 

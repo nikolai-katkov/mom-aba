@@ -1,1 +1,7 @@
-export { createInitialState, loadAssessmentState, saveAssessmentState } from './storage'
+export {
+  createInitialState,
+  loadAssessmentState,
+  loadLanguage,
+  saveAssessmentState,
+  saveLanguage,
+} from './storage'

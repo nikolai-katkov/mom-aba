@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom'
 
+import { useLanguage } from '../hooks'
+import { tProps } from '../i18n'
+
 export function NotFound() {
+  const { t } = useLanguage()
+
   return (
     <main
       style={{
@@ -12,9 +17,11 @@ export function NotFound() {
         textAlign: 'center',
       }}
     >
-      <h1>404</h1>
-      <p>Page not found.</p>
-      <Link to="/">Go home</Link>
+      <h1 {...tProps('notFoundCode')}>{t('notFoundCode')}</h1>
+      <p {...tProps('notFoundMessage')}>{t('notFoundMessage')}</p>
+      <Link to="/" {...tProps('goHome')}>
+        {t('goHome')}
+      </Link>
     </main>
   )
 }

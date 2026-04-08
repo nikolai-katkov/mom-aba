@@ -1,3 +1,7 @@
+_[Русский](./01-04-criteria-list-screen.ru.md)_
+
+---
+
 # 01-04: Criteria List Screen
 
 Status: Draft
@@ -36,7 +40,7 @@ Progression screen showing the 5 criteria within a section as level cards. Each 
 
 ## Knowledge Reference
 
-- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.md)
+- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.en.md)
 
 ## Related Files
 

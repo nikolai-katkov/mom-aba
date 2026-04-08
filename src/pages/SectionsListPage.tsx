@@ -2,14 +2,15 @@ import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Card, PageLayout, ProgressBar, StatusBadge } from '../components/ui'
-import { SECTIONS } from '../data'
-import { useAssessment } from '../hooks'
+import { useAssessment, useLanguage } from '../hooks'
+import { tProps } from '../i18n'
 import type { Section } from '../types'
 import styles from './SectionsListPage.module.css'
 
 function SectionCard({ section }: { section: Section }) {
   const navigate = useNavigate()
   const { getSectionProgress } = useAssessment()
+  const { t } = useLanguage()
   const progress = getSectionProgress(section.id)
 
   const handleClick = useCallback(() => {
@@ -23,7 +24,11 @@ function SectionCard({ section }: { section: Section }) {
           <div>
             <h2 className={styles.sectionTitle}>{section.title}</h2>
             <p className={styles.sectionSubtitle}>
-              {section.isAvailable ? section.subtitle : 'Coming soon'}
+              {section.isAvailable ? (
+                section.subtitle
+              ) : (
+                <span {...tProps('comingSoon')}>{t('comingSoon')}</span>
+              )}
             </p>
           </div>
           {section.isAvailable ? <StatusBadge status={progress.status} /> : null}
@@ -42,11 +47,15 @@ function SectionCard({ section }: { section: Section }) {
 }
 
 export function SectionsListPage() {
+  const { t, sections } = useLanguage()
+
   return (
-    <PageLayout title="Neuron">
-      <p className={styles.subtitle}>Helping parents support their autistic children</p>
+    <PageLayout title={t('appTitle')}>
+      <p className={styles.subtitle} {...tProps('appSubtitle')}>
+        {t('appSubtitle')}
+      </p>
       <div className={styles.sectionList}>
-        {SECTIONS.map(section => (
+        {sections.map(section => (
           <SectionCard key={section.id} section={section} />
         ))}
       </div>

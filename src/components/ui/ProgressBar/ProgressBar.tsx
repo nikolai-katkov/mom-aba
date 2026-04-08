@@ -1,3 +1,5 @@
+import { useLanguage } from '../../../hooks'
+import { interpolate, tProps } from '../../../i18n'
 import styles from './ProgressBar.module.css'
 
 interface ProgressBarProps {
@@ -6,6 +8,7 @@ interface ProgressBarProps {
 }
 
 export function ProgressBar({ completed, total }: ProgressBarProps) {
+  const { t } = useLanguage()
   const percentage = total > 0 ? (completed / total) * 100 : 0
 
   return (
@@ -15,7 +18,8 @@ export function ProgressBar({ completed, total }: ProgressBarProps) {
       aria-valuenow={completed}
       aria-valuemin={0}
       aria-valuemax={total}
-      aria-label={`${completed} of ${total} completed`}
+      aria-label={interpolate(t('progressLabel'), { completed, total })}
+      {...tProps('progressLabel')}
     >
       <div className={styles.fill} style={{ width: `${percentage}%` }} />
     </div>

@@ -1,3 +1,7 @@
+_[Русский](./01-06-training-screen.ru.md)_
+
+---
+
 # 01-06: Training Screen
 
 Status: Draft
@@ -42,7 +46,7 @@ Guidance screen shown after a "No" assessment. Teaches the parent how to develop
 
 ## Knowledge Reference
 
-- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.md)
+- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.en.md)
 
 ## Related Files
 

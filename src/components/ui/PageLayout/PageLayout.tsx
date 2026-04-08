@@ -2,6 +2,9 @@ import type { ReactNode } from 'react'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { useLanguage } from '../../../hooks'
+import { tProps } from '../../../i18n'
+import { LanguageSwitcher } from '../LanguageSwitcher/LanguageSwitcher'
 import styles from './PageLayout.module.css'
 
 interface PageLayoutProps {
@@ -13,6 +16,7 @@ interface PageLayoutProps {
 
 export function PageLayout({ children, title, hasBackButton = false, backPath }: PageLayoutProps) {
   const navigate = useNavigate()
+  const { t } = useLanguage()
 
   const handleBack = useCallback(() => {
     if (backPath) {
@@ -24,21 +28,25 @@ export function PageLayout({ children, title, hasBackButton = false, backPath }:
 
   return (
     <main className={styles.layout}>
-      {hasBackButton || title ? (
-        <header className={styles.header}>
+      <header className={styles.header}>
+        <div className={styles.headerRow}>
           {hasBackButton ? (
             <button
               className={styles.backButton}
               onClick={handleBack}
               type="button"
-              aria-label="Go back"
+              aria-label={t('goBack')}
+              {...tProps('back')}
             >
-              &#8592; Back
+              &#8592; {t('back')}
             </button>
-          ) : null}
-          {title ? <h1 className={styles.title}>{title}</h1> : null}
-        </header>
-      ) : null}
+          ) : (
+            <div />
+          )}
+          <LanguageSwitcher />
+        </div>
+        {title ? <h1 className={styles.title}>{title}</h1> : null}
+      </header>
       <div className={styles.content}>{children}</div>
     </main>
   )

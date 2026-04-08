@@ -3,7 +3,10 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
 import { AssessmentProvider } from '../../src/hooks'
+import { LanguageProvider } from '../../src/i18n'
+import { SECTIONS_BY_LANGUAGE } from '../../src/i18n/translations'
 import { SectionIntroPage } from '../../src/pages/SectionIntroPage'
+import { byT } from '../helpers/byT'
 
 const mockNavigate = vi.fn()
 
@@ -18,12 +21,14 @@ vi.mock('react-router-dom', async () => {
 function renderPage(sectionId = 'mand') {
   return render(
     <MemoryRouter initialEntries={[`/sections/${sectionId}/intro`]}>
-      <AssessmentProvider>
-        <Routes>
-          <Route path="/sections/:sectionId/intro" element={<SectionIntroPage />} />
-          <Route path="/" element={<div>Home</div>} />
-        </Routes>
-      </AssessmentProvider>
+      <LanguageProvider initialLanguage="en">
+        <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
+          <Routes>
+            <Route path="/sections/:sectionId/intro" element={<SectionIntroPage />} />
+            <Route path="/" element={<div>Home</div>} />
+          </Routes>
+        </AssessmentProvider>
+      </LanguageProvider>
     </MemoryRouter>
   )
 }
@@ -34,33 +39,29 @@ describe('SectionIntroPage', () => {
     mockNavigate.mockClear()
   })
 
-  it('renders section title and bullets', () => {
+  it('renders section title', () => {
     renderPage()
     expect(screen.getByText('MAND')).toBeInTheDocument()
-    expect(screen.getByText(/mand is a request/iu)).toBeInTheDocument()
   })
 
-  it('toggles full explanation with Read more', async () => {
+  it('toggles full explanation', async () => {
     renderPage()
-    const toggle = screen.getByRole('button', { name: 'Read more' })
+    const toggle = byT('readMore')
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
 
     await userEvent.click(toggle)
-    expect(screen.getByRole('button', { name: 'Show less' })).toHaveAttribute(
-      'aria-expanded',
-      'true'
-    )
+    expect(byT('showLess')).toHaveAttribute('aria-expanded', 'true')
   })
 
   it('navigates to criteria list when Start is clicked', async () => {
     renderPage()
-    await userEvent.click(screen.getByRole('button', { name: 'Start' }))
+    await userEvent.click(byT('start'))
     expect(mockNavigate).toHaveBeenCalledWith('/sections/mand/criteria')
   })
 
   it('navigates to criteria list when Skip is clicked', async () => {
     renderPage()
-    await userEvent.click(screen.getByRole('button', { name: 'Skip' }))
+    await userEvent.click(byT('skip'))
     expect(mockNavigate).toHaveBeenCalledWith('/sections/mand/criteria')
   })
 

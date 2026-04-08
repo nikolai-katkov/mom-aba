@@ -1,3 +1,7 @@
+_[Русский](./01-07-assessment-loop-and-state.ru.md)_
+
+---
+
 # 01-07: Assessment Loop and State Management
 
 Status: Draft
@@ -40,7 +44,7 @@ Wire up the full assessment loop: Assess > (if No) Train > Reassess > repeat. En
 
 ## Knowledge Reference
 
-- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.md)
+- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.en.md)
 
 ## Related Files
 

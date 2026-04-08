@@ -1,3 +1,7 @@
+_[Русский](./01-03-section-introduction-screen.ru.md)_
+
+---
+
 # 01-03: Section Introduction Screen
 
 Status: Draft
@@ -37,7 +41,7 @@ Educational screen shown before the first assessment in a section. Explains what
 
 ## Knowledge Reference
 
-- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.md)
+- [Developmental Milestones Assessment](../../knowledge/developmental-milestones-assessment.en.md)
 
 ## Related Files
 

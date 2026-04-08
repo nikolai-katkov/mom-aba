@@ -1,6 +1,25 @@
+import type { Language } from '../i18n'
 import type { AssessmentState } from '../types'
 
 const STORAGE_KEY = 'neuron-assessment-state'
+const LANGUAGE_KEY = 'neuron-language'
+const DEFAULT_LANGUAGE: Language = 'ru'
+
+export function loadLanguage(): Language {
+  try {
+    const raw = localStorage.getItem(LANGUAGE_KEY)
+    if (raw === 'en' || raw === 'ru') {
+      return raw
+    }
+    return DEFAULT_LANGUAGE
+  } catch {
+    return DEFAULT_LANGUAGE
+  }
+}
+
+export function saveLanguage(language: Language): void {
+  localStorage.setItem(LANGUAGE_KEY, language)
+}
 
 export function createInitialState(): AssessmentState {
   return { criterionStates: {} }

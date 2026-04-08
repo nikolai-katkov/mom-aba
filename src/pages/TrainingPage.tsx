@@ -2,7 +2,8 @@ import { useCallback } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 import { Button, PageLayout, ProgressiveDisclosure, VideoPlaceholder } from '../components/ui'
-import { SECTIONS, TRAINING_CONTENT } from '../data'
+import { useLanguage } from '../hooks'
+import { tProps } from '../i18n'
 import styles from './TrainingPage.module.css'
 
 export function TrainingPage() {
@@ -11,10 +12,11 @@ export function TrainingPage() {
     criterionId: string
   }>()
   const navigate = useNavigate()
+  const { t, sections, trainingContent } = useLanguage()
 
-  const section = SECTIONS.find(s => s.id === sectionId)
+  const section = sections.find(s => s.id === sectionId)
   const criterion = section?.criteria.find(c => c.id === criterionId)
-  const training = criterionId ? TRAINING_CONTENT[criterionId] : undefined
+  const training = criterionId ? trainingContent[criterionId] : undefined
 
   const handleRetry = useCallback(() => {
     if (!section || !criterion) {
@@ -54,7 +56,9 @@ export function TrainingPage() {
 
           {training.commonMistakes.length > 0 && (
             <>
-              <h4 className={styles.mistakesTitle}>Common mistakes</h4>
+              <h4 className={styles.mistakesTitle} {...tProps('commonMistakes')}>
+                {t('commonMistakes')}
+              </h4>
               <ul className={styles.mistakesList}>
                 {training.commonMistakes.map(mistake => (
                   <li key={mistake}>{mistake}</li>
@@ -66,9 +70,11 @@ export function TrainingPage() {
       </ProgressiveDisclosure>
 
       <div className={styles.actions}>
-        <Button onClick={handleRetry}>Retry Assessment</Button>
-        <Button variant="ghost" onClick={handleBack}>
-          Back to List
+        <Button onClick={handleRetry} {...tProps('retryAssessment')}>
+          {t('retryAssessment')}
+        </Button>
+        <Button variant="ghost" onClick={handleBack} {...tProps('backToList')}>
+          {t('backToList')}
         </Button>
       </div>
     </PageLayout>

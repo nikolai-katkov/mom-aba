@@ -39,6 +39,7 @@ Before committing any feature work, update the corresponding story documentation
 - Update "Related Files" section with new/modified files
 - Update `_epic.md` with status and commit hashes
 - Update `docs/roadmap/README.md` status dashboard
+- Update BOTH `.en.md` and `.ru.md` versions of any modified doc
 - Commit documentation changes with code changes (single commit)
 
 ## Architecture
@@ -47,12 +48,12 @@ Before committing any feature work, update the corresponding story documentation
 
 ```
 docs/
-├── README.md           # Product overview
+├── README.{en,ru}.md           # Product overview (both languages)
 ├── roadmap/
-│   ├── README.md       # Status dashboard
-│   ├── backlog.md      # Unrefined features
-│   └── {NN}-{name}/    # Epic folders with _epic.md + stories
-└── knowledge/          # Domain reference articles
+│   ├── README.{en,ru}.md       # Status dashboard
+│   ├── backlog.{en,ru}.md      # Unrefined features
+│   └── {NN}-{name}/            # Epic folders with _epic.md + stories (both languages)
+└── knowledge/                  # Domain reference articles (both languages)
 ```
 
 **Anti-duplication rules:**
@@ -67,7 +68,7 @@ docs/
 
 The app implements ABA-based developmental milestone assessments. Key domain concepts are documented in `docs/knowledge/`:
 
-- [Developmental Milestones Assessment](docs/knowledge/developmental-milestones-assessment.md) -- assessment structure, scoring types (TCT/NAB/KOM/NOV), MAND/TACT sections, development model, and UX screen mapping.
+- Developmental Milestones Assessment ([EN](docs/knowledge/developmental-milestones-assessment.en.md) | [RU](docs/knowledge/developmental-milestones-assessment.ru.md)) -- assessment structure, scoring types (TCT/NAB/KOM/NOV), MAND/TACT sections, development model, and UX screen mapping.
 
 ### Directory Structure
 
@@ -76,6 +77,8 @@ src/
 ├── components/
 │   └── ui/             # Design system components (barrel: import from ./ui)
 ├── hooks/              # Custom React hooks (barrel: import from ./hooks)
+├── i18n/               # Internationalization (types, context, translations)
+│   └── translations/   # Translation files per namespace (ui, sections, etc.)
 ├── pages/              # Route-level page components
 ├── styles/
 │   └── tokens.css      # Design system tokens (single source of truth)
@@ -89,6 +92,42 @@ src/
 **Token file:** `src/styles/tokens.css` — imported once in `main.tsx`, available globally.
 
 **Token categories:** Colors (primary, accent, warm, semantic, neutral, overlay), shadows, spacing (4px grid), border radius, typography (Nunito primary, IBM Plex Mono), transitions, blur.
+
+### Internationalization (i18n)
+
+**Languages:** Russian (default) and English. Language is persisted in localStorage (`neuron-language`).
+
+**Architecture:** Custom hook + context (no library). `LanguageProvider` wraps the app, `useLanguage()` hook provides `t(key)` for UI strings and language-resolved domain data (`sections`, `sectionIntroductions`, `trainingContent`).
+
+**Translation files:** `src/i18n/translations/` -- one TypeScript file per namespace:
+
+- `ui.ts` -- UI chrome strings (`UiTranslations` interface, type-safe keys)
+- `sections.ts` -- Section/criterion data per language
+- `introduction.ts` -- Introduction content per language
+- `training.ts` -- Training content per language
+
+**String interpolation:** `interpolate(template, values)` for patterns like `{completed}/{total}`.
+
+**Translation sync rules (enforced):**
+
+- When adding/modifying user-facing strings, update BOTH `en` and `ru` in the relevant translation file
+- Run `npm test -- tests/i18n/translations.test.ts` to verify translation completeness
+- All UI string keys must be defined in `UiTranslations` interface (`src/i18n/types.ts`)
+- Domain data (sections, training, introduction) must have identical structure in both languages (same IDs, same array lengths)
+- Use ABA-correct Russian terminology (МАНД, ТАКТ, эхоическая подсказка) rather than literal translations
+
+**Component usage:** Call `useLanguage()` in components, use `t('keyName')` for UI strings, destructure `sections`/`sectionIntroductions`/`trainingContent` for domain data. Add `{...tProps('keyName')}` on elements that display translated text for test selectors.
+
+**Missing translation handling:** `t()` falls back to other languages with a dev console warning. If no translation exists in any language, renders the key in dev mode and empty string in production.
+
+**Testing:**
+
+- Wrap components in `LanguageProvider` (use `renderWithProviders` helper from `tests/helpers/`)
+- Query elements by translation key using `byT('keyName')` from `tests/helpers/byT.ts` -- NEVER use hardcoded translation strings in test assertions
+- `data-t` attributes are set in development only (stripped in production via `tProps()`)
+- `byT(key)`, `allByT(key)`, `queryByT(key)` -- query helpers for `[data-t]` selectors
+
+**Documentation:** Each doc file has `.en.md` and `.ru.md` versions with cross-language links. When modifying docs, update BOTH language versions.
 
 ### Routing
 

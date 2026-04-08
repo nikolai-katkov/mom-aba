@@ -1,3 +1,7 @@
+_[Русский](./pm-questions-scoring-model.ru.md)_
+
+---
+
 # PM Questions: Scoring Model
 
 Related stories: [Epic 01 -- Assessment Foundation](../roadmap/01-assessment-foundation/_epic.md)

@@ -2,15 +2,17 @@ import { useCallback } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 import { Button, PageLayout, ProgressiveDisclosure, VideoPlaceholder } from '../components/ui'
-import { SECTION_INTRODUCTIONS, SECTIONS } from '../data'
+import { useLanguage } from '../hooks'
+import { tProps } from '../i18n'
 import styles from './SectionIntroPage.module.css'
 
 export function SectionIntroPage() {
   const { sectionId } = useParams<{ sectionId: string }>()
   const navigate = useNavigate()
+  const { t, sections, sectionIntroductions } = useLanguage()
 
-  const section = SECTIONS.find(s => s.id === sectionId)
-  const introduction = sectionId ? SECTION_INTRODUCTIONS[sectionId] : undefined
+  const section = sections.find(s => s.id === sectionId)
+  const introduction = sectionId ? sectionIntroductions[sectionId] : undefined
 
   const criteriaPath = `/sections/${sectionId}/criteria`
 
@@ -49,9 +51,11 @@ export function SectionIntroPage() {
       </ProgressiveDisclosure>
 
       <div className={styles.actions}>
-        <Button onClick={handleStart}>Start</Button>
-        <Button variant="ghost" onClick={handleSkip}>
-          Skip
+        <Button onClick={handleStart} {...tProps('start')}>
+          {t('start')}
+        </Button>
+        <Button variant="ghost" onClick={handleSkip} {...tProps('skip')}>
+          {t('skip')}
         </Button>
       </div>
     </PageLayout>

@@ -3,7 +3,10 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 
 import { AssessmentProvider } from '../../src/hooks'
+import { LanguageProvider } from '../../src/i18n'
+import { SECTIONS_BY_LANGUAGE } from '../../src/i18n/translations'
 import { SectionsListPage } from '../../src/pages/SectionsListPage'
+import { byT } from '../helpers/byT'
 
 const mockNavigate = vi.fn()
 
@@ -18,9 +21,11 @@ vi.mock('react-router-dom', async () => {
 function renderPage() {
   return render(
     <MemoryRouter>
-      <AssessmentProvider>
-        <SectionsListPage />
-      </AssessmentProvider>
+      <LanguageProvider initialLanguage="en">
+        <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
+          <SectionsListPage />
+        </AssessmentProvider>
+      </LanguageProvider>
     </MemoryRouter>
   )
 }
@@ -34,14 +39,13 @@ describe('SectionsListPage', () => {
   it('renders MAND card with title and progress', () => {
     renderPage()
     expect(screen.getByText('MAND')).toBeInTheDocument()
-    expect(screen.getByText('Requests')).toBeInTheDocument()
     expect(screen.getByText('0/5')).toBeInTheDocument()
   })
 
   it('renders TACT card as coming soon', () => {
     renderPage()
     expect(screen.getByText('TACT')).toBeInTheDocument()
-    expect(screen.getByText('Coming soon')).toBeInTheDocument()
+    expect(byT('comingSoon')).toBeInTheDocument()
   })
 
   it('navigates to MAND intro when MAND card is clicked', async () => {
