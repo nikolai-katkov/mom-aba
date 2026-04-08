@@ -1,0 +1,58 @@
+.subtitle {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-dim);
+  margin: 0;
+}
+
+.sectionList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.sectionTitle {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin: 0;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.sectionSubtitle {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  margin: 0;
+  margin-top: var(--space-1);
+}
+
+.progressArea {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.progressLabel {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}

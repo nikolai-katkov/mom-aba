@@ -1,0 +1,81 @@
+.stepList {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  counter-reset: step;
+}
+
+.stepItem {
+  counter-increment: step;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  line-height: 1.6;
+  padding-left: var(--space-8);
+  position: relative;
+}
+
+.stepItem::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--space-6);
+  height: var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-alpha-10);
+  color: var(--color-primary);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+}
+
+.fullGuide {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-dim);
+  line-height: 1.7;
+}
+
+.fullGuide p {
+  margin: 0 0 var(--space-3);
+}
+
+.fullGuide p:last-child {
+  margin-bottom: 0;
+}
+
+.mistakesTitle {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-warm);
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+.mistakesList {
+  padding-left: var(--space-5);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.mistakesList li {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-dim);
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: stretch;
+}

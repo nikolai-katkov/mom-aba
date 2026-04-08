@@ -1,0 +1,14 @@
+.track {
+  width: 100%;
+  height: var(--space-2);
+  background-color: var(--color-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-slow);
+}
