@@ -5,4 +5,5 @@ node_modules/
 .eslintcache
 playwright-report/
 test-results/
+cdk.out/
 *.min.js

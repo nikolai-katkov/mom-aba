@@ -1,0 +1,9 @@
+{
+  "app": "npx tsx infra/app.ts",
+  "watch": {
+    "include": ["infra/**"]
+  },
+  "context": {
+    "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true
+  }
+}

@@ -11,6 +11,7 @@ import sonarjsPlugin from 'eslint-plugin-sonarjs'
 import arrayFuncPlugin from 'eslint-plugin-array-func'
 import promisePlugin from 'eslint-plugin-promise'
 import regexpPlugin from 'eslint-plugin-regexp'
+import awscdkPlugin from 'eslint-plugin-awscdk'
 import playwrightPlugin from 'eslint-plugin-playwright'
 import vitestPlugin from '@vitest/eslint-plugin'
 import globals from 'globals'
@@ -26,6 +27,7 @@ export default [
       '*.config.ts',
       'playwright-report/**',
       'test-results/**',
+      'cdk.out/**',
     ],
   },
 
@@ -632,6 +634,49 @@ export default [
     rules: {
       ...vitestPlugin.configs.recommended.rules,
       'vitest/no-focused-tests': 'error',
+    },
+  },
+
+  // Infrastructure (CDK) files
+  {
+    files: ['infra/**/*.ts'],
+    languageOptions: {
+      parserOptions: {
+        project: './infra/tsconfig.json',
+      },
+    },
+    plugins: {
+      awscdk: awscdkPlugin,
+    },
+    rules: {
+      // CDK uses `new Construct(scope, id, props)` for side effects
+      'no-new': 'off',
+      // CDK stacks are classes by design
+      'max-classes-per-file': 'off',
+      '@typescript-eslint/no-extraneous-class': 'off',
+      // React rules irrelevant to CDK
+      'react/display-name': 'off',
+      'react-hooks/rules-of-hooks': 'off',
+      'react-hooks/exhaustive-deps': 'off',
+
+      // Construct quality
+      'awscdk/construct-constructor-property': 'error',
+      'awscdk/require-passing-this': 'error',
+      'awscdk/pascal-case-construct-id': 'error',
+      'awscdk/no-variable-construct-id': 'error',
+      'awscdk/no-construct-stack-suffix': 'error',
+      'awscdk/no-parent-name-construct-id-match': 'error',
+      'awscdk/prevent-construct-id-collision': 'error',
+
+      // Props hygiene
+      'awscdk/props-name-convention': 'error',
+      'awscdk/no-mutable-property-of-props-interface': 'error',
+      'awscdk/no-mutable-public-property-of-construct': 'error',
+
+      // Encapsulation
+      'awscdk/no-construct-in-interface': 'error',
+      'awscdk/no-construct-in-public-property-of-construct': 'error',
+      'awscdk/no-import-private': 'error',
     },
   },
 ]
