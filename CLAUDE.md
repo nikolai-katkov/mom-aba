@@ -63,6 +63,12 @@ docs/
 - Future features → roadmap/backlog.md
 - Development workflow → CLAUDE.md
 
+### Domain Context
+
+The app implements ABA-based developmental milestone assessments. Key domain concepts are documented in `docs/knowledge/`:
+
+- [Developmental Milestones Assessment](docs/knowledge/developmental-milestones-assessment.md) -- assessment structure, scoring types (TCT/NAB/KOM/NOV), MAND/TACT sections, development model, and UX screen mapping.
+
 ### Directory Structure
 
 ```

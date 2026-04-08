@@ -4,7 +4,11 @@ Application to help parents support their autistic children.
 
 ## Vision
 
-_To be defined during roadmapping._
+Help parents of autistic children track developmental milestones through structured, evidence-based assessments grounded in ABA verbal operant methodology.
+
+## Domain Reference
+
+See [Knowledge Articles](knowledge/) for domain documentation, starting with the [Developmental Milestones Assessment](knowledge/developmental-milestones-assessment.md).
 
 ## Technical Overview
 
