@@ -2,64 +2,92 @@
 
 Everything you need before running `npm run deploy`.
 
-## 1. Create an AWS Account
+## 1. Create a Managed Account via AWS Organizations
 
-1. Go to https://aws.amazon.com and create an account
-2. Enable MFA on the root account (Security Credentials > MFA)
+You already have a personal root AWS account. Create a dedicated member account for this project:
 
-## 2. Create an IAM User for Deployment
+1. Sign in to your root account at https://console.aws.amazon.com
+2. Go to **AWS Organizations** (create the organization if you haven't already)
+3. Click **Add an AWS account** > **Create an AWS account**
+4. Account name: `neuron` (or whatever you prefer)
+5. Email: use a `+` alias like `you+neuron@gmail.com` (must be unique across all AWS accounts)
+6. Wait a few minutes for the account to be created
 
-1. Go to IAM > Users > Create user
-2. Name: `neuron-deploy` (or whatever you prefer)
-3. Attach policy: `AdministratorAccess` (simplest for CDK bootstrap; scope down later)
-4. Create access key: Use case "Command Line Interface (CLI)"
-5. Save the Access Key ID and Secret Access Key
+## 2. Set Up Access to the New Account
 
-## 3. Install and Configure AWS CLI
+### Option A: IAM Identity Center (Recommended)
 
-Install AWS CLI v2:
-
-```bash
-# macOS
-brew install awscli
-
-# Or download from https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
-```
-
-Configure credentials:
+1. Go to **IAM Identity Center** (in the management account)
+2. Enable it if not already enabled
+3. Create a user for yourself (or use the existing one)
+4. Create a permission set with `AdministratorAccess` (scope down later)
+5. Assign yourself to the new `neuron` account with that permission set
+6. Configure the CLI:
 
 ```bash
-aws configure
+aws configure sso
 ```
 
 Enter:
 
-- AWS Access Key ID: (from step 2)
-- AWS Secret Access Key: (from step 2)
-- Default region: `eu-central-1`
-- Default output format: `json`
+- SSO session name: `neuron`
+- SSO start URL: (from IAM Identity Center settings)
+- SSO region: `eu-central-1`
+- Choose the `neuron` account and `AdministratorAccess` role
+- CLI default region: `eu-central-1`
+- CLI default output: `json`
+- CLI profile name: `neuron`
 
-Verify:
+Then log in:
 
 ```bash
-aws sts get-caller-identity
+aws sso login --profile neuron
 ```
 
-You should see your account ID and IAM user ARN.
+Set it as default for this project:
+
+```bash
+export AWS_PROFILE=neuron
+```
+
+### Option B: Assume Role with Access Keys
+
+1. In the management (root) account, create an IAM user with access keys
+2. In the new `neuron` account, note the `OrganizationAccountAccessRole` that was created automatically
+3. Add this to `~/.aws/config`:
+
+```ini
+[profile neuron]
+role_arn = arn:aws:iam::NEURON_ACCOUNT_ID:role/OrganizationAccountAccessRole
+source_profile = default
+region = eu-central-1
+output = json
+```
+
+Replace `NEURON_ACCOUNT_ID` with the 12-digit ID of the new member account.
+
+## 3. Verify Access
+
+```bash
+aws sts get-caller-identity --profile neuron
+```
+
+You should see the `neuron` account ID (not your root account ID).
 
 ## 4. Bootstrap CDK
 
 CDK needs a one-time bootstrap to create its staging resources (S3 bucket, IAM roles):
 
 ```bash
-npx cdk bootstrap aws://YOUR_ACCOUNT_ID/eu-central-1
+npx cdk bootstrap aws://NEURON_ACCOUNT_ID/eu-central-1 --profile neuron
 ```
 
-Replace `YOUR_ACCOUNT_ID` with the 12-digit number from `aws sts get-caller-identity`.
+Replace `NEURON_ACCOUNT_ID` with the 12-digit number from the previous step.
 
 ## 5. Deploy
 
 ```bash
+export AWS_PROFILE=neuron
 npm run deploy
 ```
 
@@ -77,10 +105,12 @@ npm run destroy     # Tear down all AWS resources
 
 ## Troubleshooting
 
-**"Unable to resolve AWS account"** — Run `aws sts get-caller-identity` to verify credentials are configured.
+**"Unable to resolve AWS account"** -- Run `aws sts get-caller-identity --profile neuron` to verify credentials are configured.
 
-**"CDKToolkit stack not found"** — You need to bootstrap first (step 4).
+**"Token has expired"** -- Re-authenticate with `aws sso login --profile neuron`.
 
-**"Access Denied"** — The IAM user is missing permissions. Use `AdministratorAccess` for now.
+**"CDKToolkit stack not found"** -- You need to bootstrap first (step 4).
 
-**Deploy succeeds but site shows "Access Denied"** — Wait a few minutes for CloudFront to propagate, then hard-refresh.
+**"Access Denied"** -- The IAM role/permission set is missing permissions. Use `AdministratorAccess` for now.
+
+**Deploy succeeds but site shows "Access Denied"** -- Wait a few minutes for CloudFront to propagate, then hard-refresh.
