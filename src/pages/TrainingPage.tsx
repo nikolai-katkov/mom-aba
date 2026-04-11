@@ -27,7 +27,7 @@ export function TrainingPage() {
             { label: t('home'), path: '/' },
             { label: section.title, path: `/sections/${section.id}/criteria` },
             {
-              label: criterion.title,
+              label: `${criterion.level}. ${criterion.title}`,
               path: `/sections/${section.id}/criteria/${criterion.id}/assess`,
             },
           ]
@@ -54,7 +54,7 @@ export function TrainingPage() {
   }
 
   return (
-    <PageLayout title={criterion.title} breadcrumbs={breadcrumbs}>
+    <PageLayout title={`${criterion.level}. ${criterion.title}`} breadcrumbs={breadcrumbs}>
       <VideoPlaceholder />
 
       <ol className={styles.stepList}>

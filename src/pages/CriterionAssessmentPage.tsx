@@ -28,7 +28,7 @@ export function CriterionAssessmentPage() {
             { label: t('home'), path: '/' },
             { label: section.title, path: `/sections/${section.id}/criteria` },
             {
-              label: criterion.title,
+              label: `${criterion.level}. ${criterion.title}`,
               path: `/sections/${section.id}/criteria/${criterion.id}/assess`,
             },
           ]
@@ -57,7 +57,7 @@ export function CriterionAssessmentPage() {
   }
 
   return (
-    <PageLayout breadcrumbs={breadcrumbs}>
+    <PageLayout title={`${criterion.level}. ${criterion.title}`} breadcrumbs={breadcrumbs}>
       <div
         className={[styles.assessmentLayout, styles[`layout_${theme}`]].filter(Boolean).join(' ')}
       >
