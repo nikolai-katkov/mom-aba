@@ -139,7 +139,7 @@ src/
 
 ## Translation & Content Quality
 
-**These rules are mandatory and apply to ALL text changes — application strings AND documentation, in ANY language.**
+**These rules are mandatory and apply to ALL text changes in ANY language. Terminology rules apply everywhere; audience rules differ between application text and documentation (see below).**
 
 ### Terminology Rules
 
@@ -162,6 +162,10 @@ src/
 - Use normalizing, supportive language: "it is perfectly normal," "prompts are a normal part of learning"
 - Avoid clinical detachment — write as if explaining to a caring parent, not documenting for a therapist
 
+### Audience Rules (Documentation)
+
+Documentation in `docs/` uses professional ABA terminology for precision. Terms like "cold probe," "token economy," "free operant observation," and "contrived trial" should be used as-is without simplification. Parenthetical explanations are acceptable when a term has not appeared earlier in the same document.
+
 ### Pre-Commit Text Audit (Mandatory)
 
 Before EVERY commit that adds or modifies user-facing text in any language (app strings in `src/i18n/translations/` or documentation in `docs/`):
@@ -169,7 +173,7 @@ Before EVERY commit that adds or modifies user-facing text in any language (app 
 1. Review all changed text against the terminology and audience rules above
 2. Check cross-language consistency — if text was changed in one language, verify the other language(s) match in meaning and tone
 3. Check for incomplete or truncated sentences in all languages
-4. Check that technical terms are either replaced with parent-friendly language or explained in context
+4. Check that technical terms follow the correct audience rules: parent-friendly in app text (`src/i18n/translations/`), professional ABA terminology in docs (`docs/`)
 5. Suggest specific improvements if any text does not meet these standards — do not silently pass non-compliant text
 
 ### Routing
