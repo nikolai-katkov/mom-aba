@@ -37,8 +37,8 @@ Before committing any feature work, update the corresponding story documentation
 
 - Check acceptance criteria boxes `[x]` for completed items
 - Update "Related Files" section with new/modified files
-- Update `_epic.md` with status and commit hashes
-- Update `docs/roadmap/README.md` status dashboard
+- Update `_epic.en.md` and `_epic.ru.md` with status and commit hashes
+- Update `docs/roadmap/README.en.md` and `README.ru.md` status dashboard
 - Update BOTH `.en.md` and `.ru.md` versions of any modified doc
 - Commit documentation changes with code changes (single commit)
 
@@ -68,7 +68,7 @@ docs/
 
 The app implements ABA-based developmental milestone assessments. Key domain concepts are documented in `docs/knowledge/`:
 
-- Developmental Milestones Assessment ([EN](docs/knowledge/developmental-milestones-assessment.en.md) | [RU](docs/knowledge/developmental-milestones-assessment.ru.md)) -- assessment structure, scoring types (TCT/NAB/KOM/NOV), MAND/TACT sections, development model, and UX screen mapping.
+- Developmental Milestones Assessment ([EN](docs/knowledge/developmental-milestones-assessment.en.md) | [RU](docs/knowledge/developmental-milestones-assessment.ru.md)) - assessment structure, scoring types (TCT/NAB/KOM/NOV), MAND/TACT sections, development model, and UX screen mapping.
 
 ### Directory Structure
 
@@ -107,12 +107,12 @@ src/
 
 **Architecture:** Custom hook + context (no library). `LanguageProvider` wraps the app, `useLanguage()` hook provides `t(key)` for UI strings and language-resolved domain data (`sections`, `sectionIntroductions`, `trainingContent`).
 
-**Translation files:** `src/i18n/translations/` -- one TypeScript file per namespace:
+**Translation files:** `src/i18n/translations/` - one TypeScript file per namespace:
 
-- `ui.ts` -- UI chrome strings (`UiTranslations` interface, type-safe keys)
-- `sections.ts` -- Section/criterion data per language
-- `introduction.ts` -- Introduction content per language
-- `training.ts` -- Training content per language
+- `ui.ts` - UI chrome strings (`UiTranslations` interface, type-safe keys)
+- `sections.ts` - Section/criterion data per language
+- `introduction.ts` - Introduction content per language
+- `training.ts` - Training content per language
 
 **String interpolation:** `interpolate(template, values)` for patterns like `{completed}/{total}`.
 
@@ -131,11 +131,46 @@ src/
 **Testing:**
 
 - Wrap components in `LanguageProvider` (use `renderWithProviders` helper from `tests/helpers/`)
-- Query elements by translation key using `byT('keyName')` from `tests/helpers/byT.ts` -- NEVER use hardcoded translation strings in test assertions
+- Query elements by translation key using `byT('keyName')` from `tests/helpers/byT.ts` - NEVER use hardcoded translation strings in test assertions
 - `data-t` attributes are set in development only (stripped in production via `tProps()`)
 - `byT(key)`, `allByT(key)`, `queryByT(key)` -- query helpers for `[data-t]` selectors
 
 **Documentation:** Each doc file has `.en.md` and `.ru.md` versions with cross-language links. When modifying docs, update BOTH language versions.
+
+## Translation & Content Quality
+
+**These rules are mandatory and apply to ALL text changes — application strings AND documentation, in ANY language.**
+
+### Terminology Rules
+
+- Use established ABA, developmental psychology, and child development terms for each language — NEVER use literal word-for-word translations
+- Russian is the primary authoring language; treat existing Russian text as the source of truth when translating to other languages
+- Reference existing codebase translations (`src/i18n/translations/`) as the terminology baseline for consistency
+- When adding a new language, align terminology with that language's professional literature in developmental psychology and ABA
+- Preserve key ABA terms that have established equivalents: MAND/МАНД, TACT/ТАКТ, PECS, ABA
+
+### Audience Rules (Application Text)
+
+- Target audience is **parents, not ABA specialists** — write for clarity and emotional safety
+- Replace uncommon specialist terms with concise plain-language explanations or use the technical term followed by a brief parenthetical:
+  - "reinforcement" → "reward"
+  - "non-reinforcing objects" → "everyday objects (not their favorites)"
+  - "mand responses" → "requests"
+  - "verbal operant framework" → omit or simplify to "Applied Behavior Analysis (ABA)"
+  - "stimulus generalization" → "using the skill in different situations"
+- When a technical term IS necessary for precision, immediately follow it with a short parent-friendly explanation
+- Use normalizing, supportive language: "it is perfectly normal," "prompts are a normal part of learning"
+- Avoid clinical detachment — write as if explaining to a caring parent, not documenting for a therapist
+
+### Pre-Commit Text Audit (Mandatory)
+
+Before EVERY commit that adds or modifies user-facing text in any language (app strings in `src/i18n/translations/` or documentation in `docs/`):
+
+1. Review all changed text against the terminology and audience rules above
+2. Check cross-language consistency — if text was changed in one language, verify the other language(s) match in meaning and tone
+3. Check for incomplete or truncated sentences in all languages
+4. Check that technical terms are either replaced with parent-friendly language or explained in context
+5. Suggest specific improvements if any text does not meet these standards — do not silently pass non-compliant text
 
 ### Routing
 
