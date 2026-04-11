@@ -84,7 +84,7 @@ const TACT_SECTION_EN: Section = {
   id: 'tact',
   title: 'TACT',
   subtitle: 'Labeling',
-  isAvailable: false,
+  isAvailable: true,
   criteria: [
     {
       id: 'tact-1',
@@ -245,8 +245,8 @@ const MAND_SECTION_RU: Section = {
 const TACT_SECTION_RU: Section = {
   id: 'tact',
   title: 'ТАКТ',
-  subtitle: 'Обозначение',
-  isAvailable: false,
+  subtitle: 'Называние',
+  isAvailable: true,
   criteria: [
     {
       id: 'tact-1',
