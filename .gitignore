@@ -30,6 +30,7 @@ coverage/
 /playwright-results.json
 /test-results/
 /playwright/.cache/
+/.playwright-mcp/
 
 # CDK
 cdk.out/
