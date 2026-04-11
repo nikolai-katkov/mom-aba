@@ -4,7 +4,7 @@ _[Русский](./pm-questions-scoring-model.ru.md)_
 
 # PM Questions: Scoring Model
 
-Related stories: [Epic 01 -- Assessment Foundation](../roadmap/01-assessment-foundation/_epic.en.md)
+Related stories: [Epic 01 - Assessment Foundation](../roadmap/01-assessment-foundation/_epic.en.md)
 Related files: `src/types/state.ts`, `src/types/assessment.ts`
 
 ---
@@ -46,10 +46,10 @@ This is a departure from the standard VB-MAPP scoring but offers more granularit
 
 States: binary **Yes/No** assessment per criterion.
 
-| Answer | Meaning                                      |
-| ------ | -------------------------------------------- |
-| Yes    | Skill demonstrated -- mark complete, move on |
-| No     | Skill not demonstrated -- go to training     |
+| Answer | Meaning                                     |
+| ------ | ------------------------------------------- |
+| Yes    | Skill demonstrated - mark complete, move on |
+| No     | Skill not demonstrated - go to training     |
 
 This is the simplest model. It aligns with the UX principle of "simple decisions" and minimizes cognitive load for parents.
 
@@ -65,9 +65,9 @@ This is the simplest model. It aligns with the UX principle of "simple decisions
 
 ### Arguments for 3-point (VB-MAPP style: 0/0.5/1)
 
-- Industry standard -- compatible with clinical reporting
+- Industry standard - compatible with clinical reporting
 - Captures "emerging" skills, which is critical for tracking progress over time
-- A child scoring 0.5 across many criteria looks very different from one scoring 0 -- binary loses this signal
+- A child scoring 0.5 across many criteria looks very different from one scoring 0 - binary loses this signal
 - Clinicians or therapists reviewing the data would expect this format
 
 ### Arguments for 4-point Scale
@@ -88,7 +88,7 @@ This is the simplest model. It aligns with the UX principle of "simple decisions
 
 1. **Who is the primary audience for assessment results?** Parents only, or will clinicians/therapists also review the data? If clinicians need compatibility with VB-MAPP reporting, binary may not be sufficient.
 
-2. **How important is tracking partial progress?** A child who can "sometimes" request items (emerging skill) versus one who never does -- does the app need to distinguish these? If so, binary loses critical signal.
+2. **How important is tracking partial progress?** A child who can "sometimes" request items (emerging skill) versus one who never does - does the app need to distinguish these? If so, binary loses critical signal.
 
 3. **Is the 1--4 scale from the original document a firm requirement from the domain expert, or was it illustrative?** Understanding whether this was a deliberate clinical choice or a rough sketch matters.
 

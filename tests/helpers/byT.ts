@@ -2,7 +2,7 @@
  * Query element by translation key (data-t attribute).
  * Use instead of hardcoded translation strings in tests.
  *
- * Usage: byT('statusNotStarted') -- returns the element with data-t="statusNotStarted"
+ * Usage: byT('statusNotStarted') - returns the element with data-t="statusNotStarted"
  */
 export function byT(key: string): HTMLElement {
   const el = document.querySelector(`[data-t="${key}"]`)

@@ -34,7 +34,7 @@ Guidance screen shown after a "No" assessment. Teaches the parent how to develop
 - [x] Progressive disclosure uses CSS transitions (consistent with introduction screen pattern)
 - [x] CSS Modules with design tokens only
 - [x] Responsive across all device profiles
-- [x] Reuse progressive disclosure component/pattern from 01-03 if applicable (rule of 2 -- watch for 3rd use)
+- [x] Reuse progressive disclosure component/pattern from 01-03 if applicable (rule of 2 - watch for 3rd use)
 - [x] Unit test: "Read more" toggle behavior
 - [x] Unit test: correct training data loaded based on route params
 - [x] E2E test: arrive from "No" assessment, verify training content, tap "Retry" returns to assessment
@@ -42,7 +42,7 @@ Guidance screen shown after a "No" assessment. Teaches the parent how to develop
 
 ## Depends On
 
-- 01-01 (data model -- training data), 01-05 (navigation context)
+- 01-01 (data model - training data), 01-05 (navigation context)
 
 ## Knowledge Reference
 

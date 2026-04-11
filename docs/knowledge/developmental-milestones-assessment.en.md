@@ -4,7 +4,7 @@ _[Русский](./developmental-milestones-assessment.ru.md)_
 
 # Developmental Milestones Assessment
 
-Related stories: [Epic 01 -- Assessment Foundation](../roadmap/01-assessment-foundation/_epic.en.md)
+Related stories: [Epic 01 - Assessment Foundation](../roadmap/01-assessment-foundation/_epic.en.md)
 Related files: `src/types/assessment.ts`, `src/i18n/translations/sections.ts`, `src/i18n/translations/introduction.ts`, `src/i18n/translations/training.ts`
 
 ---
@@ -28,12 +28,12 @@ The application follows this cycle:
 
 ## UX Principles
 
-1. **Low entry barrier** -- start immediately, no setup required.
-2. **Progressive disclosure** -- short explanation by default, full detail on demand ("Read more").
-3. **Simple decisions** -- Yes/No only at the assessment level.
-4. **Visual support** -- illustrations required for every assessment criterion.
-5. **Just-in-time learning** -- training surfaces only after assessment failure.
-6. **Minimal cognitive load** -- learning through action, not instruction.
+1. **Low entry barrier** - start immediately, no setup required.
+2. **Progressive disclosure** - short explanation by default, full detail on demand ("Read more").
+3. **Simple decisions** - Yes/No only at the assessment level.
+4. **Visual support** - illustrations required for every assessment criterion.
+5. **Just-in-time learning** - training surfaces only after assessment failure.
+6. **Minimal cognitive load** - learning through action, not instruction.
 
 ## Assessment Metadata
 
@@ -158,11 +158,11 @@ Criteria within each section increase in complexity, form a developmental gradie
 
 ### MVP Screens
 
-1. **Sections list** -- MAND (active) + TACT (placeholder/coming soon). Entry point of the app.
-2. **Section introduction** -- explains the skill category (video slot, short explanation, collapsible full explanation). Controls: "Start" / "Skip".
-3. **Criteria list** -- 5 level cards showing progression through the section. Each card: simplified title, short description, status, optional progress.
-4. **Criterion assessment** -- binary Yes/No question with illustration and context. "Yes" marks complete; "No" navigates to training.
-5. **Training** -- video slot, step-by-step short guide, collapsible full guide. Controls: "Retry" / "Back".
+1. **Sections list** - MAND (active) + TACT (placeholder/coming soon). Entry point of the app.
+2. **Section introduction** - explains the skill category (video slot, short explanation, collapsible full explanation). Controls: "Start" / "Skip".
+3. **Criteria list** - 5 level cards showing progression through the section. Each card: simplified title, short description, status, optional progress.
+4. **Criterion assessment** - binary Yes/No question with illustration and context. "Yes" marks complete; "No" navigates to training.
+5. **Training** - video slot, step-by-step short guide, collapsible full guide. Controls: "Retry" / "Back".
 
 All screens include a **language switcher** (RU/EN) in the page header, allowing parents to toggle the interface language at any time. Language preference is persisted across sessions.
 
@@ -179,7 +179,7 @@ All screens include a **language switcher** (RU/EN) in the page header, allowing
 
 ### Assessment Loop
 
-Assessment > (if No) Training > Reassessment -- repeats until "Yes" or parent navigates away.
+Assessment > (if No) Training > Reassessment - repeats until "Yes" or parent navigates away.
 
 ## MVP Scope
 

@@ -30,6 +30,6 @@ React 18, TypeScript (strict), Vite, CSS Modules, Vitest + Playwright (testing).
 
 ## Documentation
 
-- [Product Overview](docs/README.md) -- vision and context
-- [Roadmap](docs/roadmap/) -- epics, stories, status dashboard
-- [CLAUDE.md](CLAUDE.md) -- development workflow, code style, architecture
+- [Product Overview](docs/README.md) - vision and context
+- [Roadmap](docs/roadmap/) - epics, stories, status dashboard
+- [CLAUDE.md](CLAUDE.md) - development workflow, code style, architecture

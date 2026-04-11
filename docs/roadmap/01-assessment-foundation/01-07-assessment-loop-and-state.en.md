@@ -35,7 +35,7 @@ Wire up the full assessment loop: Assess > (if No) Train > Reassess > repeat. En
 - [x] Unit tests for state transitions: NotStarted -> InProgress -> Completed
 - [x] Unit tests for localStorage persistence (write on change, read on mount)
 - [x] Unit test: corrupted/missing localStorage falls back to clean initial state
-- [x] E2E test: full loop -- assess "No" -> training -> retry -> assess "Yes" -> criteria list updated
+- [x] E2E test: full loop - assess "No" -> training -> retry -> assess "Yes" -> criteria list updated
 - [x] E2E test: close and reopen app, verify state persisted
 
 ## Depends On
