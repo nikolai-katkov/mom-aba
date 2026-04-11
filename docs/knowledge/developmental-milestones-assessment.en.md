@@ -4,7 +4,7 @@ _[Русский](./developmental-milestones-assessment.ru.md)_
 
 # Developmental Milestones Assessment
 
-Related stories: [Epic 01 - Assessment Foundation](../roadmap/01-assessment-foundation/_epic.en.md)
+Related stories: [Epic 01 - Assessment Foundation](../roadmap/01-assessment-foundation/_epic.en.md), [Epic 05 - TACT Section](../roadmap/05-tact-section/_epic.en.md)
 Related files: `src/types/assessment.ts`, `src/i18n/translations/sections.ts`, `src/i18n/translations/introduction.ts`, `src/i18n/translations/training.ts`
 
 ---
@@ -58,7 +58,7 @@ Each criterion specifies one of four evaluation methods:
 
 ## Level I Sections
 
-Level I currently includes MAND and TACT sections. Additional sections (Listener Responding, Visual Perceptual, etc.) will be added.
+Level I currently includes 9 sections: MAND and TACT (active), plus 7 planned: Listener Responding, Visual Perceptual Skills & Matching-to-Sample, Independent Play, Social Behaviour & Social Play, Motor Imitation, Echoic, and Spontaneous Vocal Behaviour.
 
 ---
 
@@ -132,6 +132,44 @@ Level I currently includes MAND and TACT sections. Additional sections (Listener
 
 ---
 
+### Training: TACT
+
+#### Teaching Nouns
+
+1. Present real objects and picture cards simultaneously.
+2. Ask "What's this?" (Sd: visual stimulus).
+3. Token reinforcement schedule: 1 token for a single-word tact response, 2 tokens for a carrier phrase response ("This is + [word]").
+4. Mastery criterion: correct response on cold probe across 3 consecutive sessions (days).
+5. Once mastered with real objects, transfer stimulus control to picture cards only, then probe generalization to novel exemplars.
+
+#### Teaching Verbs
+
+1. Begin with action picture cards (static depictions of actions).
+2. Transfer to labeling real actions performed by the therapist or peer (live modeling).
+3. Progress to phrase building: subject + verb ("Dog runs"), then subject + verb + object ("Boy throws ball").
+
+#### Distraction Method Protocol
+
+Used to establish tact responses under conditions of competing stimuli:
+
+1. Present the target stimulus (Sd) and obtain a correct tact response.
+2. Deliver token + verbal praise (Sr+).
+3. Introduce a brief distractor task (e.g., motor imitation, receptive instruction).
+4. Re-present the original stimulus and probe for the tact response.
+5. Mastery criterion: 3 correct tact responses following distractor trials within a single session.
+
+#### Vocabulary Building System
+
+Structured across 27 semantic categories: toys, food, clothing, furniture, transport, animals, body parts, household items, kitchenware, hygiene items, nature, weather, colors, shapes, numbers, letters, professions, musical instruments, tools, sports, buildings, emotions, family members, fabrics, school supplies, insects, dinosaurs.
+
+Difficulty levels per category:
+
+- **Simple** - high-frequency, early-acquired vocabulary (e.g., "ball," "dog," "shoe")
+- **Medium** - moderate-frequency items requiring finer discrimination (e.g., "elbow," "trumpet," "hammer")
+- **Complex** - low-frequency or multi-syllabic items (e.g., "stethoscope," "triceratops," "xylophone")
+
+---
+
 ## Development Model
 
 The system measures development across three dimensions:
@@ -158,7 +196,7 @@ Criteria within each section increase in complexity, form a developmental gradie
 
 ### MVP Screens
 
-1. **Sections list** - MAND (active) + TACT (placeholder/coming soon). Entry point of the app.
+1. **Sections list** - MAND + TACT (active), 7 sections (placeholder/coming soon). Entry point of the app.
 2. **Section introduction** - explains the skill category (video slot, short explanation, collapsible full explanation). Controls: "Start" / "Skip".
 3. **Criteria list** - 5 level cards showing progression through the section. Each card: simplified title, short description, status, optional progress.
 4. **Criterion assessment** - binary Yes/No question with illustration and context. "Yes" marks complete; "No" navigates to training.
@@ -186,6 +224,7 @@ Assessment > (if No) Training > Reassessment - repeats until "Yes" or parent nav
 ### Included
 
 - MAND section (5 criteria)
+- TACT section (5 criteria)
 - Full assessment + training loop
 - Progress tracking
 - Static image placeholders for video/illustration slots
@@ -193,7 +232,6 @@ Assessment > (if No) Training > Reassessment - repeats until "Yes" or parent nav
 
 ### Excluded
 
-- TACT (shown as "coming soon" placeholder)
 - Analytics
 - Adaptive flows
 - Real video content
@@ -218,4 +256,4 @@ Every screen must offer a clear next step. The system always provides a path for
 
 ---
 
-_Last updated: 2026-04-08_
+_Last updated: 2026-04-11_
