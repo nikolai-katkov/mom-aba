@@ -47,12 +47,12 @@ Additional levels (II, III) are planned and will cover later developmental range
 
 Each criterion specifies one of four evaluation methods:
 
-| Code | Description              | Input Method         |
-| ---- | ------------------------ | -------------------- |
-| TCT  | Formal testing           | Direct test          |
-| NAB  | Observation              | Observation mode     |
-| KOM  | Combination (test + obs) | Mixed                |
-| NOV  | Time-limited observation | Timer-based (60 min) |
+| Code             | Description              | Input Method         |
+| ---------------- | ------------------------ | -------------------- |
+| TestTrial        | Formal testing           | Direct test          |
+| FreeOperant      | Observation              | Observation mode     |
+| CombinedTrial    | Combination (test + obs) | Mixed                |
+| TimedObservation | Time-limited observation | Timer-based (60 min) |
 
 > **Open question:** The VB-MAPP standard uses a half-point scoring scale (0, 0.5, 1) per criterion. The original assessment document specifies 1--4 scoring. The MVP spec uses binary Yes/No. See [PM Questions: Scoring Model](pm-questions-scoring-model.en.md) for the full analysis and questions to resolve with the PM.
 
@@ -72,30 +72,30 @@ Level I currently includes MAND and TACT sections. Additional sections (Listener
 
 - Conditions: prompts allowed (echoic, imitation, non-physical)
 - Examples: cookie, book
-- Type: KOM
+- Type: CombinedTrial
 
 **2. Makes 4 different requests independently**
 
 - Conditions: no prompts; excludes "What do you want?"; object may be visible
 - Examples: musical toy, spring toy, ball
-- Type: KOM
+- Type: CombinedTrial
 
 **3. Generalizes 6 mand responses**
 
 - Conditions: with 2 people, in 2 environments, for 2 types of reinforcement
 - Examples: asks mom and dad; at home and outside; different items
-- Type: KOM
+- Type: CombinedTrial
 
 **4. Spontaneously makes 5 requests**
 
 - Conditions: no verbal prompts; object may be visible; time constraint: 60 minutes
-- Type: NOV
+- Type: TimedObservation
 
 **5. Has 10 independent mand responses**
 
 - Conditions: no prompts; excludes "What do you want?"
 - Examples: apple, swing, car, juice
-- Type: KOM
+- Type: CombinedTrial
 
 ---
 
@@ -108,27 +108,27 @@ Level I currently includes MAND and TACT sections. Additional sections (Listener
 **1. Labels 2 objects**
 
 - Examples: people, animals, characters, favorite items
-- Type: TCT
+- Type: TestTrial
 
 **2. Labels 4 objects**
 
 - Examples: people, animals, characters
-- Type: TCT
+- Type: TestTrial
 
 **3. Labels 6 non-reinforcing objects**
 
 - Examples: shoe, hat, spoon, car, mug, bed
-- Type: TCT
+- Type: TestTrial
 
 **4. Spontaneously labels 2 objects**
 
 - Conditions: no prompts; 60-minute observation
-- Type: NOV
+- Type: TimedObservation
 
 **5. Labels 10 objects**
 
 - Examples: household items, people, body parts, pictures
-- Type: TCT
+- Type: TestTrial
 
 ---
 

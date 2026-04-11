@@ -15,7 +15,7 @@ const MAND_SECTION_EN: Section = {
       description:
         'The child uses at least 2 words, gestures, or PECS cards to request desired items or activities. Prompts are allowed: verbal, gestural, or physical help.',
       question: 'Can the child request at least 2 items using words, gestures, or cards?',
-      scoringType: 'KOM',
+      scoringType: 'CombinedTrial',
       conditions: ['Prompts allowed (verbal, gestural, physical help)'],
       examples: ['cookie', 'book'],
       developmentDimension: 'RepertoireSize',
@@ -28,7 +28,7 @@ const MAND_SECTION_EN: Section = {
       description:
         'The child independently makes at least 4 different requests without prompts. The question "What do you want?" is allowed. The desired object may be visible.',
       question: 'Can the child make 4 different requests without any prompts?',
-      scoringType: 'KOM',
+      scoringType: 'CombinedTrial',
       conditions: ['No prompts allowed', '"What do you want?" is allowed', 'Object may be visible'],
       examples: ['musical toy', 'spring toy', 'ball'],
       developmentDimension: 'Independence',
@@ -42,7 +42,7 @@ const MAND_SECTION_EN: Section = {
         'The child generalizes at least 6 requests across different people, environments, and types of rewards. This shows the skill transfers beyond a single context.',
       question:
         'Can the child make requests with different people, in different places, and for different things?',
-      scoringType: 'KOM',
+      scoringType: 'CombinedTrial',
       conditions: [
         'With at least 2 different people',
         'In at least 2 different environments (home, outside, store)',
@@ -59,7 +59,7 @@ const MAND_SECTION_EN: Section = {
       description:
         'The child spontaneously makes at least 5 requests within a 60-minute observation period without any verbal prompts. The desired object may be visible.',
       question: 'Does the child spontaneously request at least 5 items within 60 minutes?',
-      scoringType: 'NOV',
+      scoringType: 'TimedObservation',
       conditions: ['No verbal prompts', 'Object may be visible', 'Time constraint: 60 minutes'],
       examples: [],
       developmentDimension: 'Independence',
@@ -72,7 +72,7 @@ const MAND_SECTION_EN: Section = {
       description:
         'The child has a repertoire of at least 10 independent requests without any prompts. The question "What do you want?" is excluded from counting.',
       question: 'Does the child independently request at least 10 different items?',
-      scoringType: 'KOM',
+      scoringType: 'CombinedTrial',
       conditions: ['No prompts allowed', '"What do you want?" counts as a prompt'],
       examples: ['apple', 'swing', 'car', 'juice'],
       developmentDimension: 'RepertoireSize',
@@ -94,7 +94,7 @@ const TACT_SECTION_EN: Section = {
       description:
         'The child can label at least 2 objects when presented with them. Objects can include people, animals, characters, or favorite items.',
       question: 'Can the child name at least 2 objects when shown them?',
-      scoringType: 'TCT',
+      scoringType: 'TestTrial',
       conditions: [],
       examples: ['people', 'animals', 'characters', 'favorite items'],
       developmentDimension: 'RepertoireSize',
@@ -107,7 +107,7 @@ const TACT_SECTION_EN: Section = {
       description:
         'The child can label at least 4 objects including people, animals, or characters when directly tested.',
       question: 'Can the child name at least 4 objects?',
-      scoringType: 'TCT',
+      scoringType: 'TestTrial',
       conditions: [],
       examples: ['people', 'animals', 'characters'],
       developmentDimension: 'RepertoireSize',
@@ -120,7 +120,7 @@ const TACT_SECTION_EN: Section = {
       description:
         'The child can label at least 6 everyday objects that are not their favorites. These are ordinary items the child may not be especially interested in.',
       question: 'Can the child name at least 6 everyday objects that are not their favorites?',
-      scoringType: 'TCT',
+      scoringType: 'TestTrial',
       conditions: [],
       examples: ['shoe', 'hat', 'spoon', 'car', 'mug', 'bed'],
       developmentDimension: 'RepertoireSize',
@@ -133,7 +133,7 @@ const TACT_SECTION_EN: Section = {
       description:
         'The child spontaneously labels at least 2 objects during a 60-minute observation period without any prompts.',
       question: 'Does the child spontaneously name at least 2 objects within 60 minutes?',
-      scoringType: 'NOV',
+      scoringType: 'TimedObservation',
       conditions: ['No prompts', '60-minute observation'],
       examples: [],
       developmentDimension: 'Independence',
@@ -146,7 +146,7 @@ const TACT_SECTION_EN: Section = {
       description:
         'The child can label at least 10 objects across categories including household items, people, body parts, and pictures.',
       question: 'Can the child name at least 10 objects from different categories?',
-      scoringType: 'TCT',
+      scoringType: 'TestTrial',
       conditions: [],
       examples: ['household items', 'people', 'body parts', 'pictures'],
       developmentDimension: 'RepertoireSize',
@@ -169,7 +169,7 @@ const MAND_SECTION_RU: Section = {
         'Ребенок использует минимум 2 слова, жеста или карточки PECS для просьбы желаемых предметов или занятий. Допустимы подсказки: словом, жестом, физической помощью.',
       question:
         'Может ли ребенок попросить хотя бы 2 предмета с помощью слов, жестов или карточек?',
-      scoringType: 'KOM',
+      scoringType: 'CombinedTrial',
       conditions: ['Подсказки допустимы (словом, жестом, физической помощью)'],
       examples: ['печенье', 'книга'],
       developmentDimension: 'RepertoireSize',
@@ -182,7 +182,7 @@ const MAND_SECTION_RU: Section = {
       description:
         'Ребенок самостоятельно делает минимум 4 разные просьбы без подсказок. Вопрос «Что ты хочешь?». Желаемый предмет может быть в поле зрения.',
       question: 'Может ли ребенок сделать 4 разные просьбы без подсказок?',
-      scoringType: 'KOM',
+      scoringType: 'CombinedTrial',
       conditions: [
         'Подсказки не допускаются',
         'Вопрос «Что ты хочешь?»',
@@ -200,7 +200,7 @@ const MAND_SECTION_RU: Section = {
         'Ребенок обобщает минимум 6 просьб: использует навык с разными людьми, в разных местах и для разных видов поощрения. Это показывает, что навык переносится за пределы одного контекста.',
       question:
         'Может ли ребенок обращаться с просьбами к разным людям, в разных местах и по разным поводам?',
-      scoringType: 'KOM',
+      scoringType: 'CombinedTrial',
       conditions: [
         'Минимум 2 разных человека',
         'Минимум 2 разные среды (дома, на улице, в магазине)',
@@ -217,7 +217,7 @@ const MAND_SECTION_RU: Section = {
       description:
         'Ребенок спонтанно делает минимум 5 просьб в течение 60 минут наблюдения без каких-либо вербальных подсказок. Желаемый предмет может быть в поле зрения.',
       question: 'Делает ли ребенок спонтанно минимум 5 просьб в течение 60 минут?',
-      scoringType: 'NOV',
+      scoringType: 'TimedObservation',
       conditions: [
         'Вербальные подсказки не допускаются',
         'Предмет может быть в поле зрения',
@@ -234,7 +234,7 @@ const MAND_SECTION_RU: Section = {
       description:
         'Репертуар ребенка включает минимум 10 самостоятельных просьб без подсказок. Вопрос «Что ты хочешь?» не учитывается при подсчете.',
       question: 'Может ли ребенок самостоятельно попросить минимум 10 разных предметов?',
-      scoringType: 'KOM',
+      scoringType: 'CombinedTrial',
       conditions: ['Подсказки не допускаются', 'Вопрос «Что ты хочешь?»'],
       examples: ['яблоко', 'качели', 'машинка', 'сок'],
       developmentDimension: 'RepertoireSize',
@@ -256,7 +256,7 @@ const TACT_SECTION_RU: Section = {
       description:
         'Ребенок может назвать минимум 2 предмета при их предъявлении. Предметами могут быть люди, животные, персонажи или любимые вещи.',
       question: 'Может ли ребенок назвать минимум 2 предмета, когда их показывают?',
-      scoringType: 'TCT',
+      scoringType: 'TestTrial',
       conditions: [],
       examples: ['люди', 'животные', 'персонажи', 'любимые вещи'],
       developmentDimension: 'RepertoireSize',
@@ -269,7 +269,7 @@ const TACT_SECTION_RU: Section = {
       description:
         'Ребенок может назвать минимум 4 предмета, включая людей, животных или персонажей, при прямом тестировании.',
       question: 'Может ли ребенок назвать минимум 4 предмета?',
-      scoringType: 'TCT',
+      scoringType: 'TestTrial',
       conditions: [],
       examples: ['люди', 'животные', 'персонажи'],
       developmentDimension: 'RepertoireSize',
@@ -283,7 +283,7 @@ const TACT_SECTION_RU: Section = {
         'Ребенок может назвать минимум 6 обычных повседневных предметов, которые не являются его любимыми. Это вещи, к которым у ребенка нет особого интереса.',
       question:
         'Может ли ребенок назвать минимум 6 повседневных предметов, которые не являются его любимыми?',
-      scoringType: 'TCT',
+      scoringType: 'TestTrial',
       conditions: [],
       examples: ['ботинок', 'шапка', 'ложка', 'машина', 'кружка', 'кровать'],
       developmentDimension: 'RepertoireSize',
@@ -296,7 +296,7 @@ const TACT_SECTION_RU: Section = {
       description:
         'Ребенок спонтанно называет минимум 2 предмета в течение 60 минут наблюдения без подсказок.',
       question: 'Называет ли ребенок спонтанно минимум 2 предмета в течение 60 минут?',
-      scoringType: 'NOV',
+      scoringType: 'TimedObservation',
       conditions: ['Без подсказок', 'Наблюдение 60 минут'],
       examples: [],
       developmentDimension: 'Independence',
@@ -309,7 +309,7 @@ const TACT_SECTION_RU: Section = {
       description:
         'Ребенок может назвать минимум 10 предметов из разных категорий: бытовые предметы, люди, части тела, изображения.',
       question: 'Может ли ребенок назвать минимум 10 предметов из разных категорий?',
-      scoringType: 'TCT',
+      scoringType: 'TestTrial',
       conditions: [],
       examples: ['бытовые предметы', 'люди', 'части тела', 'изображения'],
       developmentDimension: 'RepertoireSize',

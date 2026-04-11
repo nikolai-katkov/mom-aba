@@ -1,4 +1,4 @@
-export type ScoringType = 'TCT' | 'NAB' | 'KOM' | 'NOV'
+export type ScoringType = 'TestTrial' | 'CombinedTrial' | 'TimedObservation' | 'FreeOperant'
 
 export type CriterionStatus = 'NotStarted' | 'InProgress' | 'Completed'
 

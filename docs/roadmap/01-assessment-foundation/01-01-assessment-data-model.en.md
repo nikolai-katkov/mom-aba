@@ -13,14 +13,14 @@ Define TypeScript interfaces and seed data for the assessment hierarchy. Two sep
 ## User Acceptance Criteria
 
 - [x] MAND section has 5 criteria with human-readable titles, descriptions, conditions, and examples
-- [x] Each criterion has a scoring type (TCT, NAB, KOM, NOV) that the UI can use to select input mode
+- [x] Each criterion has a scoring type (TestTrial, FreeOperant, CombinedTrial, TimedObservation) that the UI can use to select input mode
 - [x] TACT section exists as a placeholder with name and "coming soon" status
 - [x] Training content for each MAND criterion includes step-by-step guide text
 
 ## System Acceptance Criteria
 
 - [x] TypeScript interfaces: `Section`, `Criterion`, `ScoringType`, `CriterionStatus`, `TrainingContent`
-- [x] `ScoringType` enum: `TCT`, `NAB`, `KOM`, `NOV`
+- [x] `ScoringType` enum: `TestTrial`, `FreeOperant`, `CombinedTrial`, `TimedObservation`
 - [x] `CriterionStatus` enum: `NotStarted`, `InProgress`, `Completed`
 - [x] Assessment and training are separate data structures, linked by criterion ID
 - [x] Score stored as numeric (0, 0.5, 1) internally, even if UI exposes binary Yes/No (see [PM Questions: Scoring Model](../../knowledge/pm-questions-scoring-model.en.md))

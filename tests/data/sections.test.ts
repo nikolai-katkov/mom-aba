@@ -26,7 +26,9 @@ describe.each(LANGUAGES)('sections seed data (%s)', language => {
       expect(criterion.title).toBeTruthy()
       expect(criterion.description).toBeTruthy()
       expect(criterion.question).toBeTruthy()
-      expect(['TCT', 'NAB', 'KOM', 'NOV']).toContain(criterion.scoringType)
+      expect(['TestTrial', 'CombinedTrial', 'TimedObservation', 'FreeOperant']).toContain(
+        criterion.scoringType
+      )
       expect(Array.isArray(criterion.conditions)).toBe(true)
       expect(Array.isArray(criterion.examples)).toBe(true)
       expect(['Independence', 'Generalization', 'RepertoireSize']).toContain(
