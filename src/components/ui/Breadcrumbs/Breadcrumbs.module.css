@@ -3,7 +3,7 @@
   align-items: center;
 }
 
-/* Full breadcrumb trail — hidden on mobile */
+/* Full breadcrumb trail — hidden on narrow viewports */
 .list {
   display: flex;
   align-items: center;
@@ -54,8 +54,132 @@
   white-space: nowrap;
 }
 
-/* Mobile back link — hidden on desktop */
-.mobileBack {
+/* ============================================
+ * Dropdown
+ * ============================================ */
+.dropdownWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.dropdownTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-dim);
+  text-decoration: none;
+  padding: var(--space-1) 0;
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.dropdownTrigger:hover {
+  color: var(--color-primary);
+}
+
+.dropdownTrigger:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.dropdownTriggerCurrent {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  white-space: nowrap;
+  cursor: default;
+}
+
+.dropdownTriggerCurrent:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.chevron {
+  flex-shrink: 0;
+  opacity: 0.45;
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.dropdownWrapper:hover .chevron {
+  opacity: 0.7;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+  min-width: 180px;
+  max-width: 320px;
+  max-height: 280px;
+  overflow-y: auto;
+  margin-top: var(--space-1);
+  padding: var(--space-1) 0;
+  list-style: none;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(-4px);
+  animation: dropdownEnter 0.18s var(--animation-easing) forwards;
+}
+
+@keyframes dropdownEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdownLink {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-dim);
+  text-decoration: none;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdownLink:hover,
+.dropdownLink:focus-visible {
+  background-color: var(--color-primary-alpha-10);
+  color: var(--color-primary);
+  outline: none;
+}
+
+.dropdownLinkCurrent {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Back link — shown on narrow viewports instead of full trail */
+.backLink {
   display: none;
   align-items: center;
   gap: var(--space-1);
@@ -68,22 +192,40 @@
   transition: color var(--transition-fast);
 }
 
-.mobileBack:hover {
+.backLink:hover {
   color: var(--color-primary);
 }
 
-.mobileBack:focus-visible {
+.backLink:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
 
-@media (max-width: 480px) {
+/* ============================================
+ * Narrow viewport: collapse trail to back link
+ * ============================================ */
+@media (max-width: 640px) {
   .list {
     display: none;
   }
 
-  .mobileBack {
+  .backLink {
     display: inline-flex;
+  }
+}
+
+/* ============================================
+ * Touch devices: increase tap targets
+ * ============================================ */
+@media (hover: none) and (pointer: coarse) {
+  .backLink {
+    min-height: var(--touch-target-min);
+  }
+
+  .dropdownLink {
+    min-height: var(--touch-target-min);
+    display: flex;
+    align-items: center;
   }
 }

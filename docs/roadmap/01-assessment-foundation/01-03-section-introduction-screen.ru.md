@@ -15,7 +15,7 @@ _[English](./01-03-section-introduction-screen.en.md)_
 - [x] Краткое объяснение видно по умолчанию: 3--5 пунктов, охватывающих определение, практическую ценность и следующие шаги
 - [x] "Подробнее" разворачивает полное объяснение (теория, примеры, распространённые ошибки)
 - [x] Сворачивание "Подробнее" скрывает полное объяснение
-- [x] Место для видео отображает статичное изображение-заглушку с надписью "Видео скоро будет"
+- [x] Место для видео показывает встроенное видео, если оно доступно (например, раздел Манд), скрыто при отсутствии видео
 - [x] Кнопка "Начать" переходит к списку критериев
 - [x] Кнопка "Пропустить" также переходит к списку критериев (тот же пункт назначения, другое отслеживание намерения)
 - [x] Контент специфичен для раздела (контент Манд для Манд)
@@ -49,6 +49,4 @@ _[English](./01-03-section-introduction-screen.en.md)_
 - `src/pages/SectionIntroPage.module.css`
 - `src/components/ui/ProgressiveDisclosure/ProgressiveDisclosure.tsx`
 - `src/components/ui/ProgressiveDisclosure/ProgressiveDisclosure.module.css`
-- `src/components/ui/VideoPlaceholder/VideoPlaceholder.tsx`
-- `src/components/ui/VideoPlaceholder/VideoPlaceholder.module.css`
 - `tests/pages/SectionIntroPage.test.tsx`

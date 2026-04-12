@@ -12,7 +12,7 @@ Guidance screen shown after a "No" assessment. Teaches the parent how to develop
 
 ## User Acceptance Criteria
 
-- [x] Video slot displays static placeholder image with "Video coming soon" label
+- [x] ~~Video slot displays static placeholder image with "Video coming soon" label~~ (removed — no placeholder shown when video unavailable)
 - [x] Short guide visible by default: numbered steps (e.g., 1. Show 2 items, 2. Wait, 3. Prompt if needed, 4. Reinforce)
 - [x] "Read more" expands to show full guide (detailed explanation, common mistakes, additional examples)
 - [x] Collapsing "Read more" hides the full guide
@@ -53,5 +53,4 @@ Guidance screen shown after a "No" assessment. Teaches the parent how to develop
 - `src/pages/TrainingPage.tsx`
 - `src/pages/TrainingPage.module.css`
 - `src/components/ui/ProgressiveDisclosure/ProgressiveDisclosure.tsx`
-- `src/components/ui/VideoPlaceholder/VideoPlaceholder.tsx`
 - `tests/pages/TrainingPage.test.tsx`

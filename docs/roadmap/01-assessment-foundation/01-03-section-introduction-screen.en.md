@@ -15,7 +15,7 @@ Educational screen shown before the first assessment in a section. Explains what
 - [x] Short explanation visible by default: 3--5 bullets covering definition, practical value, and next steps
 - [x] "Read more" expands to show full explanation (theory, examples, common mistakes)
 - [x] Collapsing "Read more" hides the full explanation again
-- [x] Video slot displays a static placeholder image with "Video coming soon" label
+- [x] Video slot displays embedded video when available (e.g., Mand section), hidden when no video exists
 - [x] "Start" button navigates to criteria list
 - [x] "Skip" button also navigates to criteria list (same destination, different intent tracking)
 - [x] Content is specific to the section (Mand content for Mand)
@@ -49,6 +49,4 @@ Educational screen shown before the first assessment in a section. Explains what
 - `src/pages/SectionIntroPage.module.css`
 - `src/components/ui/ProgressiveDisclosure/ProgressiveDisclosure.tsx`
 - `src/components/ui/ProgressiveDisclosure/ProgressiveDisclosure.module.css`
-- `src/components/ui/VideoPlaceholder/VideoPlaceholder.tsx`
-- `src/components/ui/VideoPlaceholder/VideoPlaceholder.module.css`
 - `tests/pages/SectionIntroPage.test.tsx`

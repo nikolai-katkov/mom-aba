@@ -42,11 +42,6 @@ describe('CriterionAssessmentPage', () => {
     mockNavigate.mockClear()
   })
 
-  it('renders the illustration placeholder', () => {
-    renderPage()
-    expect(byT('illustration')).toBeInTheDocument()
-  })
-
   it('renders what to look for section', () => {
     renderPage()
     expect(byT('whatToLookFor')).toBeInTheDocument()

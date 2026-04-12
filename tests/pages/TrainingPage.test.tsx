@@ -40,11 +40,6 @@ describe('TrainingPage', () => {
     mockNavigate.mockClear()
   })
 
-  it('renders video placeholder', () => {
-    renderPage()
-    expect(byT('videoComingSoon')).toBeInTheDocument()
-  })
-
   it('toggles full guide', async () => {
     renderPage()
     const toggle = byT('readMore')

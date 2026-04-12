@@ -15,8 +15,6 @@ export interface UiTranslations {
   // ProgressiveDisclosure
   readMore: string
   showLess: string
-  // VideoPlaceholder
-  videoComingSoon: string
   // ProgressBar (uses interpolation: {completed}, {total})
   progressLabel: string
   // SectionsListPage
@@ -29,7 +27,6 @@ export interface UiTranslations {
   // CriteriaListPage (uses interpolation: {completed}, {total})
   completedOfTotal: string
   // CriterionAssessmentPage
-  illustration: string
   whatToLookFor: string
   examplesPrefix: string
   yes: string

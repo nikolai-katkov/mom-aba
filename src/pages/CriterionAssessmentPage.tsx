@@ -22,20 +22,45 @@ export function CriterionAssessmentPage() {
   const section = sections.find(s => s.id === sectionId)
   const criterion = section?.criteria.find(c => c.id === criterionId)
 
+  const sectionSiblings = useMemo(
+    () =>
+      sections
+        .filter(s => s.isAvailable && s.criteria.length > 0)
+        .map(s => ({
+          label: s.title,
+          path: `/${s.id}/levels/${s.criteria[0].id}`,
+          isCurrent: s.id === sectionId,
+        })),
+    [sections, sectionId]
+  )
+
+  const criterionSiblings = useMemo(
+    () =>
+      section
+        ? section.criteria.map(c => ({
+            label: `${ROMAN[c.level]} - ${c.title}`,
+            path: `/${section.id}/levels/${c.id}`,
+            isCurrent: c.id === criterionId,
+          }))
+        : [],
+    [section, criterionId]
+  )
+
   const breadcrumbs: BreadcrumbItem[] = useMemo(
     () =>
       section && criterion
         ? [
             { label: t('home'), path: '/' },
-            { label: section.title, path: `/${section.id}` },
+            { label: section.title, path: `/${section.id}`, siblings: sectionSiblings },
             { label: t('breadcrumbLevels'), path: `/${section.id}/levels` },
             {
               label: `${ROMAN[criterion.level]} - ${criterion.title}`,
               path: `/${section.id}/levels/${criterion.id}`,
+              siblings: criterionSiblings,
             },
           ]
         : [],
-    [t, section, criterion]
+    [t, section, criterion, sectionSiblings, criterionSiblings]
   )
 
   const handleYes = useCallback(() => {
@@ -63,14 +88,6 @@ export function CriterionAssessmentPage() {
       <div
         className={[styles.assessmentLayout, styles[`layout_${theme}`]].filter(Boolean).join(' ')}
       >
-        <div className={styles.mediaArea}>
-          <div className={styles.illustrationPlaceholder}>
-            <span className={styles.placeholderLabel} {...tProps('illustration')}>
-              {t('illustration')}
-            </span>
-          </div>
-        </div>
-
         <div className={styles.contentArea}>
           <h2 className={styles.question}>{criterion.question}</h2>
 

@@ -41,16 +41,28 @@ export function CriteriaListPage() {
 
   const section = sections.find(s => s.id === sectionId)
 
+  const sectionSiblings = useMemo(
+    () =>
+      sections
+        .filter(s => s.isAvailable)
+        .map(s => ({
+          label: s.title,
+          path: `/${s.id}/levels`,
+          isCurrent: s.id === sectionId,
+        })),
+    [sections, sectionId]
+  )
+
   const breadcrumbs: BreadcrumbItem[] = useMemo(
     () =>
       section
         ? [
             { label: t('home'), path: '/' },
-            { label: section.title, path: `/${section.id}` },
+            { label: section.title, path: `/${section.id}`, siblings: sectionSiblings },
             { label: t('breadcrumbLevels'), path: `/${section.id}/levels` },
           ]
         : [],
-    [t, section]
+    [t, section, sectionSiblings]
   )
 
   if (!section) {

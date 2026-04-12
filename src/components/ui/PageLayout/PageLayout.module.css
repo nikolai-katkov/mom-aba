@@ -20,6 +20,8 @@
   gap: var(--space-3);
   margin-bottom: var(--space-6);
   animation: fadeSlideUp var(--animation-duration) var(--animation-easing) both;
+  position: relative;
+  z-index: 1;
 }
 
 .title {

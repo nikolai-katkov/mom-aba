@@ -13,7 +13,7 @@ Binary assessment screen for a single criterion. Presents a clear Yes/No questio
 ## User Acceptance Criteria
 
 - [x] Clear, binary question displayed prominently (e.g., "Can the child request one of two items?")
-- [x] Illustration area shows a static placeholder image relevant to the criterion (2 distinct objects for Mand criteria)
+- [x] ~~Illustration area shows a static placeholder image~~ (removed — placeholder not shown when illustration unavailable)
 - [x] Context section shows: short explanation of what to look for, conditions from the criterion
 - [x] Two buttons: "Yes" and "No" - no ambiguity, no other options
 - [x] "Yes" shows brief positive feedback, marks complete, returns to criteria list with updated status
@@ -33,7 +33,7 @@ Binary assessment screen for a single criterion. Presents a clear Yes/No questio
 
 - [x] CSS Modules with design tokens only
 - [x] Responsive across all device profiles
-- [x] Placeholder images use a consistent aspect ratio and fallback styling
+- [x] ~~Placeholder images use a consistent aspect ratio and fallback styling~~ (removed with illustration placeholder)
 - [x] Unit test: Yes/No handlers update state correctly
 - [x] Unit test: correct criterion data loaded based on route params
 - [x] E2E test: full Yes flow (tap Yes -> returns to list with updated state)

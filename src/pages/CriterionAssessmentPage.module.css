@@ -7,35 +7,10 @@
   gap: var(--space-5);
 }
 
-.mediaArea {
-  width: 100%;
-}
-
 .contentArea {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
-}
-
-.illustrationPlaceholder {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color-elevated);
-  border-radius: var(--radius-lg);
-  border: 1px dashed var(--color-border);
-  transition:
-    background-color var(--transition-base),
-    border-color var(--transition-base);
-}
-
-.placeholderLabel {
-  font-family: var(--font-primary);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-muted);
 }
 
 .question {
@@ -153,10 +128,6 @@
   border: none;
 }
 
-.layout_soft .illustrationPlaceholder {
-  border-radius: var(--radius-xl);
-}
-
 /* ============================================
  * Theme: Editorial — typography hero
  * ============================================ */
@@ -165,11 +136,6 @@
   font-size: var(--font-size-2xl);
   line-height: 1.2;
   margin-top: var(--space-4);
-}
-
-.layout_editorial .illustrationPlaceholder {
-  aspect-ratio: 3 / 1;
-  border-radius: 2px;
 }
 
 .layout_editorial .context {

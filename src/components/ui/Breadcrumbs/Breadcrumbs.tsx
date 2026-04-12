@@ -1,11 +1,19 @@
 import { ArrowLeft, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
+import { BreadcrumbDropdown } from './BreadcrumbDropdown'
 import styles from './Breadcrumbs.module.css'
+
+export interface BreadcrumbSibling {
+  label: string
+  path: string
+  isCurrent: boolean
+}
 
 export interface BreadcrumbItem {
   label: string
   path: string
+  siblings?: BreadcrumbSibling[]
 }
 
 interface BreadcrumbsProps {
@@ -29,7 +37,14 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
               {index > 0 && (
                 <ChevronRight size={14} aria-hidden="true" className={styles.separator} />
               )}
-              {isLast ? (
+              {item.siblings && item.siblings.length > 1 ? (
+                <BreadcrumbDropdown
+                  label={item.label}
+                  path={item.path}
+                  siblings={item.siblings}
+                  isCurrentPage={isLast}
+                />
+              ) : isLast ? (
                 <span className={styles.current} aria-current="location">
                   {item.label}
                 </span>
@@ -43,7 +58,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
         })}
       </ol>
 
-      <Link to={parentItem.path} className={styles.mobileBack} aria-label={parentItem.label}>
+      <Link to={parentItem.path} className={styles.backLink} aria-label={parentItem.label}>
         <ArrowLeft size={16} aria-hidden="true" />
         {parentItem.label}
       </Link>
