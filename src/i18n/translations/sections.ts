@@ -3,7 +3,7 @@ import type { Language } from '../types'
 
 const MAND_SECTION_EN: Section = {
   id: 'mand',
-  title: 'MAND',
+  title: 'Mand',
   subtitle: 'Requests',
   isAvailable: true,
   criteria: [
@@ -82,7 +82,7 @@ const MAND_SECTION_EN: Section = {
 
 const TACT_SECTION_EN: Section = {
   id: 'tact',
-  title: 'TACT',
+  title: 'Tact',
   subtitle: 'Labeling',
   isAvailable: true,
   criteria: [
@@ -156,7 +156,7 @@ const TACT_SECTION_EN: Section = {
 
 const MAND_SECTION_RU: Section = {
   id: 'mand',
-  title: 'МАНД',
+  title: 'Манд',
   subtitle: 'Просьбы и запросы',
   isAvailable: true,
   criteria: [
@@ -244,7 +244,7 @@ const MAND_SECTION_RU: Section = {
 
 const TACT_SECTION_RU: Section = {
   id: 'tact',
-  title: 'ТАКТ',
+  title: 'Такт',
   subtitle: 'Называние',
   isAvailable: true,
   criteria: [

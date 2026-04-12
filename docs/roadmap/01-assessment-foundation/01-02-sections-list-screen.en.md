@@ -8,14 +8,14 @@ Status: Done
 
 ## Summary
 
-App entry point showing available skill sections as cards. MAND is active with progress tracking. TACT is shown as a disabled "coming soon" placeholder. Tapping MAND navigates to the MAND introduction screen.
+App entry point showing available skill sections as cards. Mand is active with progress tracking. Tact is shown as a disabled "coming soon" placeholder. Tapping Mand navigates to the Mand introduction screen.
 
 ## User Acceptance Criteria
 
-- [x] MAND card displays: title "MAND", subtitle "Requests", status (Not started / In progress / Completed), progress (X/5)
-- [x] TACT card displays: title "TACT", subtitle "Coming soon", visually disabled/greyed
-- [x] Tapping MAND card navigates to MAND introduction screen
-- [x] Tapping TACT card does nothing (disabled)
+- [x] Mand card displays: title "Mand", subtitle "Requests", status (Not started / In progress / Completed), progress (X/5)
+- [x] Tact card displays: title "Tact", subtitle "Coming soon", visually disabled/greyed
+- [x] Tapping Mand card navigates to Mand introduction screen
+- [x] Tapping Tact card does nothing (disabled)
 - [x] Progress updates reflect actual assessment state (persisted across sessions)
 
 ## System Acceptance Criteria
@@ -30,7 +30,7 @@ App entry point showing available skill sections as cards. MAND is active with p
 - [x] CSS Modules with design tokens only (no hardcoded values)
 - [x] Responsive across desktop (1920x1080), tablet (768x1024), mobile (375x667)
 - [x] Unit test for progress/status derivation logic
-- [x] E2E test: load app, verify MAND card visible, tap navigates to intro
+- [x] E2E test: load app, verify Mand card visible, tap navigates to intro
 
 ## Depends On
 

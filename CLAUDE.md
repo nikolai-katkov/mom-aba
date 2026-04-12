@@ -71,7 +71,7 @@ docs/
 
 The app implements ABA-based developmental milestone assessments. Key domain concepts are documented in `docs/knowledge/`:
 
-- Developmental Milestones Assessment ([EN](docs/knowledge/developmental-milestones-assessment.en.md) | [RU](docs/knowledge/developmental-milestones-assessment.ru.md)) - assessment structure, scoring types (TCT/NAB/KOM/NOV), MAND/TACT sections, development model, and UX screen mapping.
+- Developmental Milestones Assessment ([EN](docs/knowledge/developmental-milestones-assessment.en.md) | [RU](docs/knowledge/developmental-milestones-assessment.ru.md)) - assessment structure, scoring types (TCT/NAB/KOM/NOV), Mand/Tact sections, development model, and UX screen mapping.
 
 ### Directory Structure
 
@@ -125,7 +125,7 @@ src/
 - Run `npm test -- tests/i18n/translations.test.ts` to verify translation completeness
 - All UI string keys must be defined in `UiTranslations` interface (`src/i18n/types.ts`)
 - Domain data (sections, training, introduction) must have identical structure in both languages (same IDs, same array lengths)
-- Use ABA-correct Russian terminology (МАНД, ТАКТ, эхоическая подсказка) rather than literal translations
+- Use ABA-correct Russian terminology (Манд, Такт, эхоическая подсказка) rather than literal translations
 
 **Component usage:** Call `useLanguage()` in components, use `t('keyName')` for UI strings, destructure `sections`/`sectionIntroductions`/`trainingContent` for domain data. Add `{...tProps('keyName')}` on elements that display translated text for test selectors.
 
@@ -150,7 +150,7 @@ src/
 - Russian is the primary authoring language; treat existing Russian text as the source of truth when translating to other languages
 - Reference existing codebase translations (`src/i18n/translations/`) as the terminology baseline for consistency
 - When adding a new language, align terminology with that language's professional literature in developmental psychology and ABA
-- Preserve key ABA terms that have established equivalents: MAND/МАНД, TACT/ТАКТ, PECS, ABA
+- Preserve key ABA terms that have established equivalents: Mand/Манд, Tact/Такт, PECS, ABA
 
 ### Audience Rules (Application Text)
 

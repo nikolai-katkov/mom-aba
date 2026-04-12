@@ -15,9 +15,18 @@ export function SectionIntroPage() {
   const section = sections.find(s => s.id === sectionId)
   const introduction = sectionId ? sectionIntroductions[sectionId] : undefined
 
-  const criteriaPath = `/sections/${sectionId}/criteria`
+  const criteriaPath = `/${sectionId}/levels`
 
-  const breadcrumbs: BreadcrumbItem[] = useMemo(() => [{ label: t('home'), path: '/' }], [t])
+  const breadcrumbs: BreadcrumbItem[] = useMemo(
+    () =>
+      section
+        ? [
+            { label: t('home'), path: '/' },
+            { label: section.title, path: `/${section.id}` },
+          ]
+        : [],
+    [t, section]
+  )
 
   const handleStart = useCallback(() => {
     navigate(criteriaPath)

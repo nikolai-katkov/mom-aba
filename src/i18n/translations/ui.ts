@@ -3,6 +3,8 @@ import type { Language, UiTranslations } from '../types'
 export const UI_TRANSLATIONS: Record<Language, UiTranslations> = {
   ru: {
     home: 'Главная',
+    breadcrumbLevels: 'Уровни',
+    breadcrumbTraining: 'Тренировка',
     back: 'Назад',
     goBack: 'Вернуться назад',
     statusNotStarted: 'Впереди',
@@ -47,6 +49,8 @@ export const UI_TRANSLATIONS: Record<Language, UiTranslations> = {
   },
   en: {
     home: 'Home',
+    breadcrumbLevels: 'Levels',
+    breadcrumbTraining: 'Training',
     back: 'Back',
     goBack: 'Go back',
     statusNotStarted: 'Not started',

@@ -4,7 +4,7 @@ _[Русский](./developmental-milestones-assessment.ru.md)_
 
 # Developmental Milestones Assessment
 
-Related stories: [Epic 01 - Assessment Foundation](../roadmap/01-assessment-foundation/_epic.en.md), [Epic 05 - TACT Section](../roadmap/05-tact-section/_epic.en.md)
+Related stories: [Epic 01 - Assessment Foundation](../roadmap/01-assessment-foundation/_epic.en.md), [Epic 05 - Tact Section](../roadmap/05-tact-section/_epic.en.md)
 Related files: `src/types/assessment.ts`, `src/i18n/translations/sections.ts`, `src/i18n/translations/introduction.ts`, `src/i18n/translations/training.ts`
 
 ---
@@ -58,11 +58,11 @@ Each criterion specifies one of four evaluation methods:
 
 ## Level I Sections
 
-Level I currently includes 9 sections: MAND and TACT (active), plus 7 planned: Listener Responding, Visual Perceptual Skills & Matching-to-Sample, Independent Play, Social Behaviour & Social Play, Motor Imitation, Echoic, and Spontaneous Vocal Behaviour.
+Level I currently includes 9 sections: Mand and Tact (active), plus 7 planned: Listener Responding, Visual Perceptual Skills & Matching-to-Sample, Independent Play, Social Behaviour & Social Play, Motor Imitation, Echoic, and Spontaneous Vocal Behaviour.
 
 ---
 
-### Section 1: MAND (Requesting)
+### Section 1: Mand (Requesting)
 
 **Question:** Does the child use words, gestures, or cards to request desired items or activities?
 
@@ -99,7 +99,7 @@ Level I currently includes 9 sections: MAND and TACT (active), plus 7 planned: L
 
 ---
 
-### Section 2: TACT (Labeling)
+### Section 2: Tact (Labeling)
 
 **Question:** Can the child label people, objects, body parts, or pictures?
 
@@ -132,7 +132,7 @@ Level I currently includes 9 sections: MAND and TACT (active), plus 7 planned: L
 
 ---
 
-### Training: TACT
+### Training: Tact
 
 #### Teaching Nouns
 
@@ -196,7 +196,7 @@ Criteria within each section increase in complexity, form a developmental gradie
 
 ### MVP Screens
 
-1. **Sections list** - MAND + TACT (active), 7 sections (placeholder/coming soon). Entry point of the app.
+1. **Sections list** - Mand + Tact (active), 7 sections (placeholder/coming soon). Entry point of the app.
 2. **Section introduction** - explains the skill category (video slot, short explanation, collapsible full explanation). Controls: "Start" / "Skip".
 3. **Criteria list** - 5 level cards showing progression through the section. Each card: simplified title, short description, status, optional progress.
 4. **Criterion assessment** - binary Yes/No question with illustration and context. "Yes" marks complete; "No" navigates to training.
@@ -223,8 +223,8 @@ Assessment > (if No) Training > Reassessment - repeats until "Yes" or parent nav
 
 ### Included
 
-- MAND section (5 criteria)
-- TACT section (5 criteria)
+- Mand section (5 criteria)
+- Tact section (5 criteria)
 - Full assessment + training loop
 - Progress tracking
 - Static image placeholders for video/illustration slots

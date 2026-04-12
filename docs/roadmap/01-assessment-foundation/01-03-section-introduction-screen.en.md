@@ -18,7 +18,7 @@ Educational screen shown before the first assessment in a section. Explains what
 - [x] Video slot displays a static placeholder image with "Video coming soon" label
 - [x] "Start" button navigates to criteria list
 - [x] "Skip" button also navigates to criteria list (same destination, different intent tracking)
-- [x] Content is specific to the section (MAND content for MAND)
+- [x] Content is specific to the section (Mand content for Mand)
 
 ## System Acceptance Criteria
 

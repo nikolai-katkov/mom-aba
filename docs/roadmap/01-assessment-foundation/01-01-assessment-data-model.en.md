@@ -8,14 +8,14 @@ Status: Done
 
 ## Summary
 
-Define TypeScript interfaces and seed data for the assessment hierarchy. Two separate models: assessment data (sections, criteria, conditions) and training data (guides, steps). Seed MAND section with 5 criteria and corresponding training content. TACT included as metadata only (placeholder).
+Define TypeScript interfaces and seed data for the assessment hierarchy. Two separate models: assessment data (sections, criteria, conditions) and training data (guides, steps). Seed Mand section with 5 criteria and corresponding training content. Tact included as metadata only (placeholder).
 
 ## User Acceptance Criteria
 
-- [x] MAND section has 5 criteria with human-readable titles, descriptions, conditions, and examples
+- [x] Mand section has 5 criteria with human-readable titles, descriptions, conditions, and examples
 - [x] Each criterion has a scoring type (TestTrial, FreeOperant, CombinedTrial, TimedObservation) that the UI can use to select input mode
-- [x] TACT section exists as a placeholder with name and "coming soon" status
-- [x] Training content for each MAND criterion includes step-by-step guide text
+- [x] Tact section exists as a placeholder with name and "coming soon" status
+- [x] Training content for each Mand criterion includes step-by-step guide text
 
 ## System Acceptance Criteria
 
@@ -31,7 +31,7 @@ Define TypeScript interfaces and seed data for the assessment hierarchy. Two sep
 
 - [x] All interfaces exported from a barrel file (`src/types/` or `src/data/`)
 - [x] Seed data in dedicated file(s), not inline in components
-- [x] Unit tests validate seed data completeness (all 5 MAND criteria present, all fields populated)
+- [x] Unit tests validate seed data completeness (all 5 Mand criteria present, all fields populated)
 - [x] Unit tests validate type correctness of seed data
 - [x] No `any` types
 

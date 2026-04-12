@@ -10,7 +10,7 @@ Domain reference articles for the Mom ABA application. Each article covers a spe
 
 | Article                                                                          | Description                                                                                      |
 | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| [Developmental Milestones Assessment](developmental-milestones-assessment.en.md) | ABA-based assessment structure, scoring types, MAND/TACT sections, development model, UX mapping |
+| [Developmental Milestones Assessment](developmental-milestones-assessment.en.md) | ABA-based assessment structure, scoring types, Mand/Tact sections, development model, UX mapping |
 | [PM Questions: Scoring Model](pm-questions-scoring-model.en.md)                  | VB-MAPP scoring context and open questions for PM on binary vs graded scoring                    |
 
 ## Conventions

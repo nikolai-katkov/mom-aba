@@ -46,6 +46,14 @@
   border-radius: var(--radius-sm);
 }
 
+.current {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
 /* Mobile back link — hidden on desktop */
 .mobileBack {
   display: none;

@@ -2,11 +2,11 @@ _[Русский](./_epic.ru.md)_
 
 ---
 
-# Epic 02: MAND Content
+# Epic 02: Mand Content
 
 ## Summary
 
-MAND section content: 5 criteria with conditions and examples, section introduction with progressive disclosure, and per-criterion training guides (short steps, full guide, common mistakes). Bilingual (RU/EN).
+Mand section content: 5 criteria with conditions and examples, section introduction with progressive disclosure, and per-criterion training guides (short steps, full guide, common mistakes). Bilingual (RU/EN).
 
 **Note:** This epic is retroactive -- the content was implemented alongside Epic 01 (Assessment Platform).
 
@@ -18,8 +18,8 @@ MAND section content: 5 criteria with conditions and examples, section introduct
 
 | #     | Story                          | Status |
 | ----- | ------------------------------ | ------ |
-| 02-01 | MAND criteria and introduction | Done   |
-| 02-02 | MAND training content          | Done   |
+| 02-01 | Mand criteria and introduction | Done   |
+| 02-02 | Mand training content          | Done   |
 
 ## Status
 

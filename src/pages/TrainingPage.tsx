@@ -6,6 +6,7 @@ import type { BreadcrumbItem } from '../components/ui'
 import { Button, PageLayout, ProgressiveDisclosure, VideoPlaceholder } from '../components/ui'
 import { useLanguage } from '../hooks'
 import { tProps } from '../i18n'
+import { ROMAN } from '../utils'
 import styles from './TrainingPage.module.css'
 
 export function TrainingPage() {
@@ -25,10 +26,15 @@ export function TrainingPage() {
       section && criterion
         ? [
             { label: t('home'), path: '/' },
-            { label: section.title, path: `/sections/${section.id}/criteria` },
+            { label: section.title, path: `/${section.id}` },
+            { label: t('breadcrumbLevels'), path: `/${section.id}/levels` },
             {
-              label: `${criterion.level}. ${criterion.title}`,
-              path: `/sections/${section.id}/criteria/${criterion.id}/assess`,
+              label: `${ROMAN[criterion.level]} - ${criterion.title}`,
+              path: `/${section.id}/levels/${criterion.id}`,
+            },
+            {
+              label: t('breadcrumbTraining'),
+              path: `/${section.id}/levels/${criterion.id}/train`,
             },
           ]
         : [],
@@ -39,22 +45,22 @@ export function TrainingPage() {
     if (!section || !criterion) {
       return
     }
-    navigate(`/sections/${section.id}/criteria/${criterion.id}/assess`)
+    navigate(`/${section.id}/levels/${criterion.id}`)
   }, [navigate, section, criterion])
 
   const handleBack = useCallback(() => {
     if (!section) {
       return
     }
-    navigate(`/sections/${section.id}/criteria`)
+    navigate(`/${section.id}/levels`)
   }, [navigate, section])
 
   if (!section || !criterion || !training) {
-    return <Navigate to={sectionId ? `/sections/${sectionId}/criteria` : '/'} replace />
+    return <Navigate to={sectionId ? `/${sectionId}/levels` : '/'} replace />
   }
 
   return (
-    <PageLayout title={`${criterion.level}. ${criterion.title}`} breadcrumbs={breadcrumbs}>
+    <PageLayout title={`${ROMAN[criterion.level]} - ${criterion.title}`} breadcrumbs={breadcrumbs}>
       <VideoPlaceholder />
 
       <ol className={styles.stepList}>

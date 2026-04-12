@@ -8,13 +8,13 @@ Status: Pending
 
 ## Summary
 
-Create a vocabulary data structure with 27 word categories at three difficulty levels (simple, medium, complex), linked to the TACT section. Add TypeScript types and expose through the language context.
+Create a vocabulary data structure with 27 word categories at three difficulty levels (simple, medium, complex), linked to the Tact section. Add TypeScript types and expose through the language context.
 
 ## User Acceptance Criteria
 
 - [ ] 27 vocabulary categories available in both EN and RU
 - [ ] Each category has words at simple, medium, and complex levels
-- [ ] Categories are linked to the TACT section
+- [ ] Categories are linked to the Tact section
 
 ## System Acceptance Criteria
 
@@ -25,7 +25,7 @@ Create a vocabulary data structure with 27 word categories at three difficulty l
 
 ## Depends On
 
-- 05-02 (TACT section must exist)
+- 05-02 (Tact section must exist)
 
 ## Related Files
 

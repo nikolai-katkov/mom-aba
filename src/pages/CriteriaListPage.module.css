@@ -34,9 +34,10 @@
   background-color: var(--color-primary-alpha-10);
   color: var(--color-primary);
   border-radius: var(--radius-full);
-  font-family: var(--font-primary);
+  font-family: var(--font-numeral);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-normal);
 }
 
 .criterionContent {
@@ -92,9 +93,9 @@
   left: -38px;
   width: 40px;
   height: 40px;
-  font-family: var(--font-family-display);
+  font-family: var(--font-numeral);
   font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-extrabold);
+  font-weight: var(--font-weight-bold);
   background: var(--gradient-primary);
   color: var(--color-text-on-primary);
   box-shadow: var(--shadow-md);
@@ -107,6 +108,7 @@
 :global([data-theme='soft']) .levelBadge {
   width: var(--space-10);
   height: var(--space-10);
+  font-family: var(--font-numeral);
   font-size: var(--font-size-xl);
   background: var(--gradient-primary);
   color: var(--color-text-on-primary);
@@ -128,8 +130,7 @@
   background-color: transparent;
   color: var(--color-text-muted);
   font-size: var(--font-size-3xl);
-  font-style: italic;
-  font-family: var(--font-family-display);
+  font-family: var(--font-numeral);
   font-weight: var(--font-weight-regular);
   padding-bottom: var(--space-4);
 }

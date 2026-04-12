@@ -13,34 +13,39 @@ interface BreadcrumbsProps {
 }
 
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
-  if (items.length === 0) {
+  if (items.length < 2) {
     return null
   }
 
-  const lastItem = items[items.length - 1]
+  const parentItem = items[items.length - 2]
 
   return (
     <nav aria-label="Breadcrumb" className={styles.nav}>
       <ol className={styles.list}>
-        {items.map((item, index) => (
-          <li key={item.path} className={styles.item}>
-            {index > 0 && (
-              <ChevronRight size={14} aria-hidden="true" className={styles.separator} />
-            )}
-            <Link
-              to={item.path}
-              className={styles.link}
-              aria-current={index === items.length - 1 ? 'location' : undefined}
-            >
-              {item.label}
-            </Link>
-          </li>
-        ))}
+        {items.map((item, index) => {
+          const isLast = index === items.length - 1
+          return (
+            <li key={item.path} className={styles.item}>
+              {index > 0 && (
+                <ChevronRight size={14} aria-hidden="true" className={styles.separator} />
+              )}
+              {isLast ? (
+                <span className={styles.current} aria-current="location">
+                  {item.label}
+                </span>
+              ) : (
+                <Link to={item.path} className={styles.link}>
+                  {item.label}
+                </Link>
+              )}
+            </li>
+          )
+        })}
       </ol>
 
-      <Link to={lastItem.path} className={styles.mobileBack} aria-label={lastItem.label}>
+      <Link to={parentItem.path} className={styles.mobileBack} aria-label={parentItem.label}>
         <ArrowLeft size={16} aria-hidden="true" />
-        {lastItem.label}
+        {parentItem.label}
       </Link>
     </nav>
   )

@@ -11,13 +11,13 @@ describe.each(LANGUAGES)('training content seed data (%s)', language => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- guaranteed by test assertions
   const tactSection = sections.find(s => s.id === 'tact')!
 
-  it('has training content for every MAND criterion', () => {
+  it('has training content for every Mand criterion', () => {
     for (const criterion of mandSection.criteria) {
       expect(training[criterion.id]).toBeDefined()
     }
   })
 
-  it('has training content for every TACT criterion', () => {
+  it('has training content for every Tact criterion', () => {
     for (const criterion of tactSection.criteria) {
       expect(training[criterion.id]).toBeDefined()
     }

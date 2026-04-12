@@ -6,7 +6,7 @@ _[Русский](./_epic.ru.md)_
 
 ## Summary
 
-Implement the core assessment platform: sections list, introduction, criteria progression, binary assessment, training guidance, and the assess-train-reassess loop. MAND used as the first section; TACT shown as a placeholder.
+Implement the core assessment platform: sections list, introduction, criteria progression, binary assessment, training guidance, and the assess-train-reassess loop. Mand used as the first section; Tact shown as a placeholder.
 
 **Flow:** Learn > Assess > (if needed) Train > Reassess
 

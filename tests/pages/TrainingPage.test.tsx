@@ -20,15 +20,12 @@ vi.mock('react-router-dom', async () => {
 
 function renderPage(sectionId = 'mand', criterionId = 'mand-1') {
   return render(
-    <MemoryRouter initialEntries={[`/sections/${sectionId}/criteria/${criterionId}/train`]}>
+    <MemoryRouter initialEntries={[`/${sectionId}/levels/${criterionId}/train`]}>
       <LanguageProvider initialLanguage="en">
         <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
           <Routes>
-            <Route
-              path="/sections/:sectionId/criteria/:criterionId/train"
-              element={<TrainingPage />}
-            />
-            <Route path="/sections/:sectionId/criteria" element={<div>Criteria List</div>} />
+            <Route path="/:sectionId/levels/:criterionId/train" element={<TrainingPage />} />
+            <Route path="/:sectionId/levels" element={<div>Criteria List</div>} />
             <Route path="/" element={<div>Home</div>} />
           </Routes>
         </AssessmentProvider>
@@ -60,13 +57,13 @@ describe('TrainingPage', () => {
   it('navigates to assessment when Retry is clicked', async () => {
     renderPage()
     await userEvent.click(byT('retryAssessment'))
-    expect(mockNavigate).toHaveBeenCalledWith('/sections/mand/criteria/mand-1/assess')
+    expect(mockNavigate).toHaveBeenCalledWith('/mand/levels/mand-1')
   })
 
   it('navigates to criteria list when Back is clicked', async () => {
     renderPage()
     await userEvent.click(byT('backToList'))
-    expect(mockNavigate).toHaveBeenCalledWith('/sections/mand/criteria')
+    expect(mockNavigate).toHaveBeenCalledWith('/mand/levels')
   })
 
   it('redirects for invalid criterion', () => {

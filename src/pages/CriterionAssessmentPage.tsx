@@ -6,6 +6,7 @@ import type { BreadcrumbItem } from '../components/ui'
 import { Button, PageLayout } from '../components/ui'
 import { useAssessment, useLanguage, useTheme } from '../hooks'
 import { tProps } from '../i18n'
+import { ROMAN } from '../utils'
 import styles from './CriterionAssessmentPage.module.css'
 
 export function CriterionAssessmentPage() {
@@ -26,10 +27,11 @@ export function CriterionAssessmentPage() {
       section && criterion
         ? [
             { label: t('home'), path: '/' },
-            { label: section.title, path: `/sections/${section.id}/criteria` },
+            { label: section.title, path: `/${section.id}` },
+            { label: t('breadcrumbLevels'), path: `/${section.id}/levels` },
             {
-              label: `${criterion.level}. ${criterion.title}`,
-              path: `/sections/${section.id}/criteria/${criterion.id}/assess`,
+              label: `${ROMAN[criterion.level]} - ${criterion.title}`,
+              path: `/${section.id}/levels/${criterion.id}`,
             },
           ]
         : [],
@@ -41,7 +43,7 @@ export function CriterionAssessmentPage() {
       return
     }
     setCriterionResult(criterion.id, 1)
-    navigate(`/sections/${section.id}/criteria`)
+    navigate(`/${section.id}/levels`)
   }, [criterion, section, setCriterionResult, navigate])
 
   const handleNo = useCallback(() => {
@@ -49,15 +51,15 @@ export function CriterionAssessmentPage() {
       return
     }
     setCriterionResult(criterion.id, 0)
-    navigate(`/sections/${section.id}/criteria/${criterion.id}/train`)
+    navigate(`/${section.id}/levels/${criterion.id}/train`)
   }, [criterion, section, setCriterionResult, navigate])
 
   if (!section || !criterion) {
-    return <Navigate to={sectionId ? `/sections/${sectionId}/criteria` : '/'} replace />
+    return <Navigate to={sectionId ? `/${sectionId}/levels` : '/'} replace />
   }
 
   return (
-    <PageLayout title={`${criterion.level}. ${criterion.title}`} breadcrumbs={breadcrumbs}>
+    <PageLayout title={`${ROMAN[criterion.level]} - ${criterion.title}`} breadcrumbs={breadcrumbs}>
       <div
         className={[styles.assessmentLayout, styles[`layout_${theme}`]].filter(Boolean).join(' ')}
       >

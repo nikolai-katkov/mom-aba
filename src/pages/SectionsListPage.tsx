@@ -27,7 +27,7 @@ function SectionCard({ section }: { section: Section }) {
   const progress = getSectionProgress(section.id)
 
   const handleClick = useCallback(() => {
-    navigate(`/sections/${section.id}/intro`)
+    navigate(`/${section.id}`)
   }, [navigate, section.id])
 
   return (

@@ -6,6 +6,7 @@ import { Card, PageLayout, ProgressBar, StatusBadge } from '../components/ui'
 import { useAssessment, useLanguage } from '../hooks'
 import { interpolate, tProps } from '../i18n'
 import type { Criterion } from '../types'
+import { ROMAN } from '../utils'
 import styles from './CriteriaListPage.module.css'
 
 function CriterionCard({ criterion, sectionId }: { criterion: Criterion; sectionId: string }) {
@@ -14,13 +15,13 @@ function CriterionCard({ criterion, sectionId }: { criterion: Criterion; section
   const criterionState = getCriterionState(criterion.id)
 
   const handleClick = useCallback(() => {
-    navigate(`/sections/${sectionId}/criteria/${criterion.id}/assess`)
+    navigate(`/${sectionId}/levels/${criterion.id}`)
   }, [navigate, sectionId, criterion.id])
 
   return (
     <Card onClick={handleClick}>
       <div className={styles.criterionCard}>
-        <div className={styles.levelBadge}>{criterion.level}</div>
+        <div className={styles.levelBadge}>{ROMAN[criterion.level]}</div>
         <div className={styles.criterionContent}>
           <div className={styles.criterionHeader}>
             <h3 className={styles.criterionTitle}>{criterion.title}</h3>
@@ -45,7 +46,8 @@ export function CriteriaListPage() {
       section
         ? [
             { label: t('home'), path: '/' },
-            { label: section.title, path: `/sections/${section.id}/intro` },
+            { label: section.title, path: `/${section.id}` },
+            { label: t('breadcrumbLevels'), path: `/${section.id}/levels` },
           ]
         : [],
     [t, section]

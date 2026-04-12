@@ -10,15 +10,15 @@ describe.each(LANGUAGES)('sections seed data (%s)', language => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- guaranteed by test assertions below
   const tactSection = sections.find(s => s.id === 'tact')!
 
-  it('MAND has exactly 5 criteria', () => {
+  it('Mand has exactly 5 criteria', () => {
     expect(mandSection.criteria).toHaveLength(5)
   })
 
-  it('MAND is marked as available', () => {
+  it('Mand is marked as available', () => {
     expect(mandSection.isAvailable).toBe(true)
   })
 
-  it('has all required fields populated on every MAND criterion', () => {
+  it('has all required fields populated on every Mand criterion', () => {
     for (const criterion of mandSection.criteria) {
       expect(criterion.id).toBeTruthy()
       expect(criterion.sectionId).toBe('mand')
@@ -37,25 +37,25 @@ describe.each(LANGUAGES)('sections seed data (%s)', language => {
     }
   })
 
-  it('has MAND criteria ordered by level 1 through 5', () => {
+  it('has Mand criteria ordered by level 1 through 5', () => {
     const levels = mandSection.criteria.map(c => c.level)
     expect(levels).toEqual([1, 2, 3, 4, 5])
   })
 
-  it('has unique MAND criterion IDs', () => {
+  it('has unique Mand criterion IDs', () => {
     const ids = mandSection.criteria.map(c => c.id)
     expect(new Set(ids).size).toBe(ids.length)
   })
 
-  it('TACT exists and has 5 criteria', () => {
+  it('Tact exists and has 5 criteria', () => {
     expect(tactSection.criteria).toHaveLength(5)
   })
 
-  it('TACT is marked as available', () => {
+  it('Tact is marked as available', () => {
     expect(tactSection.isAvailable).toBe(true)
   })
 
-  it('has all required fields populated on every TACT criterion', () => {
+  it('has all required fields populated on every Tact criterion', () => {
     for (const criterion of tactSection.criteria) {
       expect(criterion.id).toBeTruthy()
       expect(criterion.sectionId).toBe('tact')
@@ -74,12 +74,12 @@ describe.each(LANGUAGES)('sections seed data (%s)', language => {
     }
   })
 
-  it('has TACT criteria ordered by level 1 through 5', () => {
+  it('has Tact criteria ordered by level 1 through 5', () => {
     const levels = tactSection.criteria.map(c => c.level)
     expect(levels).toEqual([1, 2, 3, 4, 5])
   })
 
-  it('has unique TACT criterion IDs', () => {
+  it('has unique Tact criterion IDs', () => {
     const ids = tactSection.criteria.map(c => c.id)
     expect(new Set(ids).size).toBe(ids.length)
   })

@@ -35,10 +35,10 @@ describe('SectionsListPage', () => {
     mockNavigate.mockClear()
   })
 
-  it('renders MAND and TACT cards with progress', () => {
+  it('renders Mand and Tact cards with progress', () => {
     renderPage()
-    expect(screen.getByText('MAND')).toBeInTheDocument()
-    expect(screen.getByText('TACT')).toBeInTheDocument()
+    expect(screen.getByText('Mand')).toBeInTheDocument()
+    expect(screen.getByText('Tact')).toBeInTheDocument()
     expect(screen.getAllByText('0/5')).toHaveLength(2)
   })
 
@@ -48,15 +48,15 @@ describe('SectionsListPage', () => {
     expect(comingSoonElements.length).toBe(7)
   })
 
-  it('navigates to MAND intro when MAND card is clicked', async () => {
+  it('navigates to Mand intro when Mand card is clicked', async () => {
     renderPage()
-    await userEvent.click(screen.getByText('MAND'))
-    expect(mockNavigate).toHaveBeenCalledWith('/sections/mand/intro')
+    await userEvent.click(screen.getByText('Mand'))
+    expect(mockNavigate).toHaveBeenCalledWith('/mand')
   })
 
-  it('navigates to TACT intro when TACT card is clicked', async () => {
+  it('navigates to Tact intro when Tact card is clicked', async () => {
     renderPage()
-    await userEvent.click(screen.getByText('TACT'))
-    expect(mockNavigate).toHaveBeenCalledWith('/sections/tact/intro')
+    await userEvent.click(screen.getByText('Tact'))
+    expect(mockNavigate).toHaveBeenCalledWith('/tact')
   })
 })

@@ -20,11 +20,11 @@ vi.mock('react-router-dom', async () => {
 
 function renderPage(sectionId = 'mand') {
   return render(
-    <MemoryRouter initialEntries={[`/sections/${sectionId}/intro`]}>
+    <MemoryRouter initialEntries={[`/${sectionId}`]}>
       <LanguageProvider initialLanguage="en">
         <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
           <Routes>
-            <Route path="/sections/:sectionId/intro" element={<SectionIntroPage />} />
+            <Route path="/:sectionId" element={<SectionIntroPage />} />
             <Route path="/" element={<div>Home</div>} />
           </Routes>
         </AssessmentProvider>
@@ -41,7 +41,7 @@ describe('SectionIntroPage', () => {
 
   it('renders section title', () => {
     renderPage()
-    expect(screen.getByText('MAND')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Mand', level: 1 })).toBeInTheDocument()
   })
 
   it('toggles full explanation', async () => {
@@ -56,13 +56,13 @@ describe('SectionIntroPage', () => {
   it('navigates to criteria list when Start is clicked', async () => {
     renderPage()
     await userEvent.click(byT('start'))
-    expect(mockNavigate).toHaveBeenCalledWith('/sections/mand/criteria')
+    expect(mockNavigate).toHaveBeenCalledWith('/mand/levels')
   })
 
   it('navigates to criteria list when Skip is clicked', async () => {
     renderPage()
     await userEvent.click(byT('skip'))
-    expect(mockNavigate).toHaveBeenCalledWith('/sections/mand/criteria')
+    expect(mockNavigate).toHaveBeenCalledWith('/mand/levels')
   })
 
   it('redirects to home for invalid sectionId', () => {

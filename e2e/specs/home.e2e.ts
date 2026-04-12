@@ -9,8 +9,8 @@ test.beforeEach(async ({ page }) => {
 })
 
 test('sections list page renders MAND and TACT cards', async ({ page }) => {
-  await expect(page.getByText('MAND')).toBeVisible()
-  await expect(page.getByText('TACT')).toBeVisible()
+  await expect(page.getByText('Mand')).toBeVisible()
+  await expect(page.getByText('Tact')).toBeVisible()
   await expect(page.getByText('Requests')).toBeVisible()
   await expect(page.getByText('Coming soon')).toBeVisible()
 })

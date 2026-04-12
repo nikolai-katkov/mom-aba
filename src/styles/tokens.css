@@ -10,7 +10,7 @@
  * Components use tokens via var() — theme changes cascade automatically.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 :root {
   /* ============================================
@@ -147,6 +147,7 @@
    * Typography - Families
    * ============================================ */
   --font-family-primary: 'Nunito', -apple-system, system-ui, sans-serif;
+  --font-family-numeral: 'Cinzel', 'Georgia', serif;
   --font-family-mono: 'IBM Plex Mono', 'Courier New', monospace;
 
   /* ============================================
@@ -198,6 +199,7 @@
    * Font Aliases (theme-overridable)
    * ============================================ */
   --font-primary: var(--font-family-primary);
+  --font-numeral: var(--font-family-numeral);
   --font-mono: var(--font-family-mono);
   --font-family-display: var(--font-family-primary);
   --font-family-body: var(--font-family-primary);

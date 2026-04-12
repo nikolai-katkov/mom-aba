@@ -8,13 +8,13 @@ Status: Pending
 
 ## Summary
 
-Update knowledge docs with TACT training methodology, vocabulary system documentation, and updated MVP scope. Use professional ABA terminology.
+Update knowledge docs with Tact training methodology, vocabulary system documentation, and updated MVP scope. Use professional ABA terminology.
 
 ## User Acceptance Criteria
 
-- [ ] TACT training methodology documented (nouns, verbs, distraction method, token reinforcement, cold probe mastery)
+- [ ] Tact training methodology documented (nouns, verbs, distraction method, token reinforcement, cold probe mastery)
 - [ ] Vocabulary system documented (27 categories, difficulty model)
-- [ ] MVP scope updated: TACT in "Included", not "Excluded"
+- [ ] MVP scope updated: Tact in "Included", not "Excluded"
 - [ ] Both EN and RU versions updated
 
 ## Related Files

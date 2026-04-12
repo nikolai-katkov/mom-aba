@@ -20,11 +20,11 @@ vi.mock('react-router-dom', async () => {
 
 function renderPage(sectionId = 'mand') {
   return render(
-    <MemoryRouter initialEntries={[`/sections/${sectionId}/criteria`]}>
+    <MemoryRouter initialEntries={[`/${sectionId}/levels`]}>
       <LanguageProvider initialLanguage="en">
         <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
           <Routes>
-            <Route path="/sections/:sectionId/criteria" element={<CriteriaListPage />} />
+            <Route path="/:sectionId/levels" element={<CriteriaListPage />} />
             <Route path="/" element={<div>Home</div>} />
           </Routes>
         </AssessmentProvider>
@@ -55,7 +55,7 @@ describe('CriteriaListPage', () => {
     const allButtons = screen.getAllByRole('button')
     const firstCriterionCard = allButtons[0]
     await userEvent.click(firstCriterionCard)
-    expect(mockNavigate).toHaveBeenCalledWith('/sections/mand/criteria/mand-1/assess')
+    expect(mockNavigate).toHaveBeenCalledWith('/mand/levels/mand-1')
   })
 
   it('redirects to home for invalid section', () => {

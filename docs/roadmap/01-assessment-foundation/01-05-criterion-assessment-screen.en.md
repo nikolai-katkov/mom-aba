@@ -13,7 +13,7 @@ Binary assessment screen for a single criterion. Presents a clear Yes/No questio
 ## User Acceptance Criteria
 
 - [x] Clear, binary question displayed prominently (e.g., "Can the child request one of two items?")
-- [x] Illustration area shows a static placeholder image relevant to the criterion (2 distinct objects for MAND criteria)
+- [x] Illustration area shows a static placeholder image relevant to the criterion (2 distinct objects for Mand criteria)
 - [x] Context section shows: short explanation of what to look for, conditions from the criterion
 - [x] Two buttons: "Yes" and "No" - no ambiguity, no other options
 - [x] "Yes" shows brief positive feedback, marks complete, returns to criteria list with updated status

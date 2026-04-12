@@ -18,13 +18,10 @@ function AppRoutes() {
     <AssessmentProvider sections={sections}>
       <Routes>
         <Route path="/" element={<SectionsListPage />} />
-        <Route path="/sections/:sectionId/intro" element={<SectionIntroPage />} />
-        <Route path="/sections/:sectionId/criteria" element={<CriteriaListPage />} />
-        <Route
-          path="/sections/:sectionId/criteria/:criterionId/assess"
-          element={<CriterionAssessmentPage />}
-        />
-        <Route path="/sections/:sectionId/criteria/:criterionId/train" element={<TrainingPage />} />
+        <Route path="/:sectionId" element={<SectionIntroPage />} />
+        <Route path="/:sectionId/levels" element={<CriteriaListPage />} />
+        <Route path="/:sectionId/levels/:criterionId" element={<CriterionAssessmentPage />} />
+        <Route path="/:sectionId/levels/:criterionId/train" element={<TrainingPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AssessmentProvider>

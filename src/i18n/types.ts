@@ -3,6 +3,8 @@ export type Language = 'ru' | 'en'
 export interface UiTranslations {
   // Breadcrumbs
   home: string
+  breadcrumbLevels: string
+  breadcrumbTraining: string
   // PageLayout (legacy — kept for potential reuse)
   back: string
   goBack: string
