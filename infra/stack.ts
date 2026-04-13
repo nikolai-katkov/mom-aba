@@ -40,6 +40,7 @@ export class MomAbaStack extends cdk.Stack {
       destinationBucket: bucket,
       distribution,
       distributionPaths: ['/*'],
+      memoryLimit: 256,
     })
 
     new cdk.CfnOutput(this, 'SiteUrl', {
