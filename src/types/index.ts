@@ -22,7 +22,7 @@ export {
   parseWordId,
   VERBAL_OPERANTS,
 } from './dictionary'
-export type { SectionIntroduction } from './introduction'
+export type { SectionIntroduction, VideoVariant } from './introduction'
 export type { AssessmentState, CriterionState } from './state'
 export type { ColorMode, Theme, ThemeMetadata } from './theme'
 export { COLOR_MODES, DEFAULT_COLOR_MODE, DEFAULT_THEME, THEME_METADATA, THEMES } from './theme'

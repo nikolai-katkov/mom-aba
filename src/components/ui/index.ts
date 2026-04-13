@@ -9,4 +9,3 @@ export { ProgressiveDisclosure } from './ProgressiveDisclosure/ProgressiveDisclo
 export { StatusBadge } from './StatusBadge/StatusBadge'
 export type { TabOption, TabsProps } from './Tabs/Tabs'
 export { Tabs } from './Tabs/Tabs'
-export { VideoPlaceholder } from './VideoPlaceholder/VideoPlaceholder'

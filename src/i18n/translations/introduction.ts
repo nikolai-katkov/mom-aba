@@ -14,6 +14,10 @@ const INTRODUCTIONS_EN: Record<string, SectionIntroduction> = {
       'The Mand section is based on Applied Behavior Analysis (ABA). A "mand" is a technical term for a request - it is communication motivated by a want or need. Unlike labeling or repeating, requesting is driven by the child\'s own motivation, which makes it a powerful starting point for language development.\n\nThe 5 criteria in this section follow a developmental progression across three dimensions:\n\n- Independence: Moving from prompted requests (Level 1) to fully spontaneous communication (Level 4-5), where the child initiates without any cues from adults.\n\n- Generalization: Expanding from requesting with one person in one place (Level 1-2) to requesting with different people, in different environments, and for different types of items (Level 3).\n\n- Repertoire size: Growing from 2 requests (Level 1) to 10 distinct independent requests (Level 5), reflecting a richer and more flexible communication vocabulary.\n\nDuring the assessment, you will observe or test whether your child demonstrates each skill. For most criteria, you can combine direct testing with observation in natural settings. For spontaneous requesting, you will observe during a 60-minute period without prompting.\n\nCommon things parents find helpful to know:\n- It is perfectly normal for children to be at different levels across these criteria.\n- Prompts are a normal part of learning. The goal is to gradually reduce them, not to eliminate them immediately.\n- "Requesting" includes any intentional communication - spoken words, sign language, gestures, or picture exchange (PECS) all count.\n- The assessment captures where your child is right now. The training guides will show you how to build the next skill.',
 
     videoSrc: '/assets/video/cookie.mp4',
+    videos: [
+      { label: 'Variant 1', src: '/assets/video/cookie.mp4' },
+      { label: 'Variant 2', src: '/assets/video/mand-notebook-llm.mp4' },
+    ],
   },
   tact: {
     sectionId: 'tact',
@@ -41,6 +45,10 @@ const INTRODUCTIONS_RU: Record<string, SectionIntroduction> = {
       'Раздел Манд основан на прикладном анализе поведения (ABA). «Манд» - это технический термин для просьбы: коммуникация, мотивированная желанием или потребностью. В отличие от называния или повторения, просьба определяется собственной мотивацией ребенка, что делает его мощной отправной точкой для развития речи.\n\n5 критериев в этом разделе следуют за развитием по трем направлениям:\n\n- Самостоятельность: от просьб с подсказкой (уровень 1) к полностью спонтанной коммуникации (уровни 4-5), когда ребенок инициирует общение без каких-либо подсказок со стороны взрослых.\n\n- Обобщение: от просьб с одним человеком в одном месте (уровни 1-2) к просьбам с разными людьми, в разных местах и по разным поводам (уровень 3).\n\n- Размер репертуара: от 2 просьб (уровень 1) до 10 различных самостоятельных просьб (уровень 5), что отражает более богатый и гибкий коммуникативный словарь.\n\nВ ходе оценки вы будете наблюдать или проверять, демонстрирует ли ваш ребенок каждый навык. Для большинства критериев можно сочетать прямое тестирование с наблюдением в естественных условиях. Для спонтанных просьб вы будете наблюдать в течение 60 минут без подсказок.\n\nЧто полезно знать родителям:\n- Совершенно нормально, когда ребенок находится на разных уровнях по разным критериям.\n- Подсказки - нормальная часть обучения. Цель - постепенно уменьшать их, а не убирать сразу.\n- «Просьба» включает любую намеренную коммуникацию: устные слова, жестовый язык, жесты или обмен карточками (PECS).\n- Оценка фиксирует, где ваш ребенок находится сейчас. Руководства по отработке покажут, как развить следующий навык.',
 
     videoSrc: '/assets/video/cookie.mp4',
+    videos: [
+      { label: 'Вариант 1', src: '/assets/video/cookie.mp4' },
+      { label: 'Вариант 2', src: '/assets/video/mand-notebook-llm.mp4' },
+    ],
   },
   tact: {
     sectionId: 'tact',
