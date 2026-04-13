@@ -4,7 +4,7 @@ _[English](./05-07-tests.en.md)_
 
 # 05-07: Тесты
 
-Статус: В ожидании
+Статус: Готово
 
 ## Описание
 
@@ -12,15 +12,15 @@ _[English](./05-07-tests.en.md)_
 
 ## Системные критерии приёмки
 
-- [ ] `sections.test.ts`: количество разделов 9, Такт доступен, проверка заглушек
-- [ ] `training.test.ts`: tact-1 -- tact-5 существуют на обоих языках
-- [ ] Новый `vocabulary.test.ts`: 27 категорий, оба языка, валидация структуры
-- [ ] E2E: Такт -- положительный путь оценки и путь тренировки
-- [ ] Все 3 профиля устройств проходят
+- [x] `sections.test.ts`: количество разделов 9, Такт доступен, проверка заглушек
+- [x] `training.test.ts`: tact-1 -- tact-5 существуют на обоих языках
+- [x] Новый `vocabulary.test.ts`: 27 категорий, оба языка, валидация структуры
+- [x] E2E: Такт -- положительный путь оценки и путь тренировки
+- [x] Все 3 профиля устройств проходят
 
 ## Связанные файлы
 
 - `tests/data/sections.test.ts`
 - `tests/data/training.test.ts`
-- `tests/data/vocabulary.test.ts` (новый)
-- `e2e/specs/tact-assessment-flow.e2e.ts` (новый)
+- `tests/data/vocabulary.test.ts`
+- `e2e/specs/tact-assessment-flow.e2e.ts`

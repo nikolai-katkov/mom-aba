@@ -1,11 +1,14 @@
 export {
+  createInitialDictionaryState,
   createInitialState,
   loadAssessmentState,
   loadColorMode,
+  loadDictionaryState,
   loadLanguage,
   loadTheme,
   saveAssessmentState,
   saveColorMode,
+  saveDictionaryState,
   saveLanguage,
   saveTheme,
 } from './storage'

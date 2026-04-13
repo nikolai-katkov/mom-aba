@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
-import { AssessmentProvider } from '../../src/hooks'
+import { AssessmentProvider, DictionaryProvider } from '../../src/hooks'
 import { LanguageProvider } from '../../src/i18n'
-import { SECTIONS_BY_LANGUAGE } from '../../src/i18n/translations'
+import { SECTIONS_BY_LANGUAGE, VOCABULARY_BY_LANGUAGE } from '../../src/i18n/translations'
 import { TrainingPage } from '../../src/pages/TrainingPage'
 import { byT } from '../helpers/byT'
 
@@ -22,13 +22,15 @@ function renderPage(sectionId = 'mand', criterionId = 'mand-1') {
   return render(
     <MemoryRouter initialEntries={[`/${sectionId}/levels/${criterionId}/train`]}>
       <LanguageProvider initialLanguage="en">
-        <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
-          <Routes>
-            <Route path="/:sectionId/levels/:criterionId/train" element={<TrainingPage />} />
-            <Route path="/:sectionId/levels" element={<div>Criteria List</div>} />
-            <Route path="/" element={<div>Home</div>} />
-          </Routes>
-        </AssessmentProvider>
+        <DictionaryProvider vocabulary={VOCABULARY_BY_LANGUAGE.en}>
+          <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
+            <Routes>
+              <Route path="/:sectionId/levels/:criterionId/train" element={<TrainingPage />} />
+              <Route path="/:sectionId/levels" element={<div>Criteria List</div>} />
+              <Route path="/" element={<div>Home</div>} />
+            </Routes>
+          </AssessmentProvider>
+        </DictionaryProvider>
       </LanguageProvider>
     </MemoryRouter>
   )

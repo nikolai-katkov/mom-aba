@@ -5,6 +5,15 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => {
     localStorage.clear()
     localStorage.setItem('mom-aba-language', 'en')
+    localStorage.setItem(
+      'mom-aba-dictionary-state',
+      JSON.stringify({
+        version: 1,
+        onboardingCompleted: true,
+        onboardingLevel: 'intermediate',
+        words: {},
+      })
+    )
   })
 })
 

@@ -4,7 +4,7 @@ _[English](./05-04-vocabulary-system.en.md)_
 
 # 05-04: Система словаря
 
-Статус: В ожидании
+Статус: Готово
 
 ## Описание
 
@@ -12,16 +12,16 @@ _[English](./05-04-vocabulary-system.en.md)_
 
 ## Критерии приёмки для пользователя
 
-- [ ] 27 категорий словаря доступны на обоих языках
-- [ ] Каждая категория содержит слова на простом, среднем и сложном уровнях
-- [ ] Категории привязаны к разделу Такт
+- [x] 27 категорий словаря доступны на обоих языках
+- [x] Каждая категория содержит слова на простом, среднем и сложном уровнях
+- [x] Категории привязаны к разделу Такт
 
 ## Системные критерии приёмки
 
-- [ ] Новые типы: `WordDifficulty`, `VocabularyCategory` в `src/types/vocabulary.ts`
-- [ ] Новый файл `src/i18n/translations/vocabulary.ts` со всеми 27 категориями
-- [ ] `LanguageContext` предоставляет `vocabulary: VocabularyCategory[]`
-- [ ] Оба языка имеют идентичную структуру (одни ID, одинаковые длины массивов)
+- [x] Новые типы: `WordDifficulty`, `VocabularyCategory` в `src/types/vocabulary.ts`
+- [x] Новый файл `src/i18n/translations/vocabulary.ts` со всеми 27 категориями
+- [x] `LanguageContext` предоставляет `vocabulary: VocabularyCategory[]`
+- [x] Оба языка имеют идентичную структуру (одни ID, одинаковые длины массивов)
 
 ## Зависит от
 
@@ -29,8 +29,8 @@ _[English](./05-04-vocabulary-system.en.md)_
 
 ## Связанные файлы
 
-- `src/types/vocabulary.ts` (новый)
+- `src/types/vocabulary.ts`
 - `src/types/index.ts`
-- `src/i18n/translations/vocabulary.ts` (новый)
+- `src/i18n/translations/vocabulary.ts`
 - `src/i18n/translations/index.ts`
 - `src/i18n/LanguageContext.tsx`

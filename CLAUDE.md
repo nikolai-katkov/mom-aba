@@ -71,7 +71,7 @@ docs/
 
 The app implements ABA-based developmental milestone assessments. Key domain concepts are documented in `docs/knowledge/`:
 
-- Developmental Milestones Assessment ([EN](docs/knowledge/developmental-milestones-assessment.en.md) | [RU](docs/knowledge/developmental-milestones-assessment.ru.md)) - assessment structure, scoring types (TCT/NAB/KOM/NOV), Mand/Tact sections, development model, and UX screen mapping.
+- Developmental Milestones Assessment ([EN](docs/knowledge/developmental-milestones-assessment.en.md) | [RU](docs/knowledge/developmental-milestones-assessment.ru.md)) - assessment structure, scoring types (TestTrial/CombinedTrial/TimedObservation/FreeOperant), Mand/Tact sections, development model, and UX screen mapping.
 
 ### Directory Structure
 
@@ -108,7 +108,7 @@ src/
 
 **Languages:** Russian (default) and English. Language is persisted in localStorage (`mom-aba-language`).
 
-**Architecture:** Custom hook + context (no library). `LanguageProvider` wraps the app, `useLanguage()` hook provides `t(key)` for UI strings and language-resolved domain data (`sections`, `sectionIntroductions`, `trainingContent`).
+**Architecture:** Custom hook + context (no library). `LanguageProvider` wraps the app, `useLanguage()` hook provides `t(key)` for UI strings and language-resolved domain data (`sections`, `sectionIntroductions`, `trainingContent`, `vocabulary`).
 
 **Translation files:** `src/i18n/translations/` - one TypeScript file per namespace:
 
@@ -116,6 +116,7 @@ src/
 - `sections.ts` - Section/criterion data per language
 - `introduction.ts` - Introduction content per language
 - `training.ts` - Training content per language
+- `vocabulary.ts` - Vocabulary categories and words per language (27 categories x 3 difficulty levels)
 
 **String interpolation:** `interpolate(template, values)` for patterns like `{completed}/{total}`.
 
@@ -127,7 +128,7 @@ src/
 - Domain data (sections, training, introduction) must have identical structure in both languages (same IDs, same array lengths)
 - Use ABA-correct Russian terminology (Манд, Такт, эхоическая подсказка) rather than literal translations
 
-**Component usage:** Call `useLanguage()` in components, use `t('keyName')` for UI strings, destructure `sections`/`sectionIntroductions`/`trainingContent` for domain data. Add `{...tProps('keyName')}` on elements that display translated text for test selectors.
+**Component usage:** Call `useLanguage()` in components, use `t('keyName')` for UI strings, destructure `sections`/`sectionIntroductions`/`trainingContent`/`vocabulary` for domain data. Add `{...tProps('keyName')}` on elements that display translated text for test selectors.
 
 **Missing translation handling:** `t()` falls back to other languages with a dev console warning. If no translation exists in any language, renders the key in dev mode and empty string in production.
 
@@ -179,9 +180,29 @@ Before EVERY commit that adds or modifies user-facing text in any language (app 
 4. Check that technical terms follow the correct audience rules: parent-friendly in app text (`src/i18n/translations/`), professional ABA terminology in docs (`docs/`)
 5. Suggest specific improvements if any text does not meet these standards — do not silently pass non-compliant text
 
+### Personal Dictionary
+
+**DictionaryProvider:** Context + hook (`useDictionary()`) managing per-word inclusion and mastery state. Wraps the app inside `LanguageProvider`, receives `vocabulary` from `useLanguage()`. State persisted in localStorage (`mom-aba-dictionary`).
+
+**OnboardingGate:** App-level wrapper that renders the `OnboardingPage` on first visit (before dictionary state exists). Captures the child's vocabulary level (beginner/intermediate/advanced) to set initial word inclusion defaults.
+
+**Data model:** Types in `src/types/dictionary.ts` and `src/types/vocabulary.ts`. Key types: `VerbalOperant`, `MasteryTier`, `OnboardingLevel`, `WordState`, `DictionaryState`, `VocabularyWord`.
+
 ### Routing
 
 React Router v7 (BrowserRouter) with routes declared in `App.tsx`.
+
+**Routes:**
+
+| Path                                    | Component                      | Description                           |
+| --------------------------------------- | ------------------------------ | ------------------------------------- |
+| `/`                                     | `SectionsListPage`             | Entry point, sections grid            |
+| `/dictionary`                           | `DictionaryCategoriesPage`     | 27 vocabulary category cards          |
+| `/dictionary/:categoryId`               | `DictionaryCategoryDetailPage` | Words by difficulty, inclusion toggle |
+| `/:sectionId`                           | `SectionIntroPage`             | Section introduction                  |
+| `/:sectionId/levels`                    | `CriteriaListPage`             | 5 criterion cards                     |
+| `/:sectionId/levels/:criterionId`       | `CriterionAssessmentPage`      | Yes/No assessment                     |
+| `/:sectionId/levels/:criterionId/train` | `TrainingPage`                 | Training guide + practice words       |
 
 ### Styling
 

@@ -35,6 +35,8 @@ export interface UiTranslations {
   yes: string
   no: string
   // TrainingPage
+  practiceWords: string
+  practiceWordsHint: string
   commonMistakes: string
   retryAssessment: string
   backToList: string
@@ -44,6 +46,27 @@ export interface UiTranslations {
   goHome: string
   // Language switcher
   switchLanguage: string
+  // Dictionary
+  dictionaryTitle: string
+  dictionarySubtitle: string
+  difficultySimple: string
+  difficultyMedium: string
+  difficultyComplex: string
+  zoneIncluded: string
+  zoneExcluded: string
+  operantMand: string
+  operantTact: string
+  operantListener: string
+  operantEchoic: string
+  // Onboarding
+  onboardingTitle: string
+  onboardingSubtitle: string
+  onboardingBeginner: string
+  onboardingBeginnerDesc: string
+  onboardingIntermediate: string
+  onboardingIntermediateDesc: string
+  onboardingAdvanced: string
+  onboardingAdvancedDesc: string
   // Controls pill
   selectTheme: string
   selectLanguage: string

@@ -5,6 +5,23 @@ export type {
   ScoringType,
   Section,
 } from './assessment'
+export type {
+  DictionaryState,
+  MasteryTier,
+  OnboardingLevel,
+  VerbalOperant,
+  VocabularyWord,
+  WordInclusionStatus,
+  WordState,
+} from './dictionary'
+export {
+  DEFAULT_MASTERY,
+  getCriterionCategoryIds,
+  getWordId,
+  MOTIVATING_CATEGORY_IDS,
+  parseWordId,
+  VERBAL_OPERANTS,
+} from './dictionary'
 export type { SectionIntroduction } from './introduction'
 export type { AssessmentState, CriterionState } from './state'
 export type { ColorMode, Theme, ThemeMetadata } from './theme'

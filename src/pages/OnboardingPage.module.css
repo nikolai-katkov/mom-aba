@@ -1,0 +1,402 @@
+/* ============================================
+ * Onboarding Page — Full-viewport gate
+ * ============================================ */
+
+.page {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg);
+  background-image: var(--gradient-bg);
+  overflow-y: auto;
+  padding: var(--space-6);
+}
+
+/* Ambient glow behind cards */
+.glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-full);
+  background: radial-gradient(
+    circle,
+    var(--color-primary-alpha-10) 0%,
+    var(--color-accent-alpha-5) 40%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  animation: glowPulse 6s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-10);
+  max-width: 860px;
+  width: 100%;
+}
+
+/* ============================================
+ * Header
+ * ============================================ */
+
+.header {
+  text-align: center;
+  animation: fadeSlideUp var(--animation-duration) var(--animation-easing) both;
+}
+
+.title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-3);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.subtitle {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-dim);
+  margin: 0;
+  max-width: 400px;
+  line-height: var(--leading-normal);
+}
+
+/* ============================================
+ * Card grid
+ * ============================================ */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  width: 100%;
+}
+
+/* ============================================
+ * Individual card
+ * ============================================ */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-5);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  text-align: center;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast),
+    opacity var(--transition-slow);
+  animation: cardEntrance var(--animation-duration) var(--animation-easing) both;
+}
+
+.card:hover:not(:disabled) {
+  transform: translateY(var(--hover-lift)) scale(var(--hover-scale));
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--color-primary-alpha-30);
+}
+
+.card:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
+/* ============================================
+ * Card states
+ * ============================================ */
+
+.cardSelected {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-primary-md);
+  animation: selectPulse var(--animation-duration) var(--animation-easing);
+  transform: scale(1.03);
+}
+
+.cardDimmed {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ============================================
+ * Card content
+ * ============================================ */
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-alpha-10);
+  color: var(--color-primary);
+  transition: background var(--transition-fast);
+}
+
+.card:hover:not(:disabled) .iconWrap {
+  background: var(--color-primary-alpha-20);
+}
+
+.cardSelected .iconWrap {
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.cardTitle {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  letter-spacing: var(--letter-spacing-snug);
+}
+
+.cardDesc {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  line-height: var(--leading-normal);
+  max-width: 220px;
+}
+
+/* ============================================
+ * Animations
+ * ============================================ */
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes selectPulse {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1.03);
+  }
+}
+
+/* ============================================
+ * Theme: Warm — organic shapes, warm glow
+ * ============================================ */
+
+:global([data-theme='warm']) .glow {
+  background: radial-gradient(
+    circle,
+    var(--color-warm-alpha-10) 0%,
+    var(--color-primary-alpha-5) 50%,
+    transparent 70%
+  );
+}
+
+:global([data-theme='warm']) .title {
+  background: var(--gradient-primary);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:global([data-theme='warm']) .iconWrap {
+  border-radius: var(--radius-organic);
+}
+
+/* ============================================
+ * Theme: Soft — bubbly, playful, pastel
+ * ============================================ */
+
+:global([data-theme='soft']) .glow {
+  background: radial-gradient(
+    circle,
+    var(--color-accent-alpha-10) 0%,
+    var(--color-primary-alpha-5) 50%,
+    transparent 70%
+  );
+}
+
+:global([data-theme='soft']) .title {
+  font-size: var(--font-size-4xl);
+}
+
+:global([data-theme='soft']) .card {
+  border-radius: var(--radius-2xl);
+}
+
+:global([data-theme='soft']) .iconWrap {
+  width: 64px;
+  height: 64px;
+  background: var(--gradient-primary);
+  color: var(--color-text-on-primary);
+}
+
+:global([data-theme='soft']) .card:hover:not(:disabled) .iconWrap {
+  background: var(--gradient-primary);
+}
+
+/* ============================================
+ * Theme: Editorial — typographic, understated
+ * ============================================ */
+
+:global([data-theme='editorial']) .glow {
+  opacity: 0.3;
+}
+
+:global([data-theme='editorial']) .card {
+  border-radius: var(--radius-sm);
+  padding: var(--space-10) var(--space-6);
+  border: 1px solid var(--color-border-strong);
+}
+
+:global([data-theme='editorial']) .title {
+  font-size: var(--font-size-4xl);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+:global([data-theme='editorial']) .subtitle {
+  font-size: var(--font-size-base);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+:global([data-theme='editorial']) .iconWrap {
+  border-radius: var(--radius-xs);
+}
+
+:global([data-theme='editorial']) .cardTitle {
+  font-size: var(--font-size-lg);
+  letter-spacing: var(--letter-spacing-snug);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ============================================
+ * Responsive: mobile stack
+ * ============================================ */
+
+@media (max-width: 640px) {
+  .page {
+    padding: var(--space-8) var(--space-5);
+  }
+
+  .container {
+    gap: var(--space-8);
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .card {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    padding: var(--space-5);
+    gap: var(--space-4);
+  }
+
+  .iconWrap {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+
+  .cardDesc {
+    max-width: none;
+  }
+
+  .glow {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* ============================================
+ * Reduced motion
+ * ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .glow {
+    animation: none;
+  }
+
+  .cardSelected {
+    animation: none;
+  }
+}
+
+/* ============================================
+ * Tablet: two columns
+ * ============================================ */
+
+@media (min-width: 641px) and (max-width: 860px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card:last-child {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    justify-self: center;
+  }
+}

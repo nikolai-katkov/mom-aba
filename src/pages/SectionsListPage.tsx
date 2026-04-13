@@ -1,4 +1,15 @@
-import { AudioLines, Blocks, Ear, Eye, Hand, MessageCircle, Mic, Tag, Users } from 'lucide-react'
+import {
+  AudioLines,
+  Blocks,
+  BookOpen,
+  Ear,
+  Eye,
+  Hand,
+  MessageCircle,
+  Mic,
+  Tag,
+  Users,
+} from 'lucide-react'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -64,6 +75,33 @@ function SectionCard({ section }: { section: Section }) {
   )
 }
 
+function DictionaryCard() {
+  const navigate = useNavigate()
+  const { t } = useLanguage()
+
+  const handleClick = useCallback(() => {
+    navigate('/dictionary')
+  }, [navigate])
+
+  return (
+    <Card onClick={handleClick} isClickable>
+      <div className={styles.dictionaryCardContent}>
+        <span className={styles.dictionaryIcon}>
+          <BookOpen size={22} aria-hidden="true" />
+        </span>
+        <div className={styles.dictionaryText}>
+          <span className={styles.dictionaryTitle} {...tProps('dictionaryTitle')}>
+            {t('dictionaryTitle')}
+          </span>
+          <span className={styles.dictionarySubtitle} {...tProps('dictionarySubtitle')}>
+            {t('dictionarySubtitle')}
+          </span>
+        </div>
+      </div>
+    </Card>
+  )
+}
+
 export function SectionsListPage() {
   const { t, sections } = useLanguage()
 
@@ -72,6 +110,7 @@ export function SectionsListPage() {
       <p className={styles.subtitle} {...tProps('appSubtitle')}>
         {t('appSubtitle')}
       </p>
+      <DictionaryCard />
       <div className={styles.sectionList}>
         {sections.map(section => (
           <SectionCard key={section.id} section={section} />

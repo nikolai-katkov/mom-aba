@@ -4,7 +4,7 @@ _[Русский](./05-05-placeholder-sections.ru.md)_
 
 # 05-05: Placeholder Sections
 
-Status: Pending
+Status: Done
 
 ## Summary
 
@@ -12,15 +12,15 @@ Add 7 new sections with `isAvailable: false` for future VB-MAPP Level I categori
 
 ## User Acceptance Criteria
 
-- [ ] Sections list shows 9 total sections (2 active, 7 placeholder)
-- [ ] Each placeholder has a distinct icon and "Coming soon" label
-- [ ] Placeholder cards are visually disabled
+- [x] Sections list shows 9 total sections (2 active, 7 placeholder)
+- [x] Each placeholder has a distinct icon and "Coming soon" label
+- [x] Placeholder cards are visually disabled
 
 ## System Acceptance Criteria
 
-- [ ] 7 section constants added to `sections.ts` (both languages) with `isAvailable: false` and `criteria: []`
-- [ ] Stub introductions added to `introduction.ts` for all 7 sections
-- [ ] `SECTION_ICONS` in `SectionsListPage.tsx` includes all 9 section IDs
+- [x] 7 section constants added to `sections.ts` (both languages) with `isAvailable: false` and `criteria: []`
+- [x] Stub introductions added to `introduction.ts` for all 7 sections
+- [x] `SECTION_ICONS` in `SectionsListPage.tsx` includes all 9 section IDs
 
 ## Depends On
 

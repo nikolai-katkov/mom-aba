@@ -5,7 +5,7 @@ _[English](./developmental-milestones-assessment.en.md)_
 # Оценка этапов развития
 
 Связанные истории: [Эпик 01 - Основа оценивания](../roadmap/01-assessment-foundation/_epic.ru.md), [Эпик 05 - Секция Такт](../roadmap/05-tact-section/_epic.ru.md)
-Связанные файлы: `src/types/assessment.ts`, `src/i18n/translations/sections.ts`, `src/i18n/translations/introduction.ts`, `src/i18n/translations/training.ts`
+Связанные файлы: `src/types/assessment.ts`, `src/types/dictionary.ts`, `src/types/vocabulary.ts`, `src/i18n/translations/sections.ts`, `src/i18n/translations/introduction.ts`, `src/i18n/translations/training.ts`, `src/i18n/translations/vocabulary.ts`
 
 ---
 
@@ -160,7 +160,7 @@ _[English](./developmental-milestones-assessment.en.md)_
 
 #### Система наращивания словарного запаса
 
-Структурирована по 27 семантическим категориям: игрушки, еда, одежда, мебель, транспорт, животные, части тела, бытовые предметы, посуда, средства гигиены, природа, погода, цвета, формы, числа, буквы, профессии, музыкальные инструменты, инструменты, спорт, здания, эмоции, члены семьи, ткани, школьные принадлежности, насекомые, динозавры.
+Структурирована по 27 семантическим категориям: игрушки, формы, фрукты, части тела, домашние животные, овощи, лесные животные, одежда, обувь, мебель, посуда, еда, транспорт, школьные принадлежности, электроприборы, спортивный инвентарь, ягоды, домашние птицы, дикие птицы, рыбы, деревья и цветы, головные уборы, профессии, музыкальные инструменты, насекомые, морские обитатели, динозавры.
 
 Уровни сложности по категориям:
 
@@ -256,4 +256,4 @@ _[English](./developmental-milestones-assessment.en.md)_
 
 ---
 
-_Последнее обновление: 2026-04-11_
+_Последнее обновление: 2026-04-12_

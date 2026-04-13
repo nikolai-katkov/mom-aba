@@ -1,4 +1,11 @@
-import { createInitialState, loadAssessmentState, saveAssessmentState } from '../../src/utils'
+import {
+  createInitialDictionaryState,
+  createInitialState,
+  loadAssessmentState,
+  loadDictionaryState,
+  saveAssessmentState,
+  saveDictionaryState,
+} from '../../src/utils'
 
 describe('storage utilities', () => {
   beforeEach(() => {
@@ -37,5 +44,52 @@ describe('storage utilities', () => {
     saveAssessmentState(state)
     const loaded = loadAssessmentState()
     expect(loaded).toEqual(state)
+  })
+})
+
+describe('dictionary storage', () => {
+  beforeEach(() => {
+    localStorage.clear()
+  })
+
+  it('createInitialDictionaryState returns version 1 with empty words', () => {
+    const state = createInitialDictionaryState()
+    expect(state.version).toBe(1)
+    expect(state.onboardingCompleted).toBe(false)
+    expect(state.onboardingLevel).toBeNull()
+    expect(state.words).toEqual({})
+  })
+
+  it('loadDictionaryState returns initial state when localStorage is empty', () => {
+    expect(loadDictionaryState()).toEqual(createInitialDictionaryState())
+  })
+
+  it('loadDictionaryState returns initial state for corrupted JSON', () => {
+    localStorage.setItem('mom-aba-dictionary-state', 'not-json')
+    expect(loadDictionaryState()).toEqual(createInitialDictionaryState())
+  })
+
+  it('loadDictionaryState returns initial state for wrong version', () => {
+    localStorage.setItem('mom-aba-dictionary-state', JSON.stringify({ version: 99, words: {} }))
+    expect(loadDictionaryState()).toEqual(createInitialDictionaryState())
+  })
+
+  it('loadDictionaryState returns initial state for invalid shape', () => {
+    localStorage.setItem('mom-aba-dictionary-state', JSON.stringify({ wrong: true }))
+    expect(loadDictionaryState()).toEqual(createInitialDictionaryState())
+  })
+
+  it('round-trips dictionary state through save and load', () => {
+    const state = createInitialDictionaryState()
+    state.onboardingCompleted = true
+    state.onboardingLevel = 'intermediate'
+    state.words = {
+      'toys:simple:0': {
+        inclusion: 'included',
+        mastery: { mand: 'none', tact: 'selfReport', listenerResponding: 'none', echoic: 'none' },
+      },
+    }
+    saveDictionaryState(state)
+    expect(loadDictionaryState()).toEqual(state)
   })
 })

@@ -1,8 +1,9 @@
 import type { Language } from '../i18n'
-import type { AssessmentState, ColorMode, Theme } from '../types'
+import type { AssessmentState, ColorMode, DictionaryState, Theme } from '../types'
 import { COLOR_MODES, DEFAULT_COLOR_MODE, DEFAULT_THEME, THEMES } from '../types'
 
 const STORAGE_KEY = 'mom-aba-assessment-state'
+const DICTIONARY_KEY = 'mom-aba-dictionary-state'
 const LANGUAGE_KEY = 'mom-aba-language'
 const THEME_KEY = 'mom-aba-theme'
 const COLOR_MODE_KEY = 'mom-aba-color-mode'
@@ -84,4 +85,44 @@ export function loadColorMode(): ColorMode {
 
 export function saveColorMode(mode: ColorMode): void {
   localStorage.setItem(COLOR_MODE_KEY, mode)
+}
+
+// --- Dictionary state ---
+
+function isDictionaryState(value: unknown): value is DictionaryState {
+  if (typeof value !== 'object' || value === null) {
+    return false
+  }
+  const record = value as Record<string, unknown>
+  return record.version === 1 && typeof record.words === 'object' && record.words !== null
+}
+
+export function createInitialDictionaryState(): DictionaryState {
+  return {
+    version: 1,
+    onboardingCompleted: false,
+    onboardingLevel: null,
+    words: {},
+  }
+}
+
+export function loadDictionaryState(): DictionaryState {
+  try {
+    const raw = localStorage.getItem(DICTIONARY_KEY)
+    if (!raw) {
+      return createInitialDictionaryState()
+    }
+
+    const parsed: unknown = JSON.parse(raw)
+    if (isDictionaryState(parsed)) {
+      return parsed
+    }
+    return createInitialDictionaryState()
+  } catch {
+    return createInitialDictionaryState()
+  }
+}
+
+export function saveDictionaryState(state: DictionaryState): void {
+  localStorage.setItem(DICTIONARY_KEY, JSON.stringify(state))
 }

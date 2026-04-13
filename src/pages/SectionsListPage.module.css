@@ -75,6 +75,49 @@
 }
 
 /* ============================================
+ * Dictionary Card — uses Card component, just adds tint + layout
+ * ============================================ */
+
+.dictionaryCardContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.dictionaryIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-lg);
+  background: var(--color-primary-alpha-15);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.dictionaryText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.dictionaryTitle {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  letter-spacing: var(--letter-spacing-snug);
+}
+
+.dictionarySubtitle {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-dim);
+}
+
+/* ============================================
  * Theme: Warm — centered, icon prominent
  * ============================================ */
 :global([data-theme='warm']) .sectionList {
@@ -112,6 +155,10 @@
   pointer-events: none;
 }
 
+:global([data-theme='warm']) .dictionaryIcon {
+  border-radius: var(--radius-organic);
+}
+
 :global([data-theme='warm']) .subtitle {
   text-align: center;
   position: relative;
@@ -131,6 +178,12 @@
 /* ============================================
  * Theme: Soft — centered, playful
  * ============================================ */
+:global([data-theme='soft']) .dictionaryIcon {
+  background: var(--gradient-primary);
+  color: var(--color-text-on-primary);
+  border-radius: var(--radius-full);
+}
+
 :global([data-theme='soft']) .sectionTitle {
   font-size: var(--font-size-xl);
 }
@@ -184,6 +237,15 @@
 /* ============================================
  * Theme: Editorial — typographic grid
  * ============================================ */
+:global([data-theme='editorial']) .dictionaryCard {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-strong);
+}
+
+:global([data-theme='editorial']) .dictionaryIcon {
+  border-radius: var(--radius-xs);
+}
+
 :global([data-theme='editorial']) .sectionTitle {
   font-family: var(--font-family-display);
   font-size: var(--font-size-xl);

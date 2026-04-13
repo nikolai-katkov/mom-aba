@@ -1,13 +1,58 @@
-import { ListRestart, RotateCcw } from 'lucide-react'
+import { Image, ListRestart, RotateCcw } from 'lucide-react'
 import { useCallback, useMemo } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 import type { BreadcrumbItem } from '../components/ui'
 import { Button, PageLayout, ProgressiveDisclosure, VideoPlaceholder } from '../components/ui'
-import { useLanguage } from '../hooks'
+import { useDictionary, useLanguage } from '../hooks'
 import { tProps } from '../i18n'
+import type { VocabularyWord } from '../types'
 import { ROMAN } from '../utils'
 import styles from './TrainingPage.module.css'
+
+function PracticeWordCard({ word }: { word: VocabularyWord }) {
+  return (
+    <div className={styles.wordCard}>
+      <div className={styles.wordImage}>
+        {word.imageUrl ? (
+          <img src={word.imageUrl} alt={word.text} className={styles.wordImg} />
+        ) : (
+          <Image size={24} aria-hidden="true" />
+        )}
+      </div>
+      <span className={styles.wordLabel}>{word.text}</span>
+    </div>
+  )
+}
+
+function PracticeWordsSection({ criterionId }: { criterionId: string }) {
+  const { t } = useLanguage()
+  const { getPracticeWords } = useDictionary()
+
+  const words = useMemo(() => getPracticeWords(criterionId), [getPracticeWords, criterionId])
+
+  if (words.length === 0) {
+    return null
+  }
+
+  return (
+    <section className={styles.practiceSection}>
+      <div className={styles.practiceHeader}>
+        <h3 className={styles.practiceTitle} {...tProps('practiceWords')}>
+          {t('practiceWords')}
+        </h3>
+        <span className={styles.practiceHint} {...tProps('practiceWordsHint')}>
+          {t('practiceWordsHint')}
+        </span>
+      </div>
+      <div className={styles.practiceGrid}>
+        {words.map(word => (
+          <PracticeWordCard key={word.id} word={word} />
+        ))}
+      </div>
+    </section>
+  )
+}
 
 export function TrainingPage() {
   const { sectionId, criterionId } = useParams<{
@@ -70,6 +115,8 @@ export function TrainingPage() {
           </li>
         ))}
       </ol>
+
+      <PracticeWordsSection criterionId={criterion.id} />
 
       <ProgressiveDisclosure>
         <div className={styles.fullGuide}>

@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 
-import { AssessmentProvider } from '../../src/hooks'
+import { AssessmentProvider, DictionaryProvider } from '../../src/hooks'
 import { LanguageProvider } from '../../src/i18n'
-import { SECTIONS_BY_LANGUAGE } from '../../src/i18n/translations'
+import { SECTIONS_BY_LANGUAGE, VOCABULARY_BY_LANGUAGE } from '../../src/i18n/translations'
 import { SectionsListPage } from '../../src/pages/SectionsListPage'
 
 const mockNavigate = vi.fn()
@@ -21,9 +21,11 @@ function renderPage() {
   return render(
     <MemoryRouter>
       <LanguageProvider initialLanguage="en">
-        <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
-          <SectionsListPage />
-        </AssessmentProvider>
+        <DictionaryProvider vocabulary={VOCABULARY_BY_LANGUAGE.en}>
+          <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
+            <SectionsListPage />
+          </AssessmentProvider>
+        </DictionaryProvider>
       </LanguageProvider>
     </MemoryRouter>
   )

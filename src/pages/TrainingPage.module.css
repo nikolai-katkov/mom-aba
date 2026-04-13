@@ -13,7 +13,7 @@
   font-family: var(--font-primary);
   font-size: var(--font-size-sm);
   color: var(--color-text);
-  line-height: 1.6;
+  line-height: var(--leading-relaxed);
   padding-left: var(--space-8);
   position: relative;
 }
@@ -39,7 +39,7 @@
   font-family: var(--font-primary);
   font-size: var(--font-size-sm);
   color: var(--color-text-dim);
-  line-height: 1.7;
+  line-height: var(--leading-loose);
 }
 
 .fullGuide p {
@@ -70,7 +70,103 @@
   font-family: var(--font-primary);
   font-size: var(--font-size-sm);
   color: var(--color-text-dim);
-  line-height: 1.5;
+  line-height: var(--leading-normal);
+}
+
+/* ============================================
+ * Practice Words section
+ * ============================================ */
+
+.practiceSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.practiceHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.practiceTitle {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin: 0;
+  letter-spacing: var(--letter-spacing-snug);
+}
+
+.practiceHint {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+}
+
+.practiceGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.wordCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: 88px;
+}
+
+.wordImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-lg);
+  background: var(--color-elevated);
+  color: var(--color-text-muted);
+  overflow: hidden;
+}
+
+.wordImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wordLabel {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  text-align: center;
+  line-height: var(--leading-tight);
+  word-break: break-word;
+}
+
+/* ============================================
+ * Practice Words — theme overrides
+ * ============================================ */
+
+:global([data-theme='warm']) .wordImage {
+  border-radius: var(--radius-2xl);
+  background: var(--color-primary-alpha-5);
+}
+
+:global([data-theme='soft']) .wordImage {
+  border-radius: var(--radius-full);
+  background: var(--color-primary-alpha-10);
+}
+
+:global([data-theme='editorial']) .wordImage {
+  border-radius: var(--radius-xs);
+}
+
+:global([data-theme='editorial']) .practiceTitle {
+  font-family: var(--font-family-display);
 }
 
 .actions {

@@ -5,7 +5,7 @@ _[Русский](./developmental-milestones-assessment.ru.md)_
 # Developmental Milestones Assessment
 
 Related stories: [Epic 01 - Assessment Foundation](../roadmap/01-assessment-foundation/_epic.en.md), [Epic 05 - Tact Section](../roadmap/05-tact-section/_epic.en.md)
-Related files: `src/types/assessment.ts`, `src/i18n/translations/sections.ts`, `src/i18n/translations/introduction.ts`, `src/i18n/translations/training.ts`
+Related files: `src/types/assessment.ts`, `src/types/dictionary.ts`, `src/types/vocabulary.ts`, `src/i18n/translations/sections.ts`, `src/i18n/translations/introduction.ts`, `src/i18n/translations/training.ts`, `src/i18n/translations/vocabulary.ts`
 
 ---
 
@@ -160,7 +160,7 @@ Used to establish tact responses under conditions of competing stimuli:
 
 #### Vocabulary Building System
 
-Structured across 27 semantic categories: toys, food, clothing, furniture, transport, animals, body parts, household items, kitchenware, hygiene items, nature, weather, colors, shapes, numbers, letters, professions, musical instruments, tools, sports, buildings, emotions, family members, fabrics, school supplies, insects, dinosaurs.
+Structured across 27 semantic categories: toys, shapes, fruits, body parts, domestic animals, vegetables, forest animals, clothing, footwear, furniture, dishes, food, transport, school supplies, appliances, sports equipment, berries, domestic birds, wild birds, fish, trees & flowers, headwear, professions, musical instruments, insects, sea creatures, dinosaurs.
 
 Difficulty levels per category:
 
@@ -256,4 +256,4 @@ Every screen must offer a clear next step. The system always provides a path for
 
 ---
 
-_Last updated: 2026-04-11_
+_Last updated: 2026-04-12_
