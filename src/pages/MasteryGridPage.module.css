@@ -1,0 +1,130 @@
+/* ============================================
+ * MasteryGridPage
+ * ============================================ */
+
+.levelLabel {
+  text-align: center;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.hint {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-3);
+  text-align: center;
+}
+
+.categorySection {
+  margin-bottom: var(--space-4);
+}
+
+.categoryTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  margin: 0 0 var(--space-1);
+}
+
+.categoryIcon {
+  display: flex;
+  align-items: center;
+  color: var(--color-text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: var(--space-2);
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-base);
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+  text-align: center;
+  word-break: break-word;
+}
+
+.tile:hover {
+  border-color: var(--color-primary-alpha-40);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.tile:active {
+  transform: translateY(0);
+}
+
+.tileSelected {
+  border-color: var(--color-primary);
+  background: var(--color-primary-alpha-10);
+  color: var(--color-primary);
+}
+
+.tileSelected:hover {
+  border-color: var(--color-primary-bright);
+}
+
+.tileText {
+  line-height: var(--line-height-tight);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-6);
+}
+
+/* ============================================
+ * Theme: Warm
+ * ============================================ */
+
+:global([data-theme='warm']) .tile {
+  border-radius: var(--radius-lg);
+}
+
+/* ============================================
+ * Theme: Soft
+ * ============================================ */
+
+:global([data-theme='soft']) .tileSelected {
+  background: var(--color-primary-alpha-10);
+  border-color: var(--color-primary);
+}
+
+/* ============================================
+ * Theme: Editorial
+ * ============================================ */
+
+:global([data-theme='editorial']) .tile {
+  border-radius: var(--radius-xs);
+}
+
+:global([data-theme='editorial']) .hint {
+  font-family: var(--font-family-display);
+  letter-spacing: var(--letter-spacing-snug);
+}

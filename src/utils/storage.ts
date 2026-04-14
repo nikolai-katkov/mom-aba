@@ -26,7 +26,7 @@ export function saveLanguage(language: Language): void {
 }
 
 export function createInitialState(): AssessmentState {
-  return { criterionStates: {} }
+  return { levelStates: {} }
 }
 
 export function loadAssessmentState(): AssessmentState {
@@ -37,14 +37,20 @@ export function loadAssessmentState(): AssessmentState {
     }
 
     const parsed: unknown = JSON.parse(raw)
-    if (
-      typeof parsed === 'object' &&
-      parsed !== null &&
-      'criterionStates' in parsed &&
-      typeof (parsed as AssessmentState).criterionStates === 'object'
-    ) {
+    if (typeof parsed !== 'object' || parsed === null) {
+      return createInitialState()
+    }
+
+    // Migrate legacy key: criterionStates -> levelStates
+    const record = parsed as Record<string, unknown>
+    if ('criterionStates' in record && typeof record.criterionStates === 'object') {
+      return { levelStates: record.criterionStates as Record<string, never> }
+    }
+
+    if ('levelStates' in record && typeof record.levelStates === 'object') {
       return parsed as AssessmentState
     }
+
     return createInitialState()
   } catch {
     return createInitialState()
@@ -89,17 +95,52 @@ export function saveColorMode(mode: ColorMode): void {
 
 // --- Dictionary state ---
 
+interface LegacyWordState {
+  inclusion: string
+  mastery: Record<string, string>
+}
+
+function migrateDictionaryV1toV2(state: Record<string, unknown>): DictionaryState {
+  const words = (state.words ?? {}) as Record<string, LegacyWordState>
+  const migratedWords: Record<string, unknown> = {}
+
+  for (const [wordId, wordState] of Object.entries(words)) {
+    const migratedMastery: Record<string, unknown> = {}
+    for (const [operant, tier] of Object.entries(wordState.mastery)) {
+      if (tier === 'none') {
+        migratedMastery[operant] = { tier: 'notStarted', updatedAt: null }
+      } else if (tier === 'selfReport') {
+        migratedMastery[operant] = { tier: 'mastered', updatedAt: Date.now() }
+      } else {
+        migratedMastery[operant] = tier // already migrated or new format
+      }
+    }
+    migratedWords[wordId] = { inclusion: wordState.inclusion, mastery: migratedMastery }
+  }
+
+  return {
+    version: 2,
+    onboardingCompleted: state.onboardingCompleted as boolean,
+    onboardingLevel: state.onboardingLevel as DictionaryState['onboardingLevel'],
+    words: migratedWords as DictionaryState['words'],
+  }
+}
+
 function isDictionaryState(value: unknown): value is DictionaryState {
   if (typeof value !== 'object' || value === null) {
     return false
   }
   const record = value as Record<string, unknown>
-  return record.version === 1 && typeof record.words === 'object' && record.words !== null
+  return (
+    (record.version === 1 || record.version === 2) &&
+    typeof record.words === 'object' &&
+    record.words !== null
+  )
 }
 
 export function createInitialDictionaryState(): DictionaryState {
   return {
-    version: 1,
+    version: 2,
     onboardingCompleted: false,
     onboardingLevel: null,
     words: {},
@@ -114,10 +155,18 @@ export function loadDictionaryState(): DictionaryState {
     }
 
     const parsed: unknown = JSON.parse(raw)
-    if (isDictionaryState(parsed)) {
-      return parsed
+    if (!isDictionaryState(parsed)) {
+      return createInitialDictionaryState()
     }
-    return createInitialDictionaryState()
+
+    // Migrate v1 → v2 (old MasteryTier strings → MasteryRecord objects)
+    if (parsed.version === 1) {
+      const migrated = migrateDictionaryV1toV2(parsed as unknown as Record<string, unknown>)
+      saveDictionaryState(migrated)
+      return migrated
+    }
+
+    return parsed
   } catch {
     return createInitialDictionaryState()
   }

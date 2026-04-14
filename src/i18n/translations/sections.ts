@@ -6,7 +6,7 @@ const MAND_SECTION_EN: Section = {
   title: 'Mand',
   subtitle: 'Requests',
   isAvailable: true,
-  criteria: [
+  levels: [
     {
       id: 'mand-1',
       sectionId: 'mand',
@@ -85,7 +85,7 @@ const TACT_SECTION_EN: Section = {
   title: 'Tact',
   subtitle: 'Labeling',
   isAvailable: true,
-  criteria: [
+  levels: [
     {
       id: 'tact-1',
       sectionId: 'tact',
@@ -159,7 +159,7 @@ const MAND_SECTION_RU: Section = {
   title: 'Манд',
   subtitle: 'Просьбы и запросы',
   isAvailable: true,
-  criteria: [
+  levels: [
     {
       id: 'mand-1',
       sectionId: 'mand',
@@ -247,7 +247,7 @@ const TACT_SECTION_RU: Section = {
   title: 'Такт',
   subtitle: 'Называние',
   isAvailable: true,
-  criteria: [
+  levels: [
     {
       id: 'tact-1',
       sectionId: 'tact',
@@ -323,49 +323,49 @@ const PLACEHOLDER_SECTIONS_EN: Section[] = [
     title: 'Listener Responding',
     subtitle: 'Understanding',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
   {
     id: 'visual-perceptual',
     title: 'Visual Perceptual',
     subtitle: 'Matching & Sorting',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
   {
     id: 'independent-play',
     title: 'Independent Play',
     subtitle: 'Play Skills',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
   {
     id: 'social-behaviour',
     title: 'Social Behaviour',
     subtitle: 'Social Skills',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
   {
     id: 'motor-imitation',
     title: 'Motor Imitation',
     subtitle: 'Movement Copying',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
   {
     id: 'echoic',
     title: 'Echoic',
     subtitle: 'Vocal Imitation',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
   {
     id: 'spontaneous-vocal',
     title: 'Spontaneous Vocal',
     subtitle: 'Vocal Behaviour',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
 ]
 
@@ -375,49 +375,49 @@ const PLACEHOLDER_SECTIONS_RU: Section[] = [
     title: 'Реакция слушателя',
     subtitle: 'Понимание речи',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
   {
     id: 'visual-perceptual',
     title: 'Визуальное восприятие',
     subtitle: 'Сопоставление',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
   {
     id: 'independent-play',
     title: 'Самостоятельная игра',
     subtitle: 'Игровые навыки',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
   {
     id: 'social-behaviour',
     title: 'Социальное поведение',
     subtitle: 'Социальные навыки',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
   {
     id: 'motor-imitation',
     title: 'Моторная имитация',
     subtitle: 'Подражание движениям',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
   {
     id: 'echoic',
     title: 'Эхо реакция',
     subtitle: 'Повторение звуков',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
   {
     id: 'spontaneous-vocal',
     title: 'Спонтанное вокальное поведение',
     subtitle: 'Голосовое поведение',
     isAvailable: false,
-    criteria: [],
+    levels: [],
   },
 ]
 

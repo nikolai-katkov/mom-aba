@@ -1,122 +1,77 @@
-import { Image, ListRestart, RotateCcw } from 'lucide-react'
+import { ListRestart, Play } from 'lucide-react'
 import { useCallback, useMemo } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 import type { BreadcrumbItem } from '../components/ui'
 import { Button, PageLayout, ProgressiveDisclosure } from '../components/ui'
-import { useDictionary, useLanguage } from '../hooks'
+import { useLanguage } from '../hooks'
 import { tProps } from '../i18n'
-import type { VocabularyWord } from '../types'
 import { ROMAN } from '../utils'
 import styles from './TrainingPage.module.css'
 
-function PracticeWordCard({ word }: { word: VocabularyWord }) {
-  return (
-    <div className={styles.wordCard}>
-      <div className={styles.wordImage}>
-        {word.imageUrl ? (
-          <img src={word.imageUrl} alt={word.text} className={styles.wordImg} />
-        ) : (
-          <Image size={24} aria-hidden="true" />
-        )}
-      </div>
-      <span className={styles.wordLabel}>{word.text}</span>
-    </div>
-  )
-}
-
-function PracticeWordsSection({ criterionId }: { criterionId: string }) {
-  const { t } = useLanguage()
-  const { getPracticeWords } = useDictionary()
-
-  const words = useMemo(() => getPracticeWords(criterionId), [getPracticeWords, criterionId])
-
-  if (words.length === 0) {
-    return null
-  }
-
-  return (
-    <section className={styles.practiceSection}>
-      <div className={styles.practiceHeader}>
-        <h3 className={styles.practiceTitle} {...tProps('practiceWords')}>
-          {t('practiceWords')}
-        </h3>
-        <span className={styles.practiceHint} {...tProps('practiceWordsHint')}>
-          {t('practiceWordsHint')}
-        </span>
-      </div>
-      <div className={styles.practiceGrid}>
-        {words.map(word => (
-          <PracticeWordCard key={word.id} word={word} />
-        ))}
-      </div>
-    </section>
-  )
-}
-
 export function TrainingPage() {
-  const { sectionId, criterionId } = useParams<{
+  const { sectionId, levelId } = useParams<{
     sectionId: string
-    criterionId: string
+    levelId: string
   }>()
   const navigate = useNavigate()
   const { t, sections, trainingContent } = useLanguage()
 
   const section = sections.find(s => s.id === sectionId)
-  const criterion = section?.criteria.find(c => c.id === criterionId)
-  const training = criterionId ? trainingContent[criterionId] : undefined
+  const level = section?.levels.find(l => l.id === levelId)
+  const training = levelId ? trainingContent[levelId] : undefined
 
   const sectionSiblings = useMemo(
     () =>
       sections
-        .filter(s => s.isAvailable && s.criteria.length > 0)
+        .filter(s => s.isAvailable && s.levels.length > 0)
         .map(s => ({
           label: s.title,
-          path: `/${s.id}/levels/${s.criteria[0].id}/train`,
+          path: `/${s.id}/levels/${s.levels[0].id}/train`,
           isCurrent: s.id === sectionId,
         })),
     [sections, sectionId]
   )
 
-  const criterionSiblings = useMemo(
+  const levelSiblings = useMemo(
     () =>
       section
-        ? section.criteria.map(c => ({
-            label: `${ROMAN[c.level]} - ${c.title}`,
-            path: `/${section.id}/levels/${c.id}/train`,
-            isCurrent: c.id === criterionId,
+        ? section.levels.map(l => ({
+            label: `${ROMAN[l.level]} - ${l.title}`,
+            path: `/${section.id}/levels/${l.id}/train`,
+            isCurrent: l.id === levelId,
           }))
         : [],
-    [section, criterionId]
+    [section, levelId]
   )
 
   const breadcrumbs: BreadcrumbItem[] = useMemo(
     () =>
-      section && criterion
+      section && level
         ? [
             { label: t('home'), path: '/' },
             { label: section.title, path: `/${section.id}`, siblings: sectionSiblings },
             { label: t('breadcrumbLevels'), path: `/${section.id}/levels` },
             {
-              label: `${ROMAN[criterion.level]} - ${criterion.title}`,
-              path: `/${section.id}/levels/${criterion.id}`,
-              siblings: criterionSiblings,
+              label: `${ROMAN[level.level]} - ${level.title}`,
+              path: `/${section.id}/levels/${level.id}`,
+              siblings: levelSiblings,
             },
             {
               label: t('breadcrumbTraining'),
-              path: `/${section.id}/levels/${criterion.id}/train`,
+              path: `/${section.id}/levels/${level.id}/train`,
             },
           ]
         : [],
-    [t, section, criterion, sectionSiblings, criterionSiblings]
+    [t, section, level, sectionSiblings, levelSiblings]
   )
 
-  const handleRetry = useCallback(() => {
-    if (!section || !criterion) {
+  const handleStartPractice = useCallback(() => {
+    if (!section || !level) {
       return
     }
-    navigate(`/${section.id}/levels/${criterion.id}`)
-  }, [navigate, section, criterion])
+    navigate(`/${section.id}/levels/${level.id}/practice`)
+  }, [navigate, section, level])
 
   const handleBack = useCallback(() => {
     if (!section) {
@@ -125,12 +80,12 @@ export function TrainingPage() {
     navigate(`/${section.id}/levels`)
   }, [navigate, section])
 
-  if (!section || !criterion || !training) {
+  if (!section || !level || !training) {
     return <Navigate to={sectionId ? `/${sectionId}/levels` : '/'} replace />
   }
 
   return (
-    <PageLayout title={`${ROMAN[criterion.level]} - ${criterion.title}`} breadcrumbs={breadcrumbs}>
+    <PageLayout title={`${ROMAN[level.level]} - ${level.title}`} breadcrumbs={breadcrumbs}>
       <ol className={styles.stepList}>
         {training.shortGuide.map(step => (
           <li key={step.stepNumber} className={styles.stepItem}>
@@ -138,8 +93,6 @@ export function TrainingPage() {
           </li>
         ))}
       </ol>
-
-      <PracticeWordsSection criterionId={criterion.id} />
 
       <ProgressiveDisclosure>
         <div className={styles.fullGuide}>
@@ -163,8 +116,8 @@ export function TrainingPage() {
       </ProgressiveDisclosure>
 
       <div className={styles.actions}>
-        <Button onClick={handleRetry} {...tProps('retryAssessment')}>
-          <RotateCcw size={16} aria-hidden="true" /> {t('retryAssessment')}
+        <Button onClick={handleStartPractice} {...tProps('startPractice')}>
+          <Play size={16} aria-hidden="true" /> {t('startPractice')}
         </Button>
         <Button variant="ghost" onClick={handleBack} {...tProps('backToList')}>
           <ListRestart size={16} aria-hidden="true" /> {t('backToList')}

@@ -289,3 +289,24 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================
+ * Debug utilities
+ * ============================================ */
+
+.debugLink {
+  display: block;
+  margin: var(--space-12) auto var(--space-4);
+  background: none;
+  border: none;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-2xs, 10px);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity var(--transition-fast);
+}
+
+.debugLink:hover {
+  opacity: 1;
+}

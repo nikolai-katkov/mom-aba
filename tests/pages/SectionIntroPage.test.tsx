@@ -53,15 +53,9 @@ describe('SectionIntroPage', () => {
     expect(byT('showLess')).toHaveAttribute('aria-expanded', 'true')
   })
 
-  it('navigates to criteria list when Start is clicked', async () => {
+  it('navigates to levels list when Start is clicked', async () => {
     renderPage()
     await userEvent.click(byT('start'))
-    expect(mockNavigate).toHaveBeenCalledWith('/mand/levels')
-  })
-
-  it('navigates to criteria list when Skip is clicked', async () => {
-    renderPage()
-    await userEvent.click(byT('skip'))
     expect(mockNavigate).toHaveBeenCalledWith('/mand/levels')
   })
 

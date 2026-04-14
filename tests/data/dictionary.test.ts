@@ -4,7 +4,7 @@ import { getVocabularyWord } from '../../src/hooks/useDictionary'
 import { VOCABULARY_BY_LANGUAGE } from '../../src/i18n/translations'
 import {
   EVERYDAY_CATEGORY_IDS,
-  getCriterionCategoryIds,
+  getLevelCategoryIds,
   getWordId,
   MOTIVATING_CATEGORY_IDS,
   parseWordId,
@@ -49,35 +49,35 @@ describe('Word ID helpers', () => {
   })
 })
 
-describe('getCriterionCategoryIds', () => {
+describe('getLevelCategoryIds', () => {
   it('returns motivating categories for tact levels 1-2', () => {
-    expect(getCriterionCategoryIds('tact-1')).toBe(MOTIVATING_CATEGORY_IDS)
-    expect(getCriterionCategoryIds('tact-2')).toBe(MOTIVATING_CATEGORY_IDS)
+    expect(getLevelCategoryIds('tact-1')).toBe(MOTIVATING_CATEGORY_IDS)
+    expect(getLevelCategoryIds('tact-2')).toBe(MOTIVATING_CATEGORY_IDS)
   })
 
   it('returns motivating categories for mand levels 1-2', () => {
-    expect(getCriterionCategoryIds('mand-1')).toBe(MOTIVATING_CATEGORY_IDS)
-    expect(getCriterionCategoryIds('mand-2')).toBe(MOTIVATING_CATEGORY_IDS)
+    expect(getLevelCategoryIds('mand-1')).toBe(MOTIVATING_CATEGORY_IDS)
+    expect(getLevelCategoryIds('mand-2')).toBe(MOTIVATING_CATEGORY_IDS)
   })
 
   it('returns everyday categories for tact level 3', () => {
-    expect(getCriterionCategoryIds('tact-3')).toBe(EVERYDAY_CATEGORY_IDS)
+    expect(getLevelCategoryIds('tact-3')).toBe(EVERYDAY_CATEGORY_IDS)
   })
 
   it('returns null (all categories) for tact levels 4-5', () => {
-    expect(getCriterionCategoryIds('tact-4')).toBeNull()
-    expect(getCriterionCategoryIds('tact-5')).toBeNull()
+    expect(getLevelCategoryIds('tact-4')).toBeNull()
+    expect(getLevelCategoryIds('tact-5')).toBeNull()
   })
 
   it('returns null (all categories) for mand levels 3-5', () => {
-    expect(getCriterionCategoryIds('mand-3')).toBeNull()
-    expect(getCriterionCategoryIds('mand-4')).toBeNull()
-    expect(getCriterionCategoryIds('mand-5')).toBeNull()
+    expect(getLevelCategoryIds('mand-3')).toBeNull()
+    expect(getLevelCategoryIds('mand-4')).toBeNull()
+    expect(getLevelCategoryIds('mand-5')).toBeNull()
   })
 
   it('returns null for unsupported sections', () => {
-    expect(getCriterionCategoryIds('echoic-1')).toBeNull()
-    expect(getCriterionCategoryIds('listener-responding-1')).toBeNull()
+    expect(getLevelCategoryIds('echoic-1')).toBeNull()
+    expect(getLevelCategoryIds('listener-responding-1')).toBeNull()
   })
 })
 

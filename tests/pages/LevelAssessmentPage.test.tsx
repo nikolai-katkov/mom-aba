@@ -5,7 +5,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { AssessmentProvider, ThemeProvider } from '../../src/hooks'
 import { LanguageProvider } from '../../src/i18n'
 import { SECTIONS_BY_LANGUAGE } from '../../src/i18n/translations'
-import { CriterionAssessmentPage } from '../../src/pages/CriterionAssessmentPage'
+import { LevelAssessmentPage } from '../../src/pages/LevelAssessmentPage'
 import { byT } from '../helpers/byT'
 
 const mockNavigate = vi.fn()
@@ -18,15 +18,15 @@ vi.mock('react-router-dom', async () => {
   }
 })
 
-function renderPage(sectionId = 'mand', criterionId = 'mand-1') {
+function renderPage(sectionId = 'mand', levelId = 'mand-1') {
   return render(
-    <MemoryRouter initialEntries={[`/${sectionId}/levels/${criterionId}`]}>
+    <MemoryRouter initialEntries={[`/${sectionId}/levels/${levelId}`]}>
       <ThemeProvider initialTheme="warm" initialColorMode="light">
         <LanguageProvider initialLanguage="en">
           <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
             <Routes>
-              <Route path="/:sectionId/levels/:criterionId" element={<CriterionAssessmentPage />} />
-              <Route path="/:sectionId/levels" element={<div>Criteria List</div>} />
+              <Route path="/:sectionId/levels/:levelId" element={<LevelAssessmentPage />} />
+              <Route path="/:sectionId/levels" element={<div>Levels List</div>} />
               <Route path="/" element={<div>Home</div>} />
             </Routes>
           </AssessmentProvider>
@@ -36,7 +36,7 @@ function renderPage(sectionId = 'mand', criterionId = 'mand-1') {
   )
 }
 
-describe('CriterionAssessmentPage', () => {
+describe('LevelAssessmentPage', () => {
   beforeEach(() => {
     localStorage.clear()
     mockNavigate.mockClear()
@@ -47,10 +47,10 @@ describe('CriterionAssessmentPage', () => {
     expect(byT('whatToLookFor')).toBeInTheDocument()
   })
 
-  it('navigates to criteria list when Yes is clicked', async () => {
+  it('navigates to mastery grid when Yes is clicked', async () => {
     renderPage()
     await userEvent.click(byT('yes'))
-    expect(mockNavigate).toHaveBeenCalledWith('/mand/levels')
+    expect(mockNavigate).toHaveBeenCalledWith('/mand/levels/mand-1/mastery')
   })
 
   it('navigates to training when No is clicked', async () => {
@@ -59,8 +59,8 @@ describe('CriterionAssessmentPage', () => {
     expect(mockNavigate).toHaveBeenCalledWith('/mand/levels/mand-1/train')
   })
 
-  it('redirects for invalid criterion', () => {
+  it('redirects for invalid level', () => {
     renderPage('mand', 'nonexistent')
-    expect(screen.getByText('Criteria List')).toBeInTheDocument()
+    expect(screen.getByText('Levels List')).toBeInTheDocument()
   })
 })

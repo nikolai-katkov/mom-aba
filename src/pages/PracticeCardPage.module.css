@@ -1,0 +1,134 @@
+/* ============================================
+ * PracticeCardPage
+ * ============================================ */
+
+.progress {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+.cardStack {
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+  margin-bottom: var(--space-8);
+}
+
+/* ============================================
+ * Card content
+ * ============================================ */
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-8) var(--space-6);
+  gap: var(--space-4);
+  min-height: 280px;
+}
+
+.wordArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+}
+
+.wordText {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  text-align: center;
+  word-break: break-word;
+  line-height: var(--line-height-tight);
+}
+
+.promptBrief {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin: 0;
+  line-height: var(--leading-relaxed);
+}
+
+.detailToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: var(--space-1);
+  border-radius: var(--radius-full);
+  transition: color var(--transition-fast);
+}
+
+.detailToggle:hover {
+  color: var(--color-primary);
+}
+
+.promptDetail {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-dim);
+  text-align: center;
+  margin: 0;
+  line-height: var(--leading-relaxed);
+  padding: 0 var(--space-4);
+}
+
+/* ============================================
+ * Action buttons
+ * ============================================ */
+
+.actions {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+ * Theme: Warm
+ * ============================================ */
+
+:global([data-theme='warm']) .wordText {
+  font-family: var(--font-family-display);
+}
+
+/* ============================================
+ * Theme: Editorial
+ * ============================================ */
+
+:global([data-theme='editorial']) .wordText {
+  font-family: var(--font-family-display);
+  letter-spacing: var(--letter-spacing-snug);
+}
+
+:global([data-theme='editorial']) .progress {
+  font-family: var(--font-family-display);
+}
+
+/* ============================================
+ * Responsive
+ * ============================================ */
+
+@media (max-width: 480px) {
+  .cardContent {
+    padding: var(--space-6) var(--space-4);
+    min-height: 240px;
+  }
+
+  .wordText {
+    font-size: var(--font-size-2xl);
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

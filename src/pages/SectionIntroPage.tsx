@@ -15,7 +15,7 @@ export function SectionIntroPage() {
   const section = sections.find(s => s.id === sectionId)
   const introduction = sectionId ? sectionIntroductions[sectionId] : undefined
 
-  const criteriaPath = `/${sectionId}/levels`
+  const levelsPath = `/${sectionId}/levels`
 
   const sectionSiblings = useMemo(
     () =>
@@ -37,12 +37,8 @@ export function SectionIntroPage() {
   )
 
   const handleStart = useCallback(() => {
-    navigate(criteriaPath)
-  }, [navigate, criteriaPath])
-
-  const handleSkip = useCallback(() => {
-    navigate(criteriaPath)
-  }, [navigate, criteriaPath])
+    navigate(levelsPath)
+  }, [navigate, levelsPath])
 
   const videos = introduction?.videos
   const [activeVideoIndex, setActiveVideoIndex] = useState('0')
@@ -107,9 +103,6 @@ export function SectionIntroPage() {
       <div className={styles.actions}>
         <Button onClick={handleStart} {...tProps('start')}>
           {t('start')}
-        </Button>
-        <Button variant="ghost" onClick={handleSkip} {...tProps('skip')}>
-          {t('skip')}
         </Button>
       </div>
     </PageLayout>

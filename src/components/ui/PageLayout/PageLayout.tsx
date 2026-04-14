@@ -9,11 +9,16 @@ interface PageLayoutProps {
   title?: string
   breadcrumbs?: BreadcrumbItem[]
   wide?: boolean
+  extraWide?: boolean
 }
 
-export function PageLayout({ children, title, breadcrumbs, wide }: PageLayoutProps) {
+export function PageLayout({ children, title, breadcrumbs, wide, extraWide }: PageLayoutProps) {
   return (
-    <main className={[styles.layout, wide && styles.wide].filter(Boolean).join(' ')}>
+    <main
+      className={[styles.layout, wide && styles.wide, extraWide && styles.extraWide]
+        .filter(Boolean)
+        .join(' ')}
+    >
       <header className={styles.header}>
         {breadcrumbs && breadcrumbs.length > 0 ? <Breadcrumbs items={breadcrumbs} /> : null}
         {title ? <h1 className={styles.title}>{title}</h1> : null}

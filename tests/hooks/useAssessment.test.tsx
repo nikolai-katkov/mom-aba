@@ -25,48 +25,48 @@ describe('useAssessment', () => {
     spy.mockRestore()
   })
 
-  it('returns NotStarted for unknown criterion', () => {
+  it('returns NotStarted for unknown level', () => {
     const { result } = renderHook(() => useAssessment(), {
       wrapper: createWrapper(),
     })
-    const state = result.current.getCriterionState('unknown-id')
+    const state = result.current.getLevelState('unknown-id')
     expect(state).toEqual({ status: 'NotStarted', score: 0 })
   })
 
-  it('setCriterionResult with score 1 sets status to Completed', () => {
+  it('setLevelResult with score 1 sets status to Completed', () => {
     const { result } = renderHook(() => useAssessment(), {
       wrapper: createWrapper(),
     })
 
     act(() => {
-      result.current.setCriterionResult('mand-1', 1)
+      result.current.setLevelResult('mand-1', 1)
     })
 
-    const state = result.current.getCriterionState('mand-1')
+    const state = result.current.getLevelState('mand-1')
     expect(state).toEqual({ status: 'Completed', score: 1 })
   })
 
-  it('setCriterionResult with score 0 sets status to InProgress', () => {
+  it('setLevelResult with score 0 sets status to InProgress', () => {
     const { result } = renderHook(() => useAssessment(), {
       wrapper: createWrapper(),
     })
 
     act(() => {
-      result.current.setCriterionResult('mand-1', 0)
+      result.current.setLevelResult('mand-1', 0)
     })
 
-    const state = result.current.getCriterionState('mand-1')
+    const state = result.current.getLevelState('mand-1')
     expect(state).toEqual({ status: 'InProgress', score: 0 })
   })
 
-  it('getSectionProgress correctly counts completed criteria', () => {
+  it('getSectionProgress correctly counts completed levels', () => {
     const { result } = renderHook(() => useAssessment(), {
       wrapper: createWrapper(),
     })
 
     act(() => {
-      result.current.setCriterionResult('mand-1', 1)
-      result.current.setCriterionResult('mand-3', 1)
+      result.current.setLevelResult('mand-1', 1)
+      result.current.setLevelResult('mand-3', 1)
     })
 
     const progress = result.current.getSectionProgress('mand')
@@ -77,7 +77,7 @@ describe('useAssessment', () => {
     })
   })
 
-  it('getSectionProgress returns NotStarted when no criteria assessed', () => {
+  it('getSectionProgress returns NotStarted when no levels assessed', () => {
     const { result } = renderHook(() => useAssessment(), {
       wrapper: createWrapper(),
     })
@@ -90,17 +90,17 @@ describe('useAssessment', () => {
     })
   })
 
-  it('getSectionProgress returns Completed when all criteria done', () => {
+  it('getSectionProgress returns Completed when all levels done', () => {
     const { result } = renderHook(() => useAssessment(), {
       wrapper: createWrapper(),
     })
 
     act(() => {
-      result.current.setCriterionResult('mand-1', 1)
-      result.current.setCriterionResult('mand-2', 1)
-      result.current.setCriterionResult('mand-3', 1)
-      result.current.setCriterionResult('mand-4', 1)
-      result.current.setCriterionResult('mand-5', 1)
+      result.current.setLevelResult('mand-1', 1)
+      result.current.setLevelResult('mand-2', 1)
+      result.current.setLevelResult('mand-3', 1)
+      result.current.setLevelResult('mand-4', 1)
+      result.current.setLevelResult('mand-5', 1)
     })
 
     const progress = result.current.getSectionProgress('mand')
@@ -111,13 +111,13 @@ describe('useAssessment', () => {
     })
   })
 
-  it('getSectionProgress returns InProgress when any criterion is InProgress', () => {
+  it('getSectionProgress returns InProgress when any level is InProgress', () => {
     const { result } = renderHook(() => useAssessment(), {
       wrapper: createWrapper(),
     })
 
     act(() => {
-      result.current.setCriterionResult('mand-1', 0)
+      result.current.setLevelResult('mand-1', 0)
     })
 
     const progress = result.current.getSectionProgress('mand')

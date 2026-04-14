@@ -24,9 +24,9 @@ export interface UiTranslations {
   // SectionIntroPage
   start: string
   skip: string
-  // CriteriaListPage (uses interpolation: {completed}, {total})
+  // LevelsListPage (uses interpolation: {completed}, {total})
   completedOfTotal: string
-  // CriterionAssessmentPage
+  // LevelAssessmentPage
   whatToLookFor: string
   examplesPrefix: string
   yes: string
@@ -64,6 +64,18 @@ export interface UiTranslations {
   onboardingIntermediateDesc: string
   onboardingAdvanced: string
   onboardingAdvancedDesc: string
+  // MasteryGridPage
+  masteryGridTitle: string
+  masteryGridHint: string
+  masteryDone: string
+  allMastered: string
+  // PracticeCardPage
+  startPractice: string
+  saidIt: string
+  neededHelp: string
+  notYet: string
+  cardProgress: string
+  practiceTitle: string
   // Controls pill
   selectTheme: string
   selectLanguage: string

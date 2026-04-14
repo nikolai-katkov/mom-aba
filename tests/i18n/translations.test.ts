@@ -26,18 +26,18 @@ describe('translation completeness', () => {
     expect(enIds).toEqual(ruIds)
   })
 
-  it('has the same criterion IDs in both languages', () => {
-    const enIds = SECTIONS_BY_LANGUAGE.en.flatMap(s => s.criteria.map(c => c.id))
-    const ruIds = SECTIONS_BY_LANGUAGE.ru.flatMap(s => s.criteria.map(c => c.id))
+  it('has the same level IDs in both languages', () => {
+    const enIds = SECTIONS_BY_LANGUAGE.en.flatMap(s => s.levels.map(l => l.id))
+    const ruIds = SECTIONS_BY_LANGUAGE.ru.flatMap(s => s.levels.map(l => l.id))
     expect(enIds).toEqual(ruIds)
   })
 
-  it('has the same number of criteria per section in both languages', () => {
+  it('has the same number of levels per section in both languages', () => {
     for (let i = 0; i < SECTIONS_BY_LANGUAGE.en.length; i++) {
       expect(
-        SECTIONS_BY_LANGUAGE.en[i].criteria.length,
+        SECTIONS_BY_LANGUAGE.en[i].levels.length,
         `section ${SECTIONS_BY_LANGUAGE.en[i].id}`
-      ).toBe(SECTIONS_BY_LANGUAGE.ru[i].criteria.length)
+      ).toBe(SECTIONS_BY_LANGUAGE.ru[i].levels.length)
     }
   })
 
@@ -62,13 +62,13 @@ describe('translation completeness', () => {
     }
   })
 
-  it('has non-empty criterion fields in both languages', () => {
+  it('has non-empty level fields in both languages', () => {
     for (const lang of ['en', 'ru'] as const) {
       for (const section of SECTIONS_BY_LANGUAGE[lang]) {
-        for (const criterion of section.criteria) {
-          expect(criterion.title, `${lang} ${criterion.id} title`).toBeTruthy()
-          expect(criterion.description, `${lang} ${criterion.id} description`).toBeTruthy()
-          expect(criterion.question, `${lang} ${criterion.id} question`).toBeTruthy()
+        for (const level of section.levels) {
+          expect(level.title, `${lang} ${level.id} title`).toBeTruthy()
+          expect(level.description, `${lang} ${level.id} description`).toBeTruthy()
+          expect(level.question, `${lang} ${level.id} question`).toBeTruthy()
         }
       }
     }

@@ -5,7 +5,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { AssessmentProvider } from '../../src/hooks'
 import { LanguageProvider } from '../../src/i18n'
 import { SECTIONS_BY_LANGUAGE } from '../../src/i18n/translations'
-import { CriteriaListPage } from '../../src/pages/CriteriaListPage'
+import { LevelsListPage } from '../../src/pages/LevelsListPage'
 import { byT } from '../helpers/byT'
 
 const mockNavigate = vi.fn()
@@ -24,7 +24,7 @@ function renderPage(sectionId = 'mand') {
       <LanguageProvider initialLanguage="en">
         <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
           <Routes>
-            <Route path="/:sectionId/levels" element={<CriteriaListPage />} />
+            <Route path="/:sectionId/levels" element={<LevelsListPage />} />
             <Route path="/" element={<div>Home</div>} />
           </Routes>
         </AssessmentProvider>
@@ -33,13 +33,13 @@ function renderPage(sectionId = 'mand') {
   )
 }
 
-describe('CriteriaListPage', () => {
+describe('LevelsListPage', () => {
   beforeEach(() => {
     localStorage.clear()
     mockNavigate.mockClear()
   })
 
-  it('renders 5 criterion cards', () => {
+  it('renders 5 level cards', () => {
     renderPage()
     const statusBadges = document.querySelectorAll('[data-t="statusNotStarted"]')
     expect(statusBadges).toHaveLength(5)
@@ -50,11 +50,11 @@ describe('CriteriaListPage', () => {
     expect(byT('completedOfTotal')).toBeInTheDocument()
   })
 
-  it('navigates to assessment when a criterion is clicked', async () => {
+  it('navigates to assessment when a level is clicked', async () => {
     renderPage()
     const allButtons = screen.getAllByRole('button')
-    const firstCriterionCard = allButtons[0]
-    await userEvent.click(firstCriterionCard)
+    const firstLevelCard = allButtons[0]
+    await userEvent.click(firstLevelCard)
     expect(mockNavigate).toHaveBeenCalledWith('/mand/levels/mand-1')
   })
 

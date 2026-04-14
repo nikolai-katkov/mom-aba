@@ -1,0 +1,60 @@
+/* ============================================
+ * SwipeCard
+ * ============================================ */
+
+.card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  user-select: none;
+}
+
+.cardActive {
+  cursor: grab;
+}
+
+.cardActive:active {
+  cursor: grabbing;
+}
+
+/* ============================================
+ * Theme: Warm
+ * ============================================ */
+
+:global([data-theme='warm']) .card {
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ============================================
+ * Theme: Soft
+ * ============================================ */
+
+:global([data-theme='soft']) .card {
+  border-radius: var(--radius-2xl);
+}
+
+/* ============================================
+ * Theme: Editorial
+ * ============================================ */
+
+:global([data-theme='editorial']) .card {
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+}
+
+/* ============================================
+ * Reduced motion
+ * ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none !important;
+  }
+}

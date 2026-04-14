@@ -2,7 +2,7 @@ import type { WordDifficulty } from './vocabulary'
 
 export type VerbalOperant = 'mand' | 'tact' | 'listenerResponding' | 'echoic'
 
-export type MasteryTier = 'none' | 'selfReport'
+export type MasteryTier = 'notStarted' | 'emerging' | 'mastered'
 
 export type WordInclusionStatus = 'included' | 'excluded'
 
@@ -10,11 +10,16 @@ export type OnboardingLevel = 'beginner' | 'intermediate' | 'advanced'
 
 export const VERBAL_OPERANTS: VerbalOperant[] = ['mand', 'tact', 'listenerResponding', 'echoic']
 
-export const DEFAULT_MASTERY: Record<VerbalOperant, MasteryTier> = {
-  mand: 'none',
-  tact: 'none',
-  listenerResponding: 'none',
-  echoic: 'none',
+export interface MasteryRecord {
+  tier: MasteryTier
+  updatedAt: number | null
+}
+
+export const DEFAULT_MASTERY: Record<VerbalOperant, MasteryRecord> = {
+  mand: { tier: 'notStarted', updatedAt: null },
+  tact: { tier: 'notStarted', updatedAt: null },
+  listenerResponding: { tier: 'notStarted', updatedAt: null },
+  echoic: { tier: 'notStarted', updatedAt: null },
 }
 
 /** Categories that are naturally motivating for early learners (Tact Levels 1-2). */
@@ -29,11 +34,11 @@ export const MOTIVATING_CATEGORY_IDS: string[] = [
 
 export interface WordState {
   inclusion: WordInclusionStatus
-  mastery: Record<VerbalOperant, MasteryTier>
+  mastery: Record<VerbalOperant, MasteryRecord>
 }
 
 export interface DictionaryState {
-  version: 1
+  version: 1 | 2
   onboardingCompleted: boolean
   onboardingLevel: OnboardingLevel | null
   words: Record<string, WordState>
@@ -57,14 +62,14 @@ export const EVERYDAY_CATEGORY_IDS: string[] = [
 ]
 
 /**
- * Returns which category IDs are relevant for a given criterion.
+ * Returns which category IDs are relevant for a given level.
  * - tact-1, tact-2, mand-1, mand-2: motivating categories (favorites, animals, food)
  * - tact-3: everyday mundane categories (non-preferred objects)
  * - tact-4, tact-5, mand-3..5: all categories
- * Returns null if the criterion has no vocabulary association.
+ * Returns null if the level has no vocabulary association.
  */
-export function getCriterionCategoryIds(criterionId: string): string[] | null {
-  const [sectionId, levelStr] = criterionId.split('-')
+export function getLevelCategoryIds(levelId: string): string[] | null {
+  const [sectionId, levelStr] = levelId.split('-')
   const level = Number(levelStr)
 
   if (sectionId === 'tact' || sectionId === 'mand') {
@@ -106,4 +111,15 @@ export function parseWordId(
 
 function isWordDifficulty(value: string): value is WordDifficulty {
   return value === 'simple' || value === 'medium' || value === 'complex'
+}
+
+/** Maps section IDs to their verbal operant. Returns null for unsupported sections. */
+export function getOperantForSection(sectionId: string): VerbalOperant | null {
+  if (sectionId === 'mand') {
+    return 'mand'
+  }
+  if (sectionId === 'tact') {
+    return 'tact'
+  }
+  return null
 }

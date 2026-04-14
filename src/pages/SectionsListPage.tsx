@@ -14,7 +14,7 @@ import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Card, PageLayout, ProgressBar, StatusBadge } from '../components/ui'
-import { useAssessment, useLanguage } from '../hooks'
+import { useAssessment, useDictionary, useLanguage } from '../hooks'
 import { tProps } from '../i18n'
 import type { Section } from '../types'
 import styles from './SectionsListPage.module.css'
@@ -102,6 +102,21 @@ function DictionaryCard() {
   )
 }
 
+function ResetOnboardingLink() {
+  const { resetDictionary } = useDictionary()
+
+  const handleClick = useCallback(() => {
+    resetDictionary()
+    window.location.reload()
+  }, [resetDictionary])
+
+  return (
+    <button type="button" className={styles.debugLink} onClick={handleClick}>
+      Reset onboarding
+    </button>
+  )
+}
+
 export function SectionsListPage() {
   const { t, sections } = useLanguage()
 
@@ -116,6 +131,7 @@ export function SectionsListPage() {
           <SectionCard key={section.id} section={section} />
         ))}
       </div>
+      <ResetOnboardingLink />
     </PageLayout>
   )
 }

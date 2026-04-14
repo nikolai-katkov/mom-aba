@@ -1,23 +1,23 @@
 import type { ReactNode } from 'react'
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 
-import type { AssessmentState, CriterionState, CriterionStatus, Section } from '../types'
+import type { AssessmentState, LevelState, LevelStatus, Section } from '../types'
 import { loadAssessmentState, saveAssessmentState } from '../utils'
 
 interface AssessmentContextValue {
-  getCriterionState: (criterionId: string) => CriterionState
-  setCriterionResult: (criterionId: string, score: number) => void
+  getLevelState: (levelId: string) => LevelState
+  setLevelResult: (levelId: string, score: number) => void
   getSectionProgress: (sectionId: string) => {
     completed: number
     total: number
-    status: CriterionStatus
+    status: LevelStatus
   }
 }
 
 const AssessmentContext = createContext<AssessmentContextValue | null>(null)
 AssessmentContext.displayName = 'AssessmentContext'
 
-const DEFAULT_CRITERION_STATE: CriterionState = {
+const DEFAULT_LEVEL_STATE: LevelState = {
   status: 'NotStarted',
   score: 0,
 }
@@ -34,18 +34,17 @@ export function AssessmentProvider({ children, sections }: AssessmentProviderPro
     saveAssessmentState(state)
   }, [state])
 
-  const getCriterionState = useCallback(
-    (criterionId: string): CriterionState =>
-      state.criterionStates[criterionId] ?? DEFAULT_CRITERION_STATE,
-    [state.criterionStates]
+  const getLevelState = useCallback(
+    (levelId: string): LevelState => state.levelStates[levelId] ?? DEFAULT_LEVEL_STATE,
+    [state.levelStates]
   )
 
-  const setCriterionResult = useCallback((criterionId: string, score: number) => {
+  const setLevelResult = useCallback((levelId: string, score: number) => {
     setState(previous => ({
       ...previous,
-      criterionStates: {
-        ...previous.criterionStates,
-        [criterionId]: {
+      levelStates: {
+        ...previous.levelStates,
+        [levelId]: {
           score,
           status: score > 0 ? 'Completed' : 'InProgress',
         },
@@ -54,26 +53,26 @@ export function AssessmentProvider({ children, sections }: AssessmentProviderPro
   }, [])
 
   const getSectionProgress = useCallback(
-    (sectionId: string): { completed: number; total: number; status: CriterionStatus } => {
+    (sectionId: string): { completed: number; total: number; status: LevelStatus } => {
       const section = sections.find(s => s.id === sectionId)
       if (!section) {
         return { completed: 0, total: 0, status: 'NotStarted' }
       }
 
-      const total = section.criteria.length
+      const total = section.levels.length
       let completedCount = 0
       let hasInProgress = false
 
-      for (const criterion of section.criteria) {
-        const criterionState = state.criterionStates[criterion.id] as CriterionState | undefined
-        if (criterionState?.status === 'Completed') {
+      for (const level of section.levels) {
+        const levelState = state.levelStates[level.id] as LevelState | undefined
+        if (levelState?.status === 'Completed') {
           completedCount++
-        } else if (criterionState?.status === 'InProgress') {
+        } else if (levelState?.status === 'InProgress') {
           hasInProgress = true
         }
       }
 
-      let status: CriterionStatus = 'NotStarted'
+      let status: LevelStatus = 'NotStarted'
       if (completedCount === total) {
         status = 'Completed'
       } else if (completedCount > 0 || hasInProgress) {
@@ -82,12 +81,12 @@ export function AssessmentProvider({ children, sections }: AssessmentProviderPro
 
       return { completed: completedCount, total, status }
     },
-    [state.criterionStates, sections]
+    [state.levelStates, sections]
   )
 
   const value = useMemo(
-    () => ({ getCriterionState, setCriterionResult, getSectionProgress }),
-    [getCriterionState, setCriterionResult, getSectionProgress]
+    () => ({ getLevelState, setLevelResult, getSectionProgress }),
+    [getLevelState, setLevelResult, getSectionProgress]
   )
 
   return <AssessmentContext.Provider value={value}>{children}</AssessmentContext.Provider>

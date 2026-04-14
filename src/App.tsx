@@ -10,12 +10,13 @@ import {
   useLanguage,
 } from './hooks'
 import { LanguageProvider } from './i18n'
-import { CriteriaListPage } from './pages/CriteriaListPage'
-import { CriterionAssessmentPage } from './pages/CriterionAssessmentPage'
-import { DictionaryCategoriesPage } from './pages/DictionaryCategoriesPage'
-import { DictionaryCategoryDetailPage } from './pages/DictionaryCategoryDetailPage'
+import { DictionaryPage } from './pages/DictionaryPage'
+import { LevelAssessmentPage } from './pages/LevelAssessmentPage'
+import { LevelsListPage } from './pages/LevelsListPage'
+import { MasteryGridPage } from './pages/MasteryGridPage'
 import { NotFound } from './pages/NotFound'
 import { OnboardingPage } from './pages/OnboardingPage'
+import { PracticeCardPage } from './pages/PracticeCardPage'
 import { SectionIntroPage } from './pages/SectionIntroPage'
 import { SectionsListPage } from './pages/SectionsListPage'
 import { TrainingPage } from './pages/TrainingPage'
@@ -39,12 +40,13 @@ function AppRoutes() {
         <AssessmentProvider sections={sections}>
           <Routes>
             <Route path="/" element={<SectionsListPage />} />
-            <Route path="/dictionary" element={<DictionaryCategoriesPage />} />
-            <Route path="/dictionary/:categoryId" element={<DictionaryCategoryDetailPage />} />
+            <Route path="/dictionary/:categoryId?" element={<DictionaryPage />} />
             <Route path="/:sectionId" element={<SectionIntroPage />} />
-            <Route path="/:sectionId/levels" element={<CriteriaListPage />} />
-            <Route path="/:sectionId/levels/:criterionId" element={<CriterionAssessmentPage />} />
-            <Route path="/:sectionId/levels/:criterionId/train" element={<TrainingPage />} />
+            <Route path="/:sectionId/levels" element={<LevelsListPage />} />
+            <Route path="/:sectionId/levels/:levelId" element={<LevelAssessmentPage />} />
+            <Route path="/:sectionId/levels/:levelId/mastery" element={<MasteryGridPage />} />
+            <Route path="/:sectionId/levels/:levelId/practice" element={<PracticeCardPage />} />
+            <Route path="/:sectionId/levels/:levelId/train" element={<TrainingPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AssessmentProvider>

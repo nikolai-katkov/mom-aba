@@ -8,8 +8,13 @@
   max-width: 960px;
 }
 
+.extraWide {
+  max-width: 1140px;
+}
+
 @media (max-width: 640px) {
-  .wide {
+  .wide,
+  .extraWide {
     max-width: 100%;
   }
 }

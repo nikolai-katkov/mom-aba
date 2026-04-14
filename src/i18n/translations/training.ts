@@ -3,7 +3,7 @@ import type { Language } from '../types'
 
 const TRAINING_EN: Record<string, TrainingContent> = {
   'mand-1': {
-    criterionId: 'mand-1',
+    levelId: 'mand-1',
     shortGuide: [
       {
         stepNumber: 1,
@@ -33,9 +33,14 @@ const TRAINING_EN: Record<string, TrainingContent> = {
       'Practicing only during structured sessions instead of natural moments',
       'Waiting too long to deliver the item after a successful request',
     ],
+    practicePrompt: {
+      brief: 'Can your child ask for this?',
+      detail:
+        'Show the item and wait. Any attempt to request counts: a word, gesture, or reaching.',
+    },
   },
   'mand-2': {
-    criterionId: 'mand-2',
+    levelId: 'mand-2',
     shortGuide: [
       {
         stepNumber: 1,
@@ -66,9 +71,14 @@ const TRAINING_EN: Record<string, TrainingContent> = {
       'Counting the same request multiple times instead of tracking unique requests',
       'Expecting full sentences - single words or clear gestures count',
     ],
+    practicePrompt: {
+      brief: 'Will your child ask for this on their own?',
+      detail:
+        'Do not prompt or ask "What do you want?" Wait for the child to initiate the request independently.',
+    },
   },
   'mand-3': {
-    criterionId: 'mand-3',
+    levelId: 'mand-3',
     shortGuide: [
       {
         stepNumber: 1,
@@ -98,9 +108,14 @@ const TRAINING_EN: Record<string, TrainingContent> = {
       'Not keeping track of which combinations have been achieved',
       'Giving up if the child struggles in a new setting instead of helping and trying again',
     ],
+    practicePrompt: {
+      brief: 'Can your child request this in a new situation?',
+      detail:
+        'Try with a different person, in a different place, or for a different type of item than usual.',
+    },
   },
   'mand-4': {
-    criterionId: 'mand-4',
+    levelId: 'mand-4',
     shortGuide: [
       {
         stepNumber: 1,
@@ -129,9 +144,14 @@ const TRAINING_EN: Record<string, TrainingContent> = {
       'Not having enough motivating items available in the environment',
       'Counting echoic responses (child repeating something you said) as spontaneous',
     ],
+    practicePrompt: {
+      brief: 'Did your child spontaneously ask for this?',
+      detail:
+        'No prompts, no questions from you. The child should initiate communication entirely on their own.',
+    },
   },
   'mand-5': {
-    criterionId: 'mand-5',
+    levelId: 'mand-5',
     shortGuide: [
       {
         stepNumber: 1,
@@ -161,9 +181,14 @@ const TRAINING_EN: Record<string, TrainingContent> = {
       'Not fading prompts gradually (going from full prompt to no prompt too quickly)',
       'Only counting requests made during structured teaching rather than throughout the day',
     ],
+    practicePrompt: {
+      brief: 'Can your child request this independently?',
+      detail:
+        'The child should say the word without any prompts. Count each unique item they can ask for.',
+    },
   },
   'tact-1': {
-    criterionId: 'tact-1',
+    levelId: 'tact-1',
     shortGuide: [
       {
         stepNumber: 1,
@@ -193,9 +218,14 @@ const TRAINING_EN: Record<string, TrainingContent> = {
       'Practicing only during structured sessions rather than natural moments',
       'Choosing items the child has never seen before instead of familiar favorites',
     ],
+    practicePrompt: {
+      brief: 'Can your child name this?',
+      detail:
+        'Show the item and ask "What is this?" If needed, say the word and let your child repeat it.',
+    },
   },
   'tact-2': {
-    criterionId: 'tact-2',
+    levelId: 'tact-2',
     shortGuide: [
       {
         stepNumber: 1,
@@ -226,9 +256,13 @@ const TRAINING_EN: Record<string, TrainingContent> = {
       'Testing only with pictures when the child learns better with real objects',
       "Skipping practice with already-known items, which reduces the child's confidence",
     ],
+    practicePrompt: {
+      brief: 'Can your child label this on their own?',
+      detail: 'Show the item and wait. If the child needs help, try giving just the first sound.',
+    },
   },
   'tact-3': {
-    criterionId: 'tact-3',
+    levelId: 'tact-3',
     shortGuide: [
       {
         stepNumber: 1,
@@ -259,9 +293,13 @@ const TRAINING_EN: Record<string, TrainingContent> = {
       'Moving on to new words before the child can consistently name the current ones after distractions',
       'Forgetting to make the reward exchange motivating enough (tokens should lead to something the child really wants)',
     ],
+    practicePrompt: {
+      brief: 'Can your child name this everyday object?',
+      detail: 'Use the token system: 1 token for the word, 2 tokens for "This is a [word]."',
+    },
   },
   'tact-4': {
-    criterionId: 'tact-4',
+    levelId: 'tact-4',
     shortGuide: [
       {
         stepNumber: 1,
@@ -292,9 +330,14 @@ const TRAINING_EN: Record<string, TrainingContent> = {
       'Not having enough interesting objects or scenery to spark spontaneous labeling',
       'Counting labels that came after you asked a question or named something first',
     ],
+    practicePrompt: {
+      brief: 'Did your child name this spontaneously?',
+      detail:
+        'Do not ask "What is this?" The child should label things entirely on their own initiative.',
+    },
   },
   'tact-5': {
-    criterionId: 'tact-5',
+    levelId: 'tact-5',
     shortGuide: [
       {
         stepNumber: 1,
@@ -325,12 +368,17 @@ const TRAINING_EN: Record<string, TrainingContent> = {
       'Focusing on only one category instead of spreading across household items, people, body parts, and pictures',
       'Counting labels that still require a prompt as independent',
     ],
+    practicePrompt: {
+      brief: 'Can your child label this without help?',
+      detail:
+        'No prompts at all. The child should name the item independently for 3 days in a row.',
+    },
   },
 }
 
 const TRAINING_RU: Record<string, TrainingContent> = {
   'mand-1': {
-    criterionId: 'mand-1',
+    levelId: 'mand-1',
     shortGuide: [
       {
         stepNumber: 1,
@@ -360,9 +408,14 @@ const TRAINING_RU: Record<string, TrainingContent> = {
       'Практиковать только во время занятий, а не в естественных ситуациях',
       'Слишком долго ждать с выдачей предмета после успешной просьбы',
     ],
+    practicePrompt: {
+      brief: 'Может ли ребёнок попросить это?',
+      detail:
+        'Покажите предмет и подождите. Любая попытка попросить считается: слово, жест или тянуться рукой.',
+    },
   },
   'mand-2': {
-    criterionId: 'mand-2',
+    levelId: 'mand-2',
     shortGuide: [
       {
         stepNumber: 1,
@@ -392,9 +445,14 @@ const TRAINING_RU: Record<string, TrainingContent> = {
       'Считать одну и ту же просьбу несколько раз вместо отслеживания уникальных',
       'Ожидать полные предложения - отдельные слова или четкие жесты тоже считаются',
     ],
+    practicePrompt: {
+      brief: 'Попросит ли ребёнок это сам?',
+      detail:
+        'Не подсказывайте и не спрашивайте «Что ты хочешь?». Подождите, пока ребёнок сам инициирует просьбу.',
+    },
   },
   'mand-3': {
-    criterionId: 'mand-3',
+    levelId: 'mand-3',
     shortGuide: [
       {
         stepNumber: 1,
@@ -423,9 +481,14 @@ const TRAINING_RU: Record<string, TrainingContent> = {
       'Не отслеживать, какие комбинации уже достигнуты',
       'Сдаваться, если ребенок затрудняется в новой обстановке, вместо того чтобы помочь и попробовать снова',
     ],
+    practicePrompt: {
+      brief: 'Может ли ребёнок попросить это в новой ситуации?',
+      detail:
+        'Попробуйте с другим человеком, в другом месте или с другим типом предмета, чем обычно.',
+    },
   },
   'mand-4': {
-    criterionId: 'mand-4',
+    levelId: 'mand-4',
     shortGuide: [
       {
         stepNumber: 1,
@@ -455,9 +518,14 @@ const TRAINING_RU: Record<string, TrainingContent> = {
       'Недостаточно мотивирующих предметов в окружении',
       'Считать эхоические ответы (повторение за вами) спонтанными',
     ],
+    practicePrompt: {
+      brief: 'Ребёнок спонтанно попросил это?',
+      detail:
+        'Никаких подсказок, никаких вопросов от вас. Ребёнок должен начать общение полностью сам.',
+    },
   },
   'mand-5': {
-    criterionId: 'mand-5',
+    levelId: 'mand-5',
     shortGuide: [
       {
         stepNumber: 1,
@@ -488,9 +556,14 @@ const TRAINING_RU: Record<string, TrainingContent> = {
       'Не убирать подсказки постепенно (слишком резкий переход от полной подсказки к отсутствию)',
       'Считать только просьбы на занятиях, а не в течение всего дня',
     ],
+    practicePrompt: {
+      brief: 'Может ли ребёнок попросить это самостоятельно?',
+      detail:
+        'Ребёнок должен произнести слово без подсказок. Считайте каждый уникальный предмет, который он может попросить.',
+    },
   },
   'tact-1': {
-    criterionId: 'tact-1',
+    levelId: 'tact-1',
     shortGuide: [
       {
         stepNumber: 1,
@@ -520,9 +593,14 @@ const TRAINING_RU: Record<string, TrainingContent> = {
       'Практиковать только на занятиях, а не в естественных ситуациях',
       'Выбирать предметы, которые ребенок никогда не видел, вместо знакомых любимых',
     ],
+    practicePrompt: {
+      brief: 'Может ли ребёнок назвать это?',
+      detail:
+        'Покажите предмет и спросите «Что это?». Если нужно, назовите сами и дайте ребёнку повторить.',
+    },
   },
   'tact-2': {
-    criterionId: 'tact-2',
+    levelId: 'tact-2',
     shortGuide: [
       {
         stepNumber: 1,
@@ -551,9 +629,14 @@ const TRAINING_RU: Record<string, TrainingContent> = {
       'Тестировать только по картинкам, когда ребенок лучше учится с реальными предметами',
       'Пропускать практику с уже известными предметами, что снижает уверенность ребенка',
     ],
+    practicePrompt: {
+      brief: 'Может ли ребёнок назвать это сам?',
+      detail:
+        'Покажите предмет и подождите. Если нужна помощь, попробуйте дать только первый звук.',
+    },
   },
   'tact-3': {
-    criterionId: 'tact-3',
+    levelId: 'tact-3',
     shortGuide: [
       {
         stepNumber: 1,
@@ -584,9 +667,13 @@ const TRAINING_RU: Record<string, TrainingContent> = {
       'Переходить к новым словам до того, как ребенок уверенно называет текущие после отвлечений',
       'Не делать обмен жетонов достаточно мотивирующим (жетоны должны вести к чему-то, что ребенок действительно хочет)',
     ],
+    practicePrompt: {
+      brief: 'Может ли ребёнок назвать этот обычный предмет?',
+      detail: 'Используйте жетоны: 1 жетон за слово, 2 жетона за «Это [слово]».',
+    },
   },
   'tact-4': {
-    criterionId: 'tact-4',
+    levelId: 'tact-4',
     shortGuide: [
       {
         stepNumber: 1,
@@ -615,9 +702,14 @@ const TRAINING_RU: Record<string, TrainingContent> = {
       'Недостаточно интересных предметов или обстановки для спонтанного называния',
       'Считать названия, которые последовали за вашим вопросом или после того, как вы что-то назвали',
     ],
+    practicePrompt: {
+      brief: 'Ребёнок назвал это спонтанно?',
+      detail:
+        'Не спрашивайте «Что это?». Ребёнок должен называть предметы полностью по своей инициативе.',
+    },
   },
   'tact-5': {
-    criterionId: 'tact-5',
+    levelId: 'tact-5',
     shortGuide: [
       {
         stepNumber: 1,
@@ -648,6 +740,10 @@ const TRAINING_RU: Record<string, TrainingContent> = {
       'Сосредотачиваться на одной категории вместо распределения по бытовым предметам, людям, частям тела и картинкам',
       'Считать называния, для которых ещё нужна подсказка, самостоятельными',
     ],
+    practicePrompt: {
+      brief: 'Может ли ребёнок назвать это без помощи?',
+      detail: 'Никаких подсказок. Ребёнок должен самостоятельно назвать предмет 3 дня подряд.',
+    },
   },
 }
 

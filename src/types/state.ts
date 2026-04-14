@@ -1,10 +1,10 @@
-import type { CriterionStatus } from './assessment'
+import type { LevelStatus } from './assessment'
 
-export interface CriterionState {
-  status: CriterionStatus
+export interface LevelState {
+  status: LevelStatus
   score: number
 }
 
 export interface AssessmentState {
-  criterionStates: Record<string, CriterionState>
+  levelStates: Record<string, LevelState>
 }

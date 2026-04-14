@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
-import { AssessmentProvider, DictionaryProvider } from '../../src/hooks'
+import { AssessmentProvider } from '../../src/hooks'
 import { LanguageProvider } from '../../src/i18n'
-import { SECTIONS_BY_LANGUAGE, VOCABULARY_BY_LANGUAGE } from '../../src/i18n/translations'
+import { SECTIONS_BY_LANGUAGE } from '../../src/i18n/translations'
 import { TrainingPage } from '../../src/pages/TrainingPage'
 import { byT } from '../helpers/byT'
 
@@ -18,19 +18,17 @@ vi.mock('react-router-dom', async () => {
   }
 })
 
-function renderPage(sectionId = 'mand', criterionId = 'mand-1') {
+function renderPage(sectionId = 'mand', levelId = 'mand-1') {
   return render(
-    <MemoryRouter initialEntries={[`/${sectionId}/levels/${criterionId}/train`]}>
+    <MemoryRouter initialEntries={[`/${sectionId}/levels/${levelId}/train`]}>
       <LanguageProvider initialLanguage="en">
-        <DictionaryProvider vocabulary={VOCABULARY_BY_LANGUAGE.en}>
-          <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
-            <Routes>
-              <Route path="/:sectionId/levels/:criterionId/train" element={<TrainingPage />} />
-              <Route path="/:sectionId/levels" element={<div>Criteria List</div>} />
-              <Route path="/" element={<div>Home</div>} />
-            </Routes>
-          </AssessmentProvider>
-        </DictionaryProvider>
+        <AssessmentProvider sections={SECTIONS_BY_LANGUAGE.en}>
+          <Routes>
+            <Route path="/:sectionId/levels/:levelId/train" element={<TrainingPage />} />
+            <Route path="/:sectionId/levels" element={<div>Levels List</div>} />
+            <Route path="/" element={<div>Home</div>} />
+          </Routes>
+        </AssessmentProvider>
       </LanguageProvider>
     </MemoryRouter>
   )
@@ -51,20 +49,20 @@ describe('TrainingPage', () => {
     expect(byT('showLess')).toHaveAttribute('aria-expanded', 'true')
   })
 
-  it('navigates to assessment when Retry is clicked', async () => {
+  it('navigates to practice when Start Practice is clicked', async () => {
     renderPage()
-    await userEvent.click(byT('retryAssessment'))
-    expect(mockNavigate).toHaveBeenCalledWith('/mand/levels/mand-1')
+    await userEvent.click(byT('startPractice'))
+    expect(mockNavigate).toHaveBeenCalledWith('/mand/levels/mand-1/practice')
   })
 
-  it('navigates to criteria list when Back is clicked', async () => {
+  it('navigates to levels list when Back is clicked', async () => {
     renderPage()
     await userEvent.click(byT('backToList'))
     expect(mockNavigate).toHaveBeenCalledWith('/mand/levels')
   })
 
-  it('redirects for invalid criterion', () => {
+  it('redirects for invalid level', () => {
     renderPage('mand', 'nonexistent')
-    expect(screen.getByText('Criteria List')).toBeInTheDocument()
+    expect(screen.getByText('Levels List')).toBeInTheDocument()
   })
 })

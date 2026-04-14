@@ -1,10 +1,10 @@
 export type ScoringType = 'TestTrial' | 'CombinedTrial' | 'TimedObservation' | 'FreeOperant'
 
-export type CriterionStatus = 'NotStarted' | 'InProgress' | 'Completed'
+export type LevelStatus = 'NotStarted' | 'InProgress' | 'Completed'
 
 export type DevelopmentDimension = 'Independence' | 'Generalization' | 'RepertoireSize'
 
-export interface Criterion {
+export interface Level {
   id: string
   sectionId: string
   level: number
@@ -22,5 +22,5 @@ export interface Section {
   title: string
   subtitle: string
   isAvailable: boolean
-  criteria: Criterion[]
+  levels: Level[]
 }

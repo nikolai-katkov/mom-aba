@@ -3,6 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 
 import type {
   DictionaryState,
+  MasteryRecord,
   MasteryTier,
   OnboardingLevel,
   VerbalOperant,
@@ -14,12 +15,12 @@ import type {
 } from '../types'
 import {
   DEFAULT_MASTERY,
-  getCriterionCategoryIds,
+  getLevelCategoryIds,
   getWordId,
   MOTIVATING_CATEGORY_IDS,
   parseWordId,
 } from '../types'
-import { loadDictionaryState, saveDictionaryState } from '../utils'
+import { createInitialDictionaryState, loadDictionaryState, saveDictionaryState } from '../utils'
 
 // --- Default inclusion logic ---
 
@@ -33,10 +34,13 @@ function shouldIncludeByDefault(
       return difficulty === 'simple' && MOTIVATING_CATEGORY_IDS.includes(categoryId)
     }
     case 'intermediate': {
-      return difficulty === 'simple'
+      return (
+        difficulty === 'simple' ||
+        (difficulty === 'medium' && MOTIVATING_CATEGORY_IDS.includes(categoryId))
+      )
     }
     case 'advanced': {
-      return difficulty === 'simple' || difficulty === 'medium'
+      return true
     }
   }
 }
@@ -91,7 +95,11 @@ interface DictionaryContextValue {
   setWordInclusion: (wordId: string, status: WordInclusionStatus) => void
   setWordMastery: (wordId: string, operant: VerbalOperant, tier: MasteryTier) => void
   getCategoryProgress: (categoryId: string) => CategoryProgress
-  getPracticeWords: (criterionId: string) => VocabularyWord[]
+  getPracticeWords: (
+    levelId: string,
+    options?: { operant?: VerbalOperant; unmasteredOnly?: boolean }
+  ) => VocabularyWord[]
+  resetDictionary: () => void
 }
 
 export interface CategoryProgress {
@@ -135,7 +143,7 @@ export function DictionaryProvider({ children, vocabulary }: DictionaryProviderP
 
         return {
           ...previous,
-          version: 1,
+          version: 2,
           onboardingCompleted: true,
           onboardingLevel: level,
           words: { ...initialWords, ...previous.words },
@@ -187,13 +195,17 @@ export function DictionaryProvider({ children, vocabulary }: DictionaryProviderP
           ? getDefaultWordState(parsed.categoryId, parsed.difficulty, previous.onboardingLevel)
           : { inclusion: 'excluded', mastery: { ...DEFAULT_MASTERY } }
         const current = previous.words[wordId] ?? fallback
+        const record: MasteryRecord =
+          tier === 'notStarted'
+            ? { tier: 'notStarted', updatedAt: null }
+            : { tier, updatedAt: Date.now() }
         return {
           ...previous,
           words: {
             ...previous.words,
             [wordId]: {
               ...current,
-              mastery: { ...current.mastery, [operant]: tier },
+              mastery: { ...current.mastery, [operant]: record },
             },
           },
         }
@@ -233,7 +245,7 @@ export function DictionaryProvider({ children, vocabulary }: DictionaryProviderP
           }
           included++
           for (const operant of Object.keys(mastered) as VerbalOperant[]) {
-            if (wordState.mastery[operant] !== 'none') {
+            if (wordState.mastery[operant].tier === 'mastered') {
               mastered[operant]++
             }
           }
@@ -245,9 +257,28 @@ export function DictionaryProvider({ children, vocabulary }: DictionaryProviderP
     [vocabulary, getWordState]
   )
 
+  const isWordEligible = useCallback(
+    (
+      wordState: WordState,
+      options?: { operant?: VerbalOperant; unmasteredOnly?: boolean }
+    ): boolean => {
+      if (wordState.inclusion !== 'included') {
+        return false
+      }
+      if (!options?.unmasteredOnly || !options.operant) {
+        return true
+      }
+      return wordState.mastery[options.operant].tier !== 'mastered'
+    },
+    []
+  )
+
   const getPracticeWords = useCallback(
-    (criterionId: string): VocabularyWord[] => {
-      const categoryFilter = getCriterionCategoryIds(criterionId)
+    (
+      levelId: string,
+      options?: { operant?: VerbalOperant; unmasteredOnly?: boolean }
+    ): VocabularyWord[] => {
+      const categoryFilter = getLevelCategoryIds(levelId)
       const categories = categoryFilter
         ? vocabulary.filter(c => categoryFilter.includes(c.id))
         : vocabulary
@@ -260,7 +291,7 @@ export function DictionaryProvider({ children, vocabulary }: DictionaryProviderP
           for (let i = 0; i < category.words[difficulty].length; i++) {
             const wordId = getWordId(category.id, difficulty, i)
             const wordState = getWordState(wordId)
-            if (wordState.inclusion === 'included') {
+            if (isWordEligible(wordState, options)) {
               result.push({ id: wordId, text: category.words[difficulty][i] })
             }
           }
@@ -269,8 +300,12 @@ export function DictionaryProvider({ children, vocabulary }: DictionaryProviderP
 
       return result
     },
-    [vocabulary, getWordState]
+    [vocabulary, getWordState, isWordEligible]
   )
+
+  const resetDictionary = useCallback(() => {
+    setState(createInitialDictionaryState())
+  }, [])
 
   const value = useMemo(
     () => ({
@@ -282,6 +317,7 @@ export function DictionaryProvider({ children, vocabulary }: DictionaryProviderP
       setWordMastery,
       getCategoryProgress,
       getPracticeWords,
+      resetDictionary,
     }),
     [
       state.onboardingCompleted,
@@ -292,6 +328,7 @@ export function DictionaryProvider({ children, vocabulary }: DictionaryProviderP
       setWordMastery,
       getCategoryProgress,
       getPracticeWords,
+      resetDictionary,
     ]
   )
 

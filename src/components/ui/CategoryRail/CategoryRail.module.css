@@ -1,0 +1,165 @@
+/* ============================================
+ * CategoryRail — desktop: vertical sidebar,
+ * mobile: horizontal scrollable strip
+ * ============================================ */
+
+.rail {
+  flex-shrink: 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-base);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  width: 100%;
+  text-align: left;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.item:hover {
+  background: var(--color-overlay-light);
+  color: var(--color-text);
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: -2px;
+}
+
+.itemActive {
+  background: var(--color-primary-alpha-10);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.itemActive:hover {
+  background: var(--color-primary-alpha-15);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: inherit;
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.count {
+  font-size: var(--font-size-2xs, 10px);
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.itemActive .count {
+  color: var(--color-primary);
+  opacity: 0.7;
+}
+
+/* ============================================
+ * Theme: Warm
+ * ============================================ */
+
+:global([data-theme='warm']) .item {
+  border-radius: var(--radius-lg);
+}
+
+/* ============================================
+ * Theme: Soft
+ * ============================================ */
+
+:global([data-theme='soft']) .itemActive {
+  background: var(--color-primary-alpha-10);
+}
+
+/* ============================================
+ * Theme: Editorial
+ * ============================================ */
+
+:global([data-theme='editorial']) .item {
+  border-radius: var(--radius-xs);
+}
+
+:global([data-theme='editorial']) .name {
+  font-family: var(--font-family-display);
+  letter-spacing: var(--letter-spacing-snug);
+}
+
+/* ============================================
+ * Mobile: horizontal scrollable strip
+ * ============================================ */
+
+@media (max-width: 768px) {
+  .rail {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-2) 0;
+    margin: 0 calc(-1 * var(--space-4));
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .list {
+    flex-direction: row;
+    max-height: none;
+    overflow-y: visible;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    gap: var(--space-1);
+  }
+
+  .list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .item {
+    flex-shrink: 0;
+    width: auto;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-full);
+  }
+
+  .name {
+    display: none;
+  }
+
+  .count {
+    display: none;
+  }
+
+  .itemActive .name {
+    display: inline;
+  }
+}

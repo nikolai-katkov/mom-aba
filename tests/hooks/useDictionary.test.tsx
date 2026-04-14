@@ -47,7 +47,7 @@ describe('useDictionary', () => {
     expect(result.current.onboardingLevel).toBe('intermediate')
   })
 
-  it('intermediate level includes all simple words', () => {
+  it('intermediate level includes simple words and medium from motivating categories', () => {
     const { result } = renderHook(() => useDictionary(), {
       wrapper: createWrapper(),
     })
@@ -56,13 +56,17 @@ describe('useDictionary', () => {
       result.current.completeOnboarding('intermediate')
     })
 
-    // Simple words should be included
+    // Simple words should be included (all categories)
     const simpleWord = getWordId('toys', 'simple', 0)
     expect(result.current.getWordState(simpleWord).inclusion).toBe('included')
 
-    // Medium words should be excluded
-    const mediumWord = getWordId('toys', 'medium', 0)
-    expect(result.current.getWordState(mediumWord).inclusion).toBe('excluded')
+    // Medium words from motivating categories (toys) should be included
+    const mediumMotivating = getWordId('toys', 'medium', 0)
+    expect(result.current.getWordState(mediumMotivating).inclusion).toBe('included')
+
+    // Medium words from non-motivating categories (shapes) should be excluded
+    const mediumNonMotivating = getWordId('shapes', 'medium', 0)
+    expect(result.current.getWordState(mediumNonMotivating).inclusion).toBe('excluded')
 
     // Complex words should be excluded
     const complexWord = getWordId('toys', 'complex', 0)
@@ -87,7 +91,7 @@ describe('useDictionary', () => {
     expect(result.current.getWordState(shapesSimple).inclusion).toBe('excluded')
   })
 
-  it('advanced level includes simple and medium words', () => {
+  it('advanced level includes all words', () => {
     const { result } = renderHook(() => useDictionary(), {
       wrapper: createWrapper(),
     })
@@ -102,7 +106,7 @@ describe('useDictionary', () => {
 
     expect(result.current.getWordState(simpleWord).inclusion).toBe('included')
     expect(result.current.getWordState(mediumWord).inclusion).toBe('included')
-    expect(result.current.getWordState(complexWord).inclusion).toBe('excluded')
+    expect(result.current.getWordState(complexWord).inclusion).toBe('included')
   })
 
   it('setWordInclusion toggles a word', () => {
@@ -134,15 +138,16 @@ describe('useDictionary', () => {
     })
 
     const wordId = getWordId('toys', 'simple', 0)
-    expect(result.current.getWordState(wordId).mastery.tact).toBe('none')
+    expect(result.current.getWordState(wordId).mastery.tact.tier).toBe('notStarted')
 
     act(() => {
-      result.current.setWordMastery(wordId, 'tact', 'selfReport')
+      result.current.setWordMastery(wordId, 'tact', 'mastered')
     })
 
-    expect(result.current.getWordState(wordId).mastery.tact).toBe('selfReport')
+    expect(result.current.getWordState(wordId).mastery.tact.tier).toBe('mastered')
+    expect(result.current.getWordState(wordId).mastery.tact.updatedAt).toBeGreaterThan(0)
     // Other operants unchanged
-    expect(result.current.getWordState(wordId).mastery.mand).toBe('none')
+    expect(result.current.getWordState(wordId).mastery.mand.tier).toBe('notStarted')
   })
 
   it('getCategoryProgress returns correct counts', () => {
@@ -156,10 +161,12 @@ describe('useDictionary', () => {
 
     const progress = result.current.getCategoryProgress('toys')
     expect(progress.total).toBeGreaterThan(0)
-    // Intermediate includes all simple words from toys
+    // Intermediate includes simple + medium from motivating categories (toys is motivating)
     const toysCategory = vocabulary.find(c => c.id === 'toys')
     expect(toysCategory).toBeDefined()
-    expect(progress.included).toBe(toysCategory?.words.simple.length)
+    const expectedIncluded =
+      (toysCategory?.words.simple.length ?? 0) + (toysCategory?.words.medium.length ?? 0)
+    expect(progress.included).toBe(expectedIncluded)
   })
 
   it('returns empty mastery for invalid word ID', () => {
@@ -169,7 +176,7 @@ describe('useDictionary', () => {
 
     const state = result.current.getWordState('invalid-id')
     expect(state.inclusion).toBe('excluded')
-    expect(state.mastery.tact).toBe('none')
+    expect(state.mastery.tact.tier).toBe('notStarted')
   })
 
   it('getCategoryProgress returns zeros for unknown category', () => {
@@ -182,7 +189,7 @@ describe('useDictionary', () => {
     expect(progress.included).toBe(0)
   })
 
-  it('getPracticeWords returns included words for a criterion', () => {
+  it('getPracticeWords returns included words for a level', () => {
     const { result } = renderHook(() => useDictionary(), {
       wrapper: createWrapper(),
     })

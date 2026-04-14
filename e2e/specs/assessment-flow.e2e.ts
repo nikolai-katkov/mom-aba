@@ -17,7 +17,7 @@ test.beforeEach(async ({ page }) => {
   })
 })
 
-test('happy path: sections > intro > criteria > assess Yes > completed', async ({ page }) => {
+test('happy path: sections > intro > levels > assess Yes > completed', async ({ page }) => {
   await page.goto('/')
 
   // Click MAND card
@@ -28,7 +28,7 @@ test('happy path: sections > intro > criteria > assess Yes > completed', async (
   await page.getByRole('button', { name: 'Start' }).click()
   await expect(page).toHaveURL(/\/mand\/levels$/)
 
-  // Click first criterion
+  // Click first level
   await page.getByText('Uses 2 words or gestures').click()
   await expect(page).toHaveURL(/\/mand\/levels\/mand-1$/)
 
@@ -43,7 +43,7 @@ test('happy path: sections > intro > criteria > assess Yes > completed', async (
 test('training path: assess No > training > retry > assess Yes', async ({ page }) => {
   await page.goto('/mand/levels')
 
-  // Click first criterion
+  // Click first level
   await page.getByText('Uses 2 words or gestures').click()
 
   // Click No
@@ -66,7 +66,7 @@ test('training path: assess No > training > retry > assess Yes', async ({ page }
 test('state persists across page reload', async ({ page }) => {
   await page.goto('/mand/levels/mand-1')
 
-  // Mark first criterion as complete
+  // Mark first level as complete
   await page.getByRole('button', { name: 'Yes' }).click()
   await expect(page.getByText('1/5 completed')).toBeVisible()
 
@@ -78,7 +78,7 @@ test('state persists across page reload', async ({ page }) => {
 test('back button navigates correctly through flow', async ({ page }) => {
   await page.goto('/mand')
 
-  // Start > criteria list
+  // Start > levels list
   await page.getByRole('button', { name: 'Start' }).click()
   await expect(page).toHaveURL(/\/mand\/levels$/)
 

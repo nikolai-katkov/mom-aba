@@ -3,9 +3,15 @@ export interface TrainingStep {
   instruction: string
 }
 
+export interface PracticePrompt {
+  brief: string
+  detail: string
+}
+
 export interface TrainingContent {
-  criterionId: string
+  levelId: string
   shortGuide: TrainingStep[]
   fullGuide: string
   commonMistakes: string[]
+  practicePrompt: PracticePrompt
 }

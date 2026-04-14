@@ -10,77 +10,77 @@ describe.each(LANGUAGES)('sections seed data (%s)', language => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- guaranteed by test assertions below
   const tactSection = sections.find(s => s.id === 'tact')!
 
-  it('Mand has exactly 5 criteria', () => {
-    expect(mandSection.criteria).toHaveLength(5)
+  it('Mand has exactly 5 levels', () => {
+    expect(mandSection.levels).toHaveLength(5)
   })
 
   it('Mand is marked as available', () => {
     expect(mandSection.isAvailable).toBe(true)
   })
 
-  it('has all required fields populated on every Mand criterion', () => {
-    for (const criterion of mandSection.criteria) {
-      expect(criterion.id).toBeTruthy()
-      expect(criterion.sectionId).toBe('mand')
-      expect(criterion.level).toBeGreaterThanOrEqual(1)
-      expect(criterion.title).toBeTruthy()
-      expect(criterion.description).toBeTruthy()
-      expect(criterion.question).toBeTruthy()
+  it('has all required fields populated on every Mand level', () => {
+    for (const level of mandSection.levels) {
+      expect(level.id).toBeTruthy()
+      expect(level.sectionId).toBe('mand')
+      expect(level.level).toBeGreaterThanOrEqual(1)
+      expect(level.title).toBeTruthy()
+      expect(level.description).toBeTruthy()
+      expect(level.question).toBeTruthy()
       expect(['TestTrial', 'CombinedTrial', 'TimedObservation', 'FreeOperant']).toContain(
-        criterion.scoringType
+        level.scoringType
       )
-      expect(Array.isArray(criterion.conditions)).toBe(true)
-      expect(Array.isArray(criterion.examples)).toBe(true)
+      expect(Array.isArray(level.conditions)).toBe(true)
+      expect(Array.isArray(level.examples)).toBe(true)
       expect(['Independence', 'Generalization', 'RepertoireSize']).toContain(
-        criterion.developmentDimension
+        level.developmentDimension
       )
     }
   })
 
-  it('has Mand criteria ordered by level 1 through 5', () => {
-    const levels = mandSection.criteria.map(c => c.level)
-    expect(levels).toEqual([1, 2, 3, 4, 5])
+  it('has Mand levels ordered by level 1 through 5', () => {
+    const levelNumbers = mandSection.levels.map(l => l.level)
+    expect(levelNumbers).toEqual([1, 2, 3, 4, 5])
   })
 
-  it('has unique Mand criterion IDs', () => {
-    const ids = mandSection.criteria.map(c => c.id)
+  it('has unique Mand level IDs', () => {
+    const ids = mandSection.levels.map(l => l.id)
     expect(new Set(ids).size).toBe(ids.length)
   })
 
-  it('Tact exists and has 5 criteria', () => {
-    expect(tactSection.criteria).toHaveLength(5)
+  it('Tact exists and has 5 levels', () => {
+    expect(tactSection.levels).toHaveLength(5)
   })
 
   it('Tact is marked as available', () => {
     expect(tactSection.isAvailable).toBe(true)
   })
 
-  it('has all required fields populated on every Tact criterion', () => {
-    for (const criterion of tactSection.criteria) {
-      expect(criterion.id).toBeTruthy()
-      expect(criterion.sectionId).toBe('tact')
-      expect(criterion.level).toBeGreaterThanOrEqual(1)
-      expect(criterion.title).toBeTruthy()
-      expect(criterion.description).toBeTruthy()
-      expect(criterion.question).toBeTruthy()
+  it('has all required fields populated on every Tact level', () => {
+    for (const level of tactSection.levels) {
+      expect(level.id).toBeTruthy()
+      expect(level.sectionId).toBe('tact')
+      expect(level.level).toBeGreaterThanOrEqual(1)
+      expect(level.title).toBeTruthy()
+      expect(level.description).toBeTruthy()
+      expect(level.question).toBeTruthy()
       expect(['TestTrial', 'CombinedTrial', 'TimedObservation', 'FreeOperant']).toContain(
-        criterion.scoringType
+        level.scoringType
       )
-      expect(Array.isArray(criterion.conditions)).toBe(true)
-      expect(Array.isArray(criterion.examples)).toBe(true)
+      expect(Array.isArray(level.conditions)).toBe(true)
+      expect(Array.isArray(level.examples)).toBe(true)
       expect(['Independence', 'Generalization', 'RepertoireSize']).toContain(
-        criterion.developmentDimension
+        level.developmentDimension
       )
     }
   })
 
-  it('has Tact criteria ordered by level 1 through 5', () => {
-    const levels = tactSection.criteria.map(c => c.level)
-    expect(levels).toEqual([1, 2, 3, 4, 5])
+  it('has Tact levels ordered by level 1 through 5', () => {
+    const levelNumbers = tactSection.levels.map(l => l.level)
+    expect(levelNumbers).toEqual([1, 2, 3, 4, 5])
   })
 
-  it('has unique Tact criterion IDs', () => {
-    const ids = tactSection.criteria.map(c => c.id)
+  it('has unique Tact level IDs', () => {
+    const ids = tactSection.levels.map(l => l.id)
     expect(new Set(ids).size).toBe(ids.length)
   })
 
@@ -99,25 +99,25 @@ describe.each(LANGUAGES)('sections seed data (%s)', language => {
     ])
   })
 
-  it('has 7 placeholder sections marked unavailable with no criteria', () => {
+  it('has 7 placeholder sections marked unavailable with no levels', () => {
     const placeholders = sections.filter(s => s.id !== 'mand' && s.id !== 'tact')
     expect(placeholders).toHaveLength(7)
     for (const section of placeholders) {
       expect(section.isAvailable).toBe(false)
-      expect(section.criteria).toHaveLength(0)
+      expect(section.levels).toHaveLength(0)
     }
   })
 
-  it('has globally unique criterion IDs across all sections', () => {
-    const allIds = sections.flatMap(s => s.criteria.map(c => c.id))
+  it('has globally unique level IDs across all sections', () => {
+    const allIds = sections.flatMap(s => s.levels.map(l => l.id))
     expect(new Set(allIds).size).toBe(allIds.length)
   })
 })
 
 describe('sections consistency across languages', () => {
-  it('has the same criterion IDs in both languages', () => {
-    const enIds = SECTIONS_BY_LANGUAGE.en.flatMap(s => s.criteria.map(c => c.id))
-    const ruIds = SECTIONS_BY_LANGUAGE.ru.flatMap(s => s.criteria.map(c => c.id))
+  it('has the same level IDs in both languages', () => {
+    const enIds = SECTIONS_BY_LANGUAGE.en.flatMap(s => s.levels.map(l => l.id))
+    const ruIds = SECTIONS_BY_LANGUAGE.ru.flatMap(s => s.levels.map(l => l.id))
     expect(enIds).toEqual(ruIds)
   })
 

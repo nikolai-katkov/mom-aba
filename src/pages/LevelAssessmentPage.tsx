@@ -7,97 +7,97 @@ import { Button, PageLayout } from '../components/ui'
 import { useAssessment, useLanguage, useTheme } from '../hooks'
 import { tProps } from '../i18n'
 import { ROMAN } from '../utils'
-import styles from './CriterionAssessmentPage.module.css'
+import styles from './LevelAssessmentPage.module.css'
 
-export function CriterionAssessmentPage() {
-  const { sectionId, criterionId } = useParams<{
+export function LevelAssessmentPage() {
+  const { sectionId, levelId } = useParams<{
     sectionId: string
-    criterionId: string
+    levelId: string
   }>()
   const navigate = useNavigate()
-  const { setCriterionResult } = useAssessment()
+  const { setLevelResult } = useAssessment()
   const { t, sections } = useLanguage()
   const { theme } = useTheme()
 
   const section = sections.find(s => s.id === sectionId)
-  const criterion = section?.criteria.find(c => c.id === criterionId)
+  const level = section?.levels.find(l => l.id === levelId)
 
   const sectionSiblings = useMemo(
     () =>
       sections
-        .filter(s => s.isAvailable && s.criteria.length > 0)
+        .filter(s => s.isAvailable && s.levels.length > 0)
         .map(s => ({
           label: s.title,
-          path: `/${s.id}/levels/${s.criteria[0].id}`,
+          path: `/${s.id}/levels/${s.levels[0].id}`,
           isCurrent: s.id === sectionId,
         })),
     [sections, sectionId]
   )
 
-  const criterionSiblings = useMemo(
+  const levelSiblings = useMemo(
     () =>
       section
-        ? section.criteria.map(c => ({
-            label: `${ROMAN[c.level]} - ${c.title}`,
-            path: `/${section.id}/levels/${c.id}`,
-            isCurrent: c.id === criterionId,
+        ? section.levels.map(l => ({
+            label: `${ROMAN[l.level]} - ${l.title}`,
+            path: `/${section.id}/levels/${l.id}`,
+            isCurrent: l.id === levelId,
           }))
         : [],
-    [section, criterionId]
+    [section, levelId]
   )
 
   const breadcrumbs: BreadcrumbItem[] = useMemo(
     () =>
-      section && criterion
+      section && level
         ? [
             { label: t('home'), path: '/' },
             { label: section.title, path: `/${section.id}`, siblings: sectionSiblings },
             { label: t('breadcrumbLevels'), path: `/${section.id}/levels` },
             {
-              label: `${ROMAN[criterion.level]} - ${criterion.title}`,
-              path: `/${section.id}/levels/${criterion.id}`,
-              siblings: criterionSiblings,
+              label: `${ROMAN[level.level]} - ${level.title}`,
+              path: `/${section.id}/levels/${level.id}`,
+              siblings: levelSiblings,
             },
           ]
         : [],
-    [t, section, criterion, sectionSiblings, criterionSiblings]
+    [t, section, level, sectionSiblings, levelSiblings]
   )
 
   const handleYes = useCallback(() => {
-    if (!criterion || !section) {
+    if (!level || !section) {
       return
     }
-    setCriterionResult(criterion.id, 1)
-    navigate(`/${section.id}/levels`)
-  }, [criterion, section, setCriterionResult, navigate])
+    setLevelResult(level.id, 1)
+    navigate(`/${section.id}/levels/${level.id}/mastery`)
+  }, [level, section, setLevelResult, navigate])
 
   const handleNo = useCallback(() => {
-    if (!criterion || !section) {
+    if (!level || !section) {
       return
     }
-    setCriterionResult(criterion.id, 0)
-    navigate(`/${section.id}/levels/${criterion.id}/train`)
-  }, [criterion, section, setCriterionResult, navigate])
+    setLevelResult(level.id, 0)
+    navigate(`/${section.id}/levels/${level.id}/train`)
+  }, [level, section, setLevelResult, navigate])
 
-  if (!section || !criterion) {
+  if (!section || !level) {
     return <Navigate to={sectionId ? `/${sectionId}/levels` : '/'} replace />
   }
 
   return (
-    <PageLayout title={`${ROMAN[criterion.level]} - ${criterion.title}`} breadcrumbs={breadcrumbs}>
+    <PageLayout title={`${ROMAN[level.level]} - ${level.title}`} breadcrumbs={breadcrumbs}>
       <div
         className={[styles.assessmentLayout, styles[`layout_${theme}`]].filter(Boolean).join(' ')}
       >
         <div className={styles.contentArea}>
-          <h2 className={styles.question}>{criterion.question}</h2>
+          <h2 className={styles.question}>{level.question}</h2>
 
-          {criterion.conditions.length > 0 && (
+          {level.conditions.length > 0 && (
             <div className={styles.context}>
               <h3 className={styles.contextTitle} {...tProps('whatToLookFor')}>
                 {t('whatToLookFor')}
               </h3>
               <ul className={styles.conditionsList}>
-                {criterion.conditions.map(condition => (
+                {level.conditions.map(condition => (
                   <li key={condition} className={styles.conditionItem}>
                     {condition}
                   </li>
@@ -106,12 +106,12 @@ export function CriterionAssessmentPage() {
             </div>
           )}
 
-          {criterion.examples.length > 0 && (
+          {level.examples.length > 0 && (
             <div className={styles.examples}>
               <span className={styles.examplesLabel} {...tProps('examplesPrefix')}>
                 {t('examplesPrefix')}
               </span>
-              {criterion.examples.join(', ')}
+              {level.examples.join(', ')}
             </div>
           )}
 

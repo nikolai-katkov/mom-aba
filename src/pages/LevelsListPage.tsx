@@ -5,36 +5,36 @@ import type { BreadcrumbItem } from '../components/ui'
 import { Card, PageLayout, ProgressBar, StatusBadge } from '../components/ui'
 import { useAssessment, useLanguage } from '../hooks'
 import { interpolate, tProps } from '../i18n'
-import type { Criterion } from '../types'
+import type { Level } from '../types'
 import { ROMAN } from '../utils'
-import styles from './CriteriaListPage.module.css'
+import styles from './LevelsListPage.module.css'
 
-function CriterionCard({ criterion, sectionId }: { criterion: Criterion; sectionId: string }) {
+function LevelCard({ level, sectionId }: { level: Level; sectionId: string }) {
   const navigate = useNavigate()
-  const { getCriterionState } = useAssessment()
-  const criterionState = getCriterionState(criterion.id)
+  const { getLevelState } = useAssessment()
+  const levelState = getLevelState(level.id)
 
   const handleClick = useCallback(() => {
-    navigate(`/${sectionId}/levels/${criterion.id}`)
-  }, [navigate, sectionId, criterion.id])
+    navigate(`/${sectionId}/levels/${level.id}`)
+  }, [navigate, sectionId, level.id])
 
   return (
     <Card onClick={handleClick}>
-      <div className={styles.criterionCard}>
-        <div className={styles.levelBadge}>{ROMAN[criterion.level]}</div>
-        <div className={styles.criterionContent}>
-          <div className={styles.criterionHeader}>
-            <h3 className={styles.criterionTitle}>{criterion.title}</h3>
-            <StatusBadge status={criterionState.status} />
+      <div className={styles.levelCard}>
+        <div className={styles.levelBadge}>{ROMAN[level.level]}</div>
+        <div className={styles.levelContent}>
+          <div className={styles.levelHeader}>
+            <h3 className={styles.levelTitle}>{level.title}</h3>
+            <StatusBadge status={levelState.status} />
           </div>
-          <p className={styles.criterionDescription}>{criterion.description}</p>
+          <p className={styles.levelDescription}>{level.description}</p>
         </div>
       </div>
     </Card>
   )
 }
 
-export function CriteriaListPage() {
+export function LevelsListPage() {
   const { sectionId } = useParams<{ sectionId: string }>()
   const { getSectionProgress } = useAssessment()
   const { t, sections } = useLanguage()
@@ -83,9 +83,9 @@ export function CriteriaListPage() {
         </span>
       </div>
 
-      <div className={styles.criteriaList}>
-        {section.criteria.map(criterion => (
-          <CriterionCard key={criterion.id} criterion={criterion} sectionId={section.id} />
+      <div className={styles.levelsList}>
+        {section.levels.map(level => (
+          <LevelCard key={level.id} level={level} sectionId={section.id} />
         ))}
       </div>
     </PageLayout>

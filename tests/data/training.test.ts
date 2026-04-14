@@ -11,15 +11,15 @@ describe.each(LANGUAGES)('training content seed data (%s)', language => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- guaranteed by test assertions
   const tactSection = sections.find(s => s.id === 'tact')!
 
-  it('has training content for every Mand criterion', () => {
-    for (const criterion of mandSection.criteria) {
-      expect(training[criterion.id]).toBeDefined()
+  it('has training content for every Mand level', () => {
+    for (const level of mandSection.levels) {
+      expect(training[level.id]).toBeDefined()
     }
   })
 
-  it('has training content for every Tact criterion', () => {
-    for (const criterion of tactSection.criteria) {
-      expect(training[criterion.id]).toBeDefined()
+  it('has training content for every Tact level', () => {
+    for (const level of tactSection.levels) {
+      expect(training[level.id]).toBeDefined()
     }
   })
 
@@ -29,9 +29,9 @@ describe.each(LANGUAGES)('training content seed data (%s)', language => {
     }
   })
 
-  it('has criterionId matching the key for each entry', () => {
+  it('has levelId matching the key for each entry', () => {
     for (const [key, content] of Object.entries(training)) {
-      expect(content.criterionId).toBe(key)
+      expect(content.levelId).toBe(key)
     }
   })
 
