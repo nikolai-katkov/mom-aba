@@ -40,6 +40,9 @@ _[English](./05-12-dictionary-category-detail-page.en.md)_
 
 ## Связанные файлы
 
-- `src/pages/DictionaryCategoryDetailPage.tsx`
-- `src/pages/DictionaryCategoryDetailPage.module.css`
+- `src/pages/DictionaryPage.tsx`
+- `src/pages/DictionaryPage.module.css`
+- `src/pages/dictionaryConstants.ts`
+- `src/components/ui/CategoryRail/CategoryRail.tsx`
+- `src/components/ui/CategoryRail/CategoryRail.module.css`
 - `src/App.tsx`

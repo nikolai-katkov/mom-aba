@@ -40,6 +40,9 @@ Add the `/dictionary/:categoryId` route showing all words in a category, organiz
 
 ## Related Files
 
-- `src/pages/DictionaryCategoryDetailPage.tsx`
-- `src/pages/DictionaryCategoryDetailPage.module.css`
+- `src/pages/DictionaryPage.tsx`
+- `src/pages/DictionaryPage.module.css`
+- `src/pages/dictionaryConstants.ts`
+- `src/components/ui/CategoryRail/CategoryRail.tsx`
+- `src/components/ui/CategoryRail/CategoryRail.module.css`
 - `src/App.tsx`
