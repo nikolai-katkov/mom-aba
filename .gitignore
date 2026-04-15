@@ -35,3 +35,6 @@ coverage/
 # CDK
 cdk.out/
 cdk-outputs.json
+
+# Claude
+.claude/scheduled_tasks.lock
