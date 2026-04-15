@@ -229,6 +229,7 @@
   .categoryName {
     font-size: var(--font-size-xl);
     margin-bottom: var(--space-1);
+    text-align: center;
   }
 
   .desktopColumns {
