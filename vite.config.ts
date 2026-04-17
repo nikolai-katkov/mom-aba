@@ -56,6 +56,7 @@ export default defineConfig({
   root: 'src',
   build: {
     outDir: '../dist',
+    copyPublicDir: false,
   },
   server: {
     allowedHosts: ['.ngrok-free.dev', '.ngrok.io'],

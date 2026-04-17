@@ -58,16 +58,13 @@ export class MomAbaStack extends cdk.Stack {
       ],
     })
 
-    // Deploy only code files via BucketDeployment (tiny payload, no videos/images)
+    // Deploy only code files via BucketDeployment (tiny payload, no media)
     new cdk.aws_s3_deployment.BucketDeployment(this, 'DeploySite', {
-      sources: [
-        cdk.aws_s3_deployment.Source.asset('./dist', {
-          exclude: ['assets/video/**', 'images/**'],
-        }),
-      ],
+      sources: [cdk.aws_s3_deployment.Source.asset('./dist')],
       destinationBucket: siteBucket,
       distribution,
       distributionPaths: ['/*'],
+      memoryLimit: 128,
     })
 
     new cdk.CfnOutput(this, 'SiteUrl', {

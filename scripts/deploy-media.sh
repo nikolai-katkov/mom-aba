@@ -26,21 +26,23 @@ fi
 echo "Media bucket: $MEDIA_BUCKET"
 SYNCED=false
 
-# Sync videos
-if [ -d "dist/assets/video" ]; then
+# Sync videos (from source — not copied to dist)
+if [ -d "src/public/assets/video" ]; then
   echo "Syncing videos..."
-  aws s3 sync dist/assets/video/ "s3://$MEDIA_BUCKET/assets/video/" \
+  aws s3 sync src/public/assets/video/ "s3://$MEDIA_BUCKET/assets/video/" \
     --profile "$PROFILE" \
     --size-only
   SYNCED=true
 fi
 
-# Sync vocabulary images
-if [ -d "dist/images/vocabulary" ]; then
+# Sync vocabulary images (from source — not copied to dist)
+if [ -d "src/public/images/vocabulary" ]; then
   echo "Syncing vocabulary images..."
-  aws s3 sync dist/images/vocabulary/ "s3://$MEDIA_BUCKET/images/vocabulary/" \
+  aws s3 sync src/public/images/vocabulary/ "s3://$MEDIA_BUCKET/images/vocabulary/" \
     --profile "$PROFILE" \
-    --size-only
+    --size-only \
+    --exclude "*/.*" \
+    --exclude "LICENSE"
   SYNCED=true
 fi
 
